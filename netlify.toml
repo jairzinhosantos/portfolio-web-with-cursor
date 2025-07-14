@@ -1,22 +1,59 @@
+# ============================================
+# Configuración Netlify - Patrón Modular
+# ============================================
+# Configuración optimizada para Angular 19 + SSR
+# Usa @netlify/angular-runtime para manejo nativo
+
 [build]
-  command = "npm run build && mkdir -p dist/functions && cp -r dist/portfolio/server/* dist/functions/ && mv dist/functions/main.server.mjs dist/functions/main-server.mjs && mv dist/functions/polyfills.server.mjs dist/functions/polyfills-server.mjs"
+  command = "npm run build"
   publish = "dist/portfolio/browser"
 
-[functions]
-  directory = "dist/functions"
-  node_bundler = "esbuild"
-  included_files = ["**/*"]
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
-  force = false
-  
+# ============================================
+# Configuración de Headers - Seguridad
+# ============================================
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin" 
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# ============================================
+# Configuración de Headers - Assets Estáticos
+# ============================================
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ============================================
+# Configuración de Headers - Archivos JS/CSS
+# ============================================
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ============================================
+# Redirects - SPA y Angular Universal
+# ============================================
+# Manejo de rutas SPA para Angular
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = false
+
+# ============================================
+# Configuración de Build - Optimización
+# ============================================
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_VERSION = "10" 
