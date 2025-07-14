@@ -243,7 +243,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   onSectionClick(sectionId: string): void {
     this.activeSection = sectionId;
     this.isMenuOpen = false;
-    // El navegador se encarga del scroll automáticamente usando scroll-padding-top
+    this.scrollToSection(sectionId);
   }
 
   onMenuToggle(): void {
@@ -339,12 +339,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.isPersonalInfoLoaded && this.isExpertiseLoaded && this.isRecommendationsLoaded;
   }
 
-  // Método para scroll suave a sección con offset para header
+  // Método para scroll suave a sección con offset para header (sin hashtags en URL)
   scrollToSection(sectionId: string): void {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Usar el scroll-padding-top definido en CSS para el comportamiento nativo
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Usar scrollIntoView con scroll-padding-top para el offset correcto
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start',
+        inline: 'nearest'
+      });
     }
   }
 

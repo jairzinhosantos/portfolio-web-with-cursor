@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && mkdir -p dist/functions && cp -r dist/portfolio/server/* dist/functions/"
+  command = "npm run build && mkdir -p dist/functions && cp -r dist/portfolio/server/* dist/functions/ && mv dist/functions/main.server.mjs dist/functions/main-server.mjs && mv dist/functions/polyfills.server.mjs dist/functions/polyfills-server.mjs"
   publish = "dist/portfolio/browser"
 
 [functions]

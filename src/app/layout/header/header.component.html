@@ -2,25 +2,25 @@
   <nav class="nav">
     <ul class="nav-list" [class.mobile-open]="isMenuOpen">
       <li class="nav-item">
-        <a href="#about" [class.active]="activeSection === 'about'" (click)="onSectionClick('about')">About</a>
+        <a [class.active]="activeSection === 'about'" (click)="onSectionClick('about', $event)">About</a>
       </li>
       <li class="nav-item">
-        <a href="#expertise" [class.active]="activeSection === 'expertise'" (click)="onSectionClick('expertise')">Expertise</a>
+        <a [class.active]="activeSection === 'expertise'" (click)="onSectionClick('expertise', $event)">Expertise</a>
       </li>
       <li class="nav-item">
-        <a href="#research" [class.active]="activeSection === 'research'" (click)="onSectionClick('research')">Research</a>
+        <a [class.active]="activeSection === 'research'" (click)="onSectionClick('research', $event)">Research</a>
       </li>
       <li class="nav-item">
-        <a href="#projects" [class.active]="activeSection === 'projects'" (click)="onSectionClick('projects')">Projects</a>
+        <a [class.active]="activeSection === 'projects'" (click)="onSectionClick('projects', $event)">Projects</a>
       </li>
       <li class="nav-item">
-        <a href="#publications" [class.active]="activeSection === 'publications'" (click)="onSectionClick('publications')">Publications</a>
+        <a [class.active]="activeSection === 'publications'" (click)="onSectionClick('publications', $event)">Publications</a>
       </li>
       <li class="nav-item">
-        <a href="#videos" [class.active]="activeSection === 'videos'" (click)="onSectionClick('videos')">Videos</a>
+        <a [class.active]="activeSection === 'videos'" (click)="onSectionClick('videos', $event)">Videos</a>
       </li>
       <li class="nav-item">
-        <a href="#recommendations" [class.active]="activeSection === 'recommendations'" (click)="onSectionClick('recommendations')">Recommendations</a>
+        <a [class.active]="activeSection === 'recommendations'" (click)="onSectionClick('recommendations', $event)">Recommendations</a>
       </li>
     </ul>
     
