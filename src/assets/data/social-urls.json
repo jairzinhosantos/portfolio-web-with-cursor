@@ -1,0 +1,73 @@
+{
+  "socialMedia": {
+    "linkedin": "https://www.linkedin.com/in/jairzinhosantos/",
+    "github": "https://github.com/jairzinhosantos",
+    "twitter": "https://x.com/_jairzinho_",
+    "youtube": "https://www.youtube.com/@jairzinho.santos",
+    "tiktok": "https://www.tiktok.com/@jairzinho.santos",
+    "instagram": "https://www.instagram.com/jairzinho.santos/",
+    "medium": "https://medium.com/@jairzinho.santos",
+    "email": "jairzinho.santos@hotmail.com",
+    "discord": "javascript:void(0)",
+    "resume": "assets/resume/resume_jairzinho_santos-en.pdf"
+  },
+  "iconMapping": {
+    "linkedin": {
+      "icon": "fab fa-linkedin",
+      "title": "LinkedIn"
+    },
+    "github": {
+      "icon": "fab fa-github", 
+      "title": "GitHub"
+    },
+    "twitter": {
+      "icon": "x-icon",
+      "title": "X (formerly Twitter)",
+      "customContent": "𝕏"
+    },
+    "youtube": {
+      "icon": "fab fa-youtube",
+      "title": "YouTube"
+    },
+    "tiktok": {
+      "icon": "fab fa-tiktok",
+      "title": "TikTok"
+    },
+    "instagram": {
+      "icon": "fab fa-instagram",
+      "title": "Instagram"
+    },
+    "medium": {
+      "icon": "fab fa-medium",
+      "title": "Medium"
+    },
+    "email": {
+      "icon": "fas fa-envelope",
+      "title": "Email"
+    },
+    "discord": {
+      "icon": "fab fa-discord",
+      "title": "Discord"
+    },
+    "resume": {
+      "icon": "fas fa-download",
+      "title": "Ver CV"
+    }
+  },
+  "socialGroups": {
+    "primary": ["linkedin", "twitter", "github", "discord", "email", "resume"],
+    "secondary": ["youtube", "tiktok", "instagram"]
+  },
+  "messages": {
+    "contact": {
+      "emailSubject": "Let's Connect - Professional Inquiry",
+      "emailBody": "Hello Jairzinho,\n\nI'm reaching out regarding your expertise in AI Solutions Architecture. I would like to discuss potential collaboration opportunities.\n\nBest regards",
+      "contactLinkText": "write me"
+    },
+    "discord": {
+      "popupTitle": "Discord Server",
+      "popupMessage": "The Discord server will be available soon! We're currently working on setting up an amazing community space where we can discuss AI, technology, and innovation together.\n\nStay tuned for updates!",
+      "popupButtonText": "Got it!"
+    }
+  }
+} 

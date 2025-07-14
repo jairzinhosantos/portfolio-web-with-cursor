@@ -1,0 +1,282 @@
+@use 'sass:map';
+
+// Constantes específicas para publications - evita conflictos con otras secciones
+$publications-card-width-desktop: 450px;
+$publications-card-width-mobile: 300px;
+$publications-card-height-desktop: 400px;
+$publications-card-height-mobile: 380px;
+$publications-image-height-desktop: 160px;
+$publications-image-height-mobile: 140px;
+
+// Color constants para mantener clean code y modularidad - Publication Buttons
+$primary-blue: #007acc;           // Azul principal para tema claro
+$primary-blue-dark: #60a5fa;      // Azul claro para tema oscuro
+$button-hover-transition: all 0.3s ease;
+
+// Variables de colores para tema claro - UNIFORME BLANCO
+$light-theme-colors: (
+  background: #ffffff,              // Fondo blanco uniforme (consistente con otras secciones)
+  card-bg: white,
+  title: #333,
+  text: #666,
+  meta-text: #666,
+  button-color: $primary-blue,
+  button-border: $primary-blue,
+  button-hover-bg: $primary-blue,
+  button-hover-color: white,
+  icon-color: $primary-blue
+);
+
+// Variables de colores para tema oscuro
+$dark-theme-colors: (
+  background: #1a1a1a,
+  card-bg: #2a2a2a,
+  title: #e0e0e0,
+  text: #b0b0b0,
+  meta-text: #b0b0b0,
+  button-color: #b0b0b0,        // Gris claro como el contenido
+  button-border: #b0b0b0,       // Gris claro como el contenido
+  button-hover-bg: #d0d0d0,     // Gris más claro para hover sutil
+  button-hover-color: #2a2a2a,  // Texto oscuro para contraste
+  icon-color: $primary-blue-dark
+);
+
+#publications {
+  padding: var(--section-padding-y) var(--section-padding-x);
+  max-width: 1200px;
+  margin: 0 auto;
+  background: map.get($light-theme-colors, background);
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+
+  .loading-message {
+    text-align: center;
+    padding: 3rem 0;
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .publication-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: $publications-card-height-desktop;
+    display: flex;
+    flex-direction: column;
+    max-width: $publications-card-width-desktop;
+    min-width: $publications-card-width-desktop;
+    width: $publications-card-width-desktop;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 0 auto;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    img, .image-placeholder {
+      width: 100%;
+      height: $publications-image-height-desktop;
+      object-fit: cover;
+    }
+
+    .image-placeholder {
+      background: #ffffff; // Fondo blanco uniforme (consistente con otras secciones)
+      border: 1px solid #e5e7eb; // Borde sutil para definir el área
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: map.get($light-theme-colors, icon-color);
+
+      i {
+        font-size: 2rem;
+      }
+    }
+
+    .card-content {
+      padding: 1.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        margin: 0 0 0.8rem 0;
+        font-size: 1.2rem;
+        color: map.get($light-theme-colors, title);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      p {
+        flex: 1;
+        line-height: 1.5;
+        color: map.get($light-theme-colors, text);
+        margin: 0 0 0.8rem 0;
+        font-size: 0.9rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+        background: transparent;
+        color: map.get($light-theme-colors, button-color);
+        text-decoration: none;
+        border: 2px solid map.get($light-theme-colors, button-border);
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: $button-hover-transition;
+        align-self: flex-start;
+
+        &:hover {
+          background: map.get($light-theme-colors, button-hover-bg);
+          color: map.get($light-theme-colors, button-hover-color);
+          transform: translateY(-2px);
+        }
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .medium-content,
+  .github-projects {
+    margin-bottom: 2rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  #publications {
+    padding: 20px 1rem;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .publication-card {
+      height: auto;
+      max-width: 100%;
+
+      .card-content {
+        padding: 1rem;
+
+        h3 {
+          font-size: 1.1rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+          -webkit-line-clamp: 4;
+        }
+
+        .project-link {
+          font-size: 0.8rem;
+          padding: 0.35rem 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+// Dark theme support - Con especificidad máxima para botones
+:host-context(.dark-mode) #publications {
+  background: map.get($dark-theme-colors, background);
+
+  h2 {
+    color: map.get($dark-theme-colors, title);
+
+    &::after {
+      background: map.get($dark-theme-colors, button-color);
+    }
+  }
+
+  .loading-message p {
+    color: map.get($dark-theme-colors, text);
+  }
+
+  .publication-card {
+    background: map.get($dark-theme-colors, card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #2a2a2a, #333);
+      color: map.get($dark-theme-colors, button-color);
+    }
+
+    .card-content {
+      h3 {
+        color: map.get($dark-theme-colors, title) !important;
+      }
+
+      p {
+        color: map.get($dark-theme-colors, text) !important;
+      }
+
+      .project-link {
+        // Estado normal: transparente con borde gris claro
+        background: transparent !important;
+        color: map.get($dark-theme-colors, button-color) !important;
+        border: 2px solid map.get($dark-theme-colors, button-border) !important;
+        transition: $button-hover-transition !important;
+
+        // Estado hover: fondo gris claro con texto oscuro
+        &:hover {
+          background: map.get($dark-theme-colors, button-hover-bg) !important;
+          color: map.get($dark-theme-colors, button-hover-color) !important;
+          border-color: map.get($dark-theme-colors, button-hover-bg) !important;
+        }
+
+        // Iconos heredan el color del botón
+        i {
+          color: inherit !important;
+        }
+      }
+    }
+  }
+}

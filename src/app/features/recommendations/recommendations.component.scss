@@ -1,0 +1,301 @@
+@use 'sass:map';
+
+// Constantes específicas para recommendations - evita conflictos con otras secciones
+$recommendations-card-width-desktop: 480px;
+$recommendations-card-width-mobile: 300px;
+$recommendations-card-height-desktop: 420px;
+$recommendations-card-height-mobile: 380px;
+$recommendations-gap: 30px;
+$recommendations-avatar-size: 50px;
+
+// Variables modulares para Recommendations - siguiendo patrón EXACTO de Projects (GRIS)
+$recommendations-config: (
+  // Layout
+  'padding': 20px 2rem,
+  'margin-top': 100px,
+  
+  // Card dimensions - OPTIMIZADO para garantizar exactamente 2 cards por ventana
+  'card-height': $recommendations-card-height-desktop,
+  'card-max-width': $recommendations-card-width-desktop,
+  'card-gap': 15px,
+  
+  // Colors - Light theme (EXACTO como Projects - fondo blanco puro)
+  'bg-color': #ffffff,
+  'text-color': #333333,
+  'card-bg': #ffffff,              // BLANCO PURO como Projects
+  'card-border': transparent,       // TRANSPARENTE como Projects
+  'title-color': #2c3e50,
+  'position-color': #007acc,        // Azul distintivo para cargos
+  'button-bg': transparent,          // Fondo transparente
+  'button-color': #666666,           // GRIS como Projects - CHANGED FROM BLUE
+  'button-border': #666666,          // Borde GRIS como Projects - CHANGED FROM BLUE
+  'button-hover-bg': #666666,        // Fondo GRIS al hover como Projects - CHANGED FROM BLUE
+  'button-hover-color': #ffffff,     // Texto blanco al hover
+  'avatar-bg': #007acc,
+  'avatar-color': #ffffff,
+  
+  // Colors - Dark theme (EXACTO como Projects - patrón gris sutil)
+  'dark-bg-color': #1a1a1a,
+  'dark-text-color': #e0e0e0,
+  'dark-card-bg': #2a2a2a,
+  'dark-card-border': rgba(255, 255, 255, 0.1),  // SUTIL como Projects
+  'dark-title-color': #ffffff,
+  'dark-position-color': #60a5fa,   // Azul claro para cargos en tema oscuro
+  'dark-button-bg': transparent,     // Fondo transparente
+  'dark-button-color': #b0b0b0,      // GRIS CLARO como en Projects
+  'dark-button-border': #b0b0b0,     // GRIS CLARO como borde
+  'dark-button-hover-bg': #d0d0d0,   // GRIS MÁS CLARO para hover sutil
+  'dark-button-hover-color': #2a2a2a, // Texto oscuro al hover
+  'dark-avatar-bg': #60a5fa,
+  'dark-avatar-color': #1a1a1a,
+  
+  // Typography
+  'title-font-size': 2rem,
+  'title-font-size-mobile': 1.8rem,
+  'author-name-size': 1.1rem,
+  'author-position-size': 0.9rem,
+  'text-size': 0.9rem,
+  
+  // Spacing and layout structure
+  'header-margin': 1rem,
+  'content-margin': 1rem,
+  'footer-margin-top': 1rem,
+  'button-padding': 0.4rem 0.8rem,
+  'avatar-size': 50px
+);
+
+.recommendations-section {
+  padding: map.get($recommendations-config, 'padding');
+  margin-top: map.get($recommendations-config, 'margin-top');
+  background-color: map.get($recommendations-config, 'bg-color');
+  color: map.get($recommendations-config, 'text-color');
+  
+  .recommendations-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: map.get($recommendations-config, 'title-font-size');
+    font-weight: 700;
+    color: map.get($recommendations-config, 'title-color');
+    margin-bottom: 1.5rem; // Cambiado para consistencia con otras secciones
+    position: relative; // Necesario para el pseudo-elemento
+    
+    // Línea divisoria azul - patrón consistente con otras secciones
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: #007acc; // Color azul consistente
+      border-radius: 2px;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: map.get($recommendations-config, 'title-font-size-mobile');
+    }
+  }
+
+  .recommendation-card {
+    height: map.get($recommendations-config, 'card-height');
+    max-width: map.get($recommendations-config, 'card-max-width');
+    background: map.get($recommendations-config, 'card-bg');
+    border: 1px solid map.get($recommendations-config, 'card-border');
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: default; // Removido cursor pointer para evitar click en toda la card
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .recommendation-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: map.get($recommendations-config, 'header-margin');
+      flex-shrink: 0; // No se reduce al comprimir
+      height: 70px; // Altura fija para el header para uniformidad
+
+      .avatar {
+        width: map.get($recommendations-config, 'avatar-size');
+        height: map.get($recommendations-config, 'avatar-size');
+        background: map.get($recommendations-config, 'avatar-bg');
+        color: map.get($recommendations-config, 'avatar-color');
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .author-info {
+        flex: 1;
+        min-width: 0;
+
+        .author-name {
+          font-size: map.get($recommendations-config, 'author-name-size');
+          font-weight: 600;
+          color: map.get($recommendations-config, 'title-color');
+          margin: 0 0 0.25rem 0;
+          line-height: 1.3;
+        }
+
+        .author-position {
+          font-size: map.get($recommendations-config, 'author-position-size');
+          color: map.get($recommendations-config, 'position-color'); // Azul distintivo
+          margin: 0 0 0.15rem 0;
+          line-height: 1.4;
+          font-weight: 500; // Ligeramente más bold para destacar
+        }
+
+        .author-company {
+          font-size: map.get($recommendations-config, 'author-position-size');
+          color: map.get($recommendations-config, 'text-color');
+          margin: 0;
+          line-height: 1.4;
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .recommendation-content {
+      flex: 1; // Toma todo el espacio disponible
+      display: flex;
+      flex-direction: column;
+      min-height: 0; // Importante para el truncado correcto
+      overflow: hidden; // Evita desbordamiento
+
+      .recommendation-text {
+        font-size: map.get($recommendations-config, 'text-size');
+        line-height: 1.6;
+        color: map.get($recommendations-config, 'text-color');
+        margin: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 10;  // Reducido a 10 líneas para más consistencia
+        -webkit-box-orient: vertical;
+        flex: 1; // Ocupa todo el espacio disponible
+        max-height: calc(10 * 1.6 * 0.9rem); // Altura máxima calculada para 10 líneas
+      }
+    }
+
+    .recommendation-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: auto; // Empuja el footer al fondo
+      padding-top: 1rem; // Separación del contenido
+      flex-shrink: 0; // Footer siempre en la misma posición
+      min-height: 50px; // Altura mínima garantizada para el botón
+      border-top: 1px solid transparent; // Separador visual sutil
+
+      .read-more-btn {
+        background: map.get($recommendations-config, 'button-bg');
+        color: map.get($recommendations-config, 'button-color');
+        border: 2px solid map.get($recommendations-config, 'button-border');
+        border-radius: 6px;
+        padding: map.get($recommendations-config, 'button-padding');
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        text-decoration: none;
+
+        &:hover {
+          background: map.get($recommendations-config, 'button-hover-bg') !important;
+          color: map.get($recommendations-config, 'button-hover-color') !important;
+          transform: translateY(-2px);
+        }
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+// Dark theme
+:host-context(.dark-mode) .recommendations-section {
+  background-color: map.get($recommendations-config, 'dark-bg-color') !important;
+  color: map.get($recommendations-config, 'dark-text-color') !important;
+
+  .section-title {
+    color: map.get($recommendations-config, 'dark-title-color') !important;
+    
+    // Línea divisoria azul para modo oscuro - consistente con otras secciones
+    &::after {
+      background: #60a5fa !important;
+    }
+  }
+
+  .recommendation-card {
+    background: map.get($recommendations-config, 'dark-card-bg') !important;
+    border-color: map.get($recommendations-config, 'dark-card-border') !important;
+
+    .recommendation-header {
+      .avatar {
+        background: map.get($recommendations-config, 'dark-avatar-bg') !important;
+        color: map.get($recommendations-config, 'dark-avatar-color') !important;
+      }
+
+      .author-info {
+        .author-name {
+          color: map.get($recommendations-config, 'dark-title-color') !important;
+        }
+
+        .author-position {
+          color: map.get($recommendations-config, 'dark-position-color') !important; // Azul claro en tema oscuro
+        }
+
+        .author-company {
+          color: map.get($recommendations-config, 'dark-text-color') !important;
+        }
+      }
+    }
+
+    .recommendation-content {
+      .recommendation-text {
+        color: map.get($recommendations-config, 'dark-text-color') !important;
+      }
+    }
+
+    .recommendation-footer {
+      .read-more-btn {
+        // Estado normal: transparente con borde GRIS (como Projects)
+        background: map.get($recommendations-config, 'dark-button-bg') !important;
+        color: map.get($recommendations-config, 'dark-button-color') !important;
+        border: 2px solid map.get($recommendations-config, 'dark-button-border') !important;
+        transition: all 0.3s ease !important;
+
+        // Estado hover: fondo gris claro con texto oscuro (EXACTO como Projects)
+        &:hover {
+          background: map.get($recommendations-config, 'dark-button-hover-bg') !important;
+          color: map.get($recommendations-config, 'dark-button-hover-color') !important;
+          border-color: map.get($recommendations-config, 'dark-button-hover-bg') !important;
+        }
+
+        // Iconos heredan el color del botón
+        i {
+          color: inherit !important;
+        }
+      }
+    }
+  }
+}

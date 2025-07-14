@@ -1,0 +1,42 @@
+<section id="projects">
+  <h2>Github Projects</h2>
+  
+  <div *ngIf="projects.length === 0" class="loading-message">
+    <p><i class="fab fa-github" style="margin-right: 8px; color: #007acc;"></i>Cargando proyectos...</p>
+  </div>
+  
+  <div *ngIf="projects.length > 0">
+    <app-carousel 
+      [items]="projects"
+      [config]="carouselConfig"
+      type="projects"
+      (itemClick)="onProjectClick($event)"
+      (slideChange)="onSlideChange($event)">
+      
+      <ng-template #itemTemplate let-project="item">
+        <div class="project-card">
+          <div class="card-content">
+            <h3>{{ project.name }}</h3>
+            <p>{{ project.description }}</p>
+            <div class="project-meta">
+              <span class="language" *ngIf="project.language">
+                <i class="fas fa-code"></i> {{ project.language }}
+              </span>
+              <span class="stars" *ngIf="project.stargazers_count">
+                <i class="fas fa-star"></i> {{ project.stargazers_count }}
+              </span>
+            </div>
+            <div class="project-links">
+              <a [href]="project.html_url" target="_blank" class="project-link" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Ver en GitHub
+              </a>
+              <a *ngIf="project.homepage" [href]="project.homepage" target="_blank" class="project-link" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </app-carousel>
+  </div>
+</section> 

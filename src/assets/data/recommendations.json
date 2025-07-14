@@ -1,0 +1,65 @@
+{
+  "linkedinRecommendationsUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/",
+  "recomendaciones": [
+    {
+      "nombre": "Adriana Cuadros Bedoya",
+      "acronimo": "AC",
+      "cargo": "CX | Innovation @Interbank",
+      "empresa": "Interbank",
+      "fecha": "December 27, 2024",
+      "texto": "Tuve el placer de trabajar con Jairzinho durante Salto AI. Fue una guía indispensable en el desarrollo del proyecto, tanto por su experiencia técnica como por su apoyo y motivación durante todo el desarrollo del programa. Logramos sacar adelante un prototipo de manera veloz (7 semanas), siempre con el mindset de pensar fuera de la caja y de que todo es posible. Definitivamente sus conocimientos profundos en GenAI nos permitieron sacar adelante el proyecto de la mejor manera posible.",
+      "foto": "https://via.placeholder.com/150x150/007acc/ffffff?text=AC",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    },
+    {
+      "nombre": "Fiorella Diez",
+      "acronimo": "FD",
+      "cargo": "Design Lead en La Victoria Lab",
+      "empresa": "La Victoria Lab",
+      "fecha": "December 20, 2024",
+      "texto": "Ha sido un placer haber contado con Jairzinho como partner en nuestro proyecto de AI. No solo trajo todos los conocimientos técnicos necesarios para guiar y ayudar a nuestros equipos a construir soluciones con gen AI, si no que desde el primer minuto se sintió parte del equipo por su nivel de involucramiento en ayudarnos a conseguir nuestros objetivos estratégicos. Ha ido mucho más allá de solo la parte técnica, también ha sido pieza clave en transferir conocimientos a nuestros participantes y retarlos a ir siempre un poco más allá para conseguir resultados impresionantes. Trabajaría con Jair en todos los proyectos que pudiera.",
+      "foto": "https://via.placeholder.com/150x150/28a745/ffffff?text=FD",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    },
+    {
+      "nombre": "Orlando Andrés Yepes Miquilena",
+      "acronimo": "OY",
+      "cargo": "Technical Lead | Chapter Lead Backend",
+      "empresa": "Interseguro Compañía de Seguros",
+      "fecha": "June 23, 2024",
+      "texto": "I had the pleasure of working with Jairzinho Santos at SALTO AI, where his contributions were nothing short of outstanding. Jairzinho's expertise and guidance in Generative AI were pivotal to our project's success. His deep understanding of Generative AI technologies enabled us to explore and implement innovative solutions effectively. His proficiency in RAG helped us enhance our AI models by incorporating external information sources. His expertise in fine-tuning pre-trained models allowed us to customize AI solutions to meet our specific needs. Beyond his technical skills, Jairzinho's proactive approach, collaborative spirit, and commitment to excellence set a high standard for our team.",
+      "foto": "https://via.placeholder.com/150x150/dc3545/ffffff?text=OY",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    },
+    {
+      "nombre": "Franco Pastor",
+      "acronimo": "FP",
+      "cargo": "Computer Scientist | Complex Problem Solver | Pianist",
+      "empresa": "Intercorp",
+      "fecha": "June 22, 2024",
+      "texto": "I had the pleasure of working with Jairzinho during an AI incubation program at Intercorp, and his contributions were outstanding. His expertise in GenAI best practices significantly enhanced our teams' understanding and capabilities. Jairzinho's teaching skills and dedication to our success were exceptional, making a substantial impact on our projects. I highly recommend Jairzinho for any initiative involving AI and team training.",
+      "foto": "https://via.placeholder.com/150x150/6f42c1/ffffff?text=FP",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    },
+    {
+      "nombre": "Dice Yukita",
+      "acronimo": "DY",
+      "cargo": "Interaction designer & founder at duhhh | ex IDEO",
+      "empresa": "duhhh",
+      "fecha": "June 19, 2024",
+      "texto": "Jair joined me on a rather difficult project midway, but showed tremendous impact instantly. He not only has the expertise in deploying AI solutions, but he also does it with a passionate lens on UX, which are two things that are certainly not easy to balance. He also elegantly 'walks his talk' by getting his hands dirty and showing first hand how it can be done without hesitation. I very much look forward to working with Jair again.",
+      "foto": "https://via.placeholder.com/150x150/fd7e14/ffffff?text=DY",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    },
+    {
+      "nombre": "Reynaldo Sal y Rosas",
+      "acronimo": "RS",
+      "cargo": "Business Leader | Digital Transformation | Professional Services",
+      "empresa": "IEEE Peru",
+      "fecha": "March 27, 2023",
+      "texto": "Jairzinho is one of the most talented young professionals I have had the opportunity to work with. We were both part of the Software Define Networks working group at the IEEE Peru where I mentored him. Jairzinho stood out for his ability to investigate and put theoretical and abstract networking/software concepts into practice with great confidence and agility. In addition, Jairzinho stood out for his curiosity to learn and his ability to ask questions to build a 360 vision that covers multiple angles of a problem and solution. Jairzinho's work exceeded my expectations and I look forward to working with him again.",
+      "foto": "https://via.placeholder.com/150x150/20c997/ffffff?text=RS",
+      "linkedinUrl": "https://www.linkedin.com/in/jairzinhosantos/details/recommendations/"
+    }
+  ]
+} 

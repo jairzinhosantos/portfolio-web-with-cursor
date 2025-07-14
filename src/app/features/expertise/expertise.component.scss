@@ -1,0 +1,264 @@
+// EXPERTISE COMPONENT - Card design matching port 4000 with ELEVATED/RAISED effect
+#expertise {
+  padding: var(--section-padding-y) var(--section-padding-x);
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .expertise-block {
+    // ELEVATED CARD DESIGN - Port 4000 style with raised effect
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06); // Much subtler border matching port 4000
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    
+    // RAISED EFFECT - Multiple layered shadows for depth (identical to expertise)
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),      // Close subtle shadow
+      0 4px 12px rgba(0, 0, 0, 0.12),     // Medium depth shadow  
+      0 8px 24px rgba(0, 0, 0, 0.06);     // Far ambient shadow
+    
+    position: relative;
+    
+    // Enhanced hover effect with more elevation (matching expertise)
+    &:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 0, 0, 0.08); // Subtle border change on hover
+      
+      // ELEVATED HOVER - Even more pronounced shadows (identical to expertise)
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.12),     // Close shadow stronger
+        0 8px 20px rgba(0, 0, 0, 0.16),    // Medium shadow stronger
+        0 16px 40px rgba(0, 0, 0, 0.12);   // Far shadow much stronger
+    }
+
+    .expertise-icon {
+      margin-bottom: 1.5rem;
+      
+      i {
+        font-size: 3rem;
+        transition: all 0.3s ease;
+        
+        // ICONOS CON COLORES BASE MÁS CLAROS - MAYOR CONTRASTE EN HOVER
+        &.fa-brain {
+          color: #f472b6; // Rosa claro base
+          
+          &:hover {
+            color: #be185d; // Rosa oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-sitemap {
+          color: #34d399; // Verde claro base
+          
+          &:hover {
+            color: #047857; // Verde oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-code {
+          color: #60a5fa; // Azul claro base
+          
+          &:hover {
+            color: #1e40af; // Azul oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(96, 165, 250, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-users {
+          color: #fbbf24; // Naranja claro base
+          
+          &:hover {
+            color: #b45309; // Naranja oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-rocket {
+          color: #f87171; // Rojo claro base
+          
+          &:hover {
+            color: #991b1b; // Rojo oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(248, 113, 113, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        // STRATEGIC DESIGN - Updated to use chess icon with vibrant purple
+        &.fa-chess {
+          color: #8b5cf6; // Púrpura vibrante base - MUCH MORE COLORFUL
+          
+          &:hover {
+            color: #581c87; // Púrpura oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #666;
+      text-align: left;
+      margin: 0;
+    }
+  }
+}
+
+// DARK THEME SUPPORT - Enhanced for elevated card design
+:host-context(.dark-mode) #expertise {
+  background: #1a1a1a;
+
+  h2 {
+    color: #e0e0e0;
+
+    &::after {
+      background: #60a5fa;
+    }
+  }
+
+  .expertise-grid {
+    .expertise-block {
+      background: #2a2a2a;
+      border-color: rgba(255, 255, 255, 0.12);
+      
+      // DARK THEME ELEVATED SHADOWS - Stronger for dark background
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),      // Close shadow stronger in dark
+        0 4px 12px rgba(0, 0, 0, 0.5),     // Medium shadow stronger
+        0 8px 24px rgba(0, 0, 0, 0.3);     // Far shadow for depth
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        
+        // DARK THEME ELEVATED HOVER - Even more dramatic
+        box-shadow: 
+          0 4px 8px rgba(0, 0, 0, 0.6),     // Close shadow much stronger
+          0 8px 20px rgba(0, 0, 0, 0.7),    // Medium shadow much stronger  
+          0 16px 40px rgba(0, 0, 0, 0.5);   // Far shadow very strong
+      }
+
+      .expertise-icon {
+        i {
+          // COLORES ESPECÍFICOS PARA DARK THEME - Mayor contraste
+          &.fa-brain {
+            color: #fbb6ce; // Rosa más claro para dark theme
+            
+            &:hover {
+              color: #ec4899;
+              text-shadow: 0 0 30px rgba(251, 182, 206, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-sitemap {
+            color: #6ee7b7; // Verde más claro para dark theme
+            
+            &:hover {
+              color: #10b981;
+              text-shadow: 0 0 30px rgba(110, 231, 183, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-code {
+            color: #93c5fd; // Azul más claro para dark theme
+            
+            &:hover {
+              color: #3b82f6;
+              text-shadow: 0 0 30px rgba(147, 197, 253, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-users {
+            color: #fcd34d; // Naranja más claro para dark theme
+            
+            &:hover {
+              color: #f59e0b;
+              text-shadow: 0 0 30px rgba(252, 211, 77, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-rocket {
+            color: #fca5a5; // Rojo más claro para dark theme
+            
+            &:hover {
+              color: #ef4444;
+              text-shadow: 0 0 30px rgba(252, 165, 165, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          // STRATEGIC DESIGN - Enhanced purple for dark theme
+          &.fa-chess {
+            color: #c4b5fd; // Púrpura vibrante para dark theme - MUCH MORE VISIBLE
+            
+            &:hover {
+              color: #8b5cf6;
+              text-shadow: 0 0 30px rgba(196, 181, 253, 0.7);
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+      h3 {
+        color: #e0e0e0;
+      }
+
+      p {
+        color: #b0b0b0;
+      }
+    }
+  }
+} 

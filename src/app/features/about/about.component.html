@@ -1,0 +1,58 @@
+<section id="about" class="section about-section">
+  <div class="about-container">
+    <!-- Profile Section - Left Side -->
+    <div class="about-profile">
+      <img [src]="fotoPerfil" alt="Profile Photo" class="about-profile__image">
+      <div class="about-profile__info">
+        <h1 class="about-profile__name">{{ nombre }}</h1>
+        <div class="about-profile__titles">
+          <div class="about-profile__title">{{ titulo1 }}</div>
+          <div class="about-profile__title">{{ titulo2 }}</div>
+          <div class="about-profile__title">{{ titulo3 }}</div>
+        </div>
+        <p class="about-profile__tagline" [innerHTML]="tagline"></p>
+      </div>
+      
+      <!-- Social Links under profile -->
+      <div class="social-links">
+        <div class="social-links__row">
+          <a [href]="finalLinkedin" target="_blank" title="LinkedIn" class="social-links__link">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a [href]="finalTwitter" target="_blank" title="X (formerly Twitter)" class="social-links__link">
+            <span class="x-icon">𝕏</span>
+          </a>
+          <a [href]="finalGithub" target="_blank" title="GitHub" class="social-links__link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="javascript:void(0)" (click)="onDiscordClick()" title="Discord" class="social-links__link">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a href="javascript:void(0)" (click)="onContactClick()" title="Email" class="social-links__link">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="assets/resume/resume_jairzinho_santos-en.pdf" target="_blank" rel="noopener" title="Ver CV" class="social-links__link">
+            <i class="fas fa-download"></i>
+          </a>
+        </div>
+        <div class="social-links__row">
+          <a [href]="finalYoutube" target="_blank" title="YouTube" class="social-links__link">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a [href]="finalTiktok" target="_blank" title="TikTok" class="social-links__link">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a [href]="finalInstagram" target="_blank" title="Instagram" class="social-links__link">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Content - Right Side -->
+    <div class="about-content">
+      <h2 class="section__title">About me</h2>
+      <div class="about-content__text" [innerHTML]="resumenProfesional"></div>
+    </div>
+  </div>
+</section> 

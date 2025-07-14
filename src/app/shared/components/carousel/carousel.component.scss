@@ -1,0 +1,133 @@
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 var(--section-padding-x);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 122, 204, 0.9);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 16px;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 122, 204, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.prev {
+      left: 20px;
+    }
+
+    &.next {
+      right: 20px;
+    }
+
+    i {
+      pointer-events: none;
+    }
+  }
+
+  .carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.3s ease;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      min-width: 100%;
+
+      .slide-content {
+        display: flex;
+        gap: 20px;
+        padding: 0 20px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 122, 204, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(0, 122, 204, 0.6);
+        transform: scale(1.2);
+      }
+
+      &.active {
+        background: #007acc;
+        transform: scale(1.3);
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .carousel-container {
+    padding: 0 var(--section-padding-x);
+
+    .carousel-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+
+      &.prev {
+        left: 10px;
+      }
+
+      &.next {
+        right: 10px;
+      }
+    }
+
+    .carousel-track .carousel-slide .slide-content {
+      gap: 15px;
+      padding: 0 10px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+} 

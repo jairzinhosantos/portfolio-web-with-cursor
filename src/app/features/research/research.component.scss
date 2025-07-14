@@ -1,0 +1,256 @@
+// RESEARCH COMPONENT - Elevated cards matching port 4000 with vibrant icon colors
+#research {
+  padding: var(--section-padding-y) var(--section-padding-x);
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Slightly wider for better proportion
+    gap: 2rem; // Increased gap matching expertise
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .research-block {
+    // ELEVATED CARD DESIGN - Port 4000 style with raised effect (exact match with expertise)
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06); // Much subtler border matching port 4000
+    border-radius: 16px; // More rounded corners like port 4000
+    padding: 2rem 1.5rem; // More generous padding matching expertise
+    text-align: center;
+    transition: all 0.3s ease;
+    
+    // RAISED EFFECT - Multiple layered shadows for depth (identical to expertise)
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),      // Close subtle shadow
+      0 4px 12px rgba(0, 0, 0, 0.12),     // Medium depth shadow  
+      0 8px 24px rgba(0, 0, 0, 0.06);     // Far ambient shadow
+    
+    position: relative;
+    
+    // Enhanced hover effect with more elevation (matching expertise)
+    &:hover {
+      transform: translateY(-8px); // Same elevation as expertise
+      border-color: rgba(0, 0, 0, 0.08); // Subtle border change on hover
+      
+      // ELEVATED HOVER - Even more pronounced shadows (identical to expertise)
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.12),     // Close shadow stronger
+        0 8px 20px rgba(0, 0, 0, 0.16),    // Medium shadow stronger
+        0 16px 40px rgba(0, 0, 0, 0.12);   // Far shadow much stronger
+    }
+
+    .research-icon {
+      margin-bottom: 1.5rem; // Matching expertise spacing
+      
+      i {
+        font-size: 3rem; // Larger icons matching expertise
+        transition: all 0.3s ease;
+        
+        // ICONOS CON COLORES BASE MÁS CLAROS - MAYOR CONTRASTE EN HOVER (maintaining vibrant colors)
+        &.fa-search {
+          color: #60a5fa; // Azul claro base para búsqueda
+          
+          &:hover {
+            color: #1e40af; // Azul oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(96, 165, 250, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-brain {
+          color: #f472b6; // Rosa claro base (consistente con expertise)
+          
+          &:hover {
+            color: #be185d; // Rosa oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-robot {
+          color: #a78bfa; // Púrpura claro base para robótica
+          
+          &:hover {
+            color: #581c87; // Púrpura oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(167, 139, 250, 0.6);
+            transform: scale(1.1);
+          }
+        }
+
+        &.fa-atom {
+          color: #fb923c; // Naranja claro base para ciencias
+          
+          &:hover {
+            color: #c2410c; // Naranja oscuro hover - Mayor contraste
+            text-shadow: 0 0 25px rgba(251, 146, 60, 0.6);
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    h3 {
+      font-size: 1.4rem; // Matching expertise title size
+      margin-bottom: 1rem; // Matching expertise spacing
+      color: var(--text-color);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 1rem; // Matching expertise text size
+      line-height: 1.6;
+      color: #666;
+      text-align: left; // Left-aligned text like expertise
+      margin: 0;
+    }
+  }
+}
+
+// Responsive Design - Updated for new card design
+@media (max-width: 768px) {
+  #research {
+    padding: 20px 1rem;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-grid {
+      padding: 0;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+
+      .research-block {
+        padding: 1.5rem; // Adjusted for mobile
+
+        .research-icon i {
+          font-size: 2.5rem; // Smaller for mobile but still impactful
+        }
+
+        h3 {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+// DARK THEME SUPPORT - Enhanced for elevated card design (matching expertise)
+:host-context(.dark-mode) #research {
+  background: #1a1a1a;
+
+  h2 {
+    color: #e0e0e0;
+
+    &::after {
+      background: #60a5fa;
+    }
+  }
+
+  .research-grid {
+    .research-block {
+      background: #2a2a2a;
+      border-color: rgba(255, 255, 255, 0.12);
+      
+      // DARK THEME ELEVATED SHADOWS - Stronger for dark background (identical to expertise)
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),      // Close shadow stronger in dark
+        0 4px 12px rgba(0, 0, 0, 0.5),     // Medium shadow stronger
+        0 8px 24px rgba(0, 0, 0, 0.3);     // Far shadow for depth
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        
+        // DARK THEME ELEVATED HOVER - Even more dramatic (identical to expertise)
+        box-shadow: 
+          0 4px 8px rgba(0, 0, 0, 0.6),     // Close shadow much stronger
+          0 8px 20px rgba(0, 0, 0, 0.7),    // Medium shadow much stronger  
+          0 16px 40px rgba(0, 0, 0, 0.5);   // Far shadow very strong
+      }
+
+      .research-icon {
+        i {
+          // COLORES ESPECÍFICOS PARA DARK THEME - Mayor contraste (maintaining vibrant colors)
+          &.fa-search {
+            color: #93c5fd; // Azul más claro para dark theme
+            
+            &:hover {
+              color: #60a5fa;
+              text-shadow: 0 0 30px rgba(147, 197, 253, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-brain {
+            color: #fbb6ce; // Rosa más claro para dark theme (consistente con expertise)
+            
+            &:hover {
+              color: #f472b6;
+              text-shadow: 0 0 30px rgba(251, 182, 206, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-robot {
+            color: #c4b5fd; // Púrpura más claro para dark theme
+            
+            &:hover {
+              color: #a78bfa;
+              text-shadow: 0 0 30px rgba(196, 181, 253, 0.7);
+              transform: scale(1.1);
+            }
+          }
+
+          &.fa-atom {
+            color: #fed7aa; // Naranja más claro para dark theme
+            
+            &:hover {
+              color: #fb923c;
+              text-shadow: 0 0 30px rgba(254, 215, 170, 0.7);
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+      h3 {
+        color: #e0e0e0;
+      }
+
+      p {
+        color: #b0b0b0;
+      }
+    }
+  }
+} 

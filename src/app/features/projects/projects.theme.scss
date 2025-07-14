@@ -1,0 +1,42 @@
+// Temas específicos para Projects - Patrón modular Clean Code
+// Esto permite mantener los temas organizados y reutilizables
+
+// Tema claro para projects
+$projects-light-theme: (
+  'background': #ffffff,
+  'text': #333333,
+  'title': #2c3e50,
+  'card-bg': #ffffff,
+  'card-border': transparent,
+  'meta-text': #666666,
+  'icon-color': #007acc,
+  
+  // Botones en tema claro - Azul profesional
+  'button-color': #007acc,
+  'button-border': #007acc,
+  'button-hover-bg': #007acc,
+  'button-hover-color': #ffffff
+) !default;
+
+// Tema oscuro para projects - Botones GRISES (no azul)
+$projects-dark-theme: (
+  'background': #1a1a1a,
+  'text': #e0e0e0,
+  'title': #ffffff,
+  'card-bg': #2a2a2a,
+  'card-border': rgba(255, 255, 255, 0.1),
+  'meta-text': #b0b0b0,
+  'icon-color': #60a5fa,
+  
+  // Botones en tema oscuro - PATRÓN GRIS (como recommendations)
+  'button-color': #b0b0b0,        // GRIS claro (NO azul)
+  'button-border': #b0b0b0,       // Borde GRIS
+  'button-hover-bg': #d0d0d0,     // Hover GRIS más claro
+  'button-hover-color': #2a2a2a   // Texto oscuro en hover
+) !default;
+
+// Transiciones y efectos
+$projects-transitions: (
+  'button-hover': all 0.3s ease,
+  'card-hover': all 0.3s ease
+) !default; 

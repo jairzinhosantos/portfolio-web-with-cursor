@@ -1,0 +1,55 @@
+<header class="header">
+  <nav class="nav">
+    <ul class="nav-list" [class.mobile-open]="isMenuOpen">
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'about'" (click)="onSectionClick('about')">About</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'expertise'" (click)="onSectionClick('expertise')">Expertise</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'research'" (click)="onSectionClick('research')">Research</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'projects'" (click)="onSectionClick('projects')">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'publications'" (click)="onSectionClick('publications')">Publications</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'videos'" (click)="onSectionClick('videos')">Videos</a>
+      </li>
+      <li class="nav-item">
+        <a [class.active]="activeSection === 'recommendations'" (click)="onSectionClick('recommendations')">Recommendations</a>
+      </li>
+    </ul>
+    
+    <!-- Theme Selector -->
+    <div class="header-actions">
+      <div class="theme-selector">
+        <button class="theme-toggle" (click)="onThemeMenuToggle()">
+          <i class="fas" [class]="getThemeIcon()"></i>
+        </button>
+        <div class="theme-menu" *ngIf="themeMenuOpen">
+          <button class="theme-option" [class.active]="currentTheme === 'light'" (click)="onThemeChange('light')">
+            <i class="fas fa-sun"></i>
+            <span>Light</span>
+          </button>
+          <button class="theme-option" [class.active]="currentTheme === 'dark'" (click)="onThemeChange('dark')">
+            <i class="fas fa-moon"></i>
+            <span>Dark</span>
+          </button>
+          <button class="theme-option" [class.active]="currentTheme === 'auto'" (click)="onThemeChange('auto')">
+            <i class="fas fa-desktop"></i>
+            <span>Auto</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu Toggle -->
+  <button class="mobile-menu-toggle" (click)="onMenuToggle()">
+    <i class="fas" [class.fa-bars]="!isMenuOpen" [class.fa-times]="isMenuOpen"></i>
+  </button>
+</header> 

@@ -1,0 +1,68 @@
+<section id="videos">
+  <h2>Videos</h2>
+  
+  <div *ngIf="videos.length > 0; else noVideos">
+    <app-carousel 
+      [items]="videos"
+      [config]="carouselConfig"
+      type="videos"
+      (itemClick)="onVideoClick($event)"
+      (slideChange)="onSlideChange($event)">
+      
+      <ng-template #itemTemplate let-video="item">
+        <div class="video-card">
+          <div class="video-thumbnail" (click)="onVideoClick(video)">
+            <img [src]="video.thumbnail" [alt]="video.title" />
+            <div class="play-overlay">
+              <div class="play-button">▶</div>
+            </div>
+            <div class="video-duration">{{ formatDuration(video.duration) }}</div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">{{ video.title }}</h3>
+            <div class="video-meta">
+              <span class="video-views">{{ formatViewCount(video.viewCount) }} visualizaciones</span>
+              <span class="video-date">{{ video.publishedAt | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </app-carousel>
+  </div>
+
+  <ng-template #noVideos>
+    <div class="no-videos">
+      <p>Mostrando videos estáticos mientras las APIs de YouTube no están disponibles</p>
+    </div>
+  </ng-template>
+
+  <!-- Modal de Video -->
+  <div 
+    *ngIf="isVideoModalOpen && currentModalVideo" 
+    class="video-modal-overlay" 
+    (click)="closeVideoModal()">
+    <div class="video-modal-container" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeVideoModal()">×</button>
+      
+      <div class="video-player">
+        <iframe
+          [src]="'https://www.youtube.com/embed/' + currentModalVideo.id + '?controls=1&autoplay=1&fs=1&rel=0&modestbranding=1&playsinline=0&enablejsapi=1' | sanitizeUrl"
+          frameborder="0"
+          allowfullscreen
+          webkitallowfullscreen
+          mozallowfullscreen
+          allow="autoplay; fullscreen; picture-in-picture"
+          sandbox="allow-same-origin allow-scripts allow-presentation">
+        </iframe>
+      </div>
+      
+      <div class="video-modal-info">
+        <h3>{{ currentModalVideo.title }}</h3>
+        <div class="video-modal-meta">
+          <span class="views">{{ formatViewCount(currentModalVideo.viewCount || '0') }} visualizaciones</span>
+          <span class="duration">{{ formatDuration(currentModalVideo.duration || 0) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

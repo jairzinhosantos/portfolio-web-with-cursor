@@ -1,0 +1,73 @@
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-row a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  border: 2px solid #007acc;
+  border-radius: 50%;
+  color: #007acc;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.social-row a:hover {
+  background: #007acc;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+}
+
+.social-row a .x-icon {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.social-row.primary-social a,
+.social-row.secondary-social a {
+  border-color: #007acc;
+  color: #007acc;
+}
+
+.social-row.primary-social a:hover,
+.social-row.secondary-social a:hover {
+  background: #007acc;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .social-row a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Dark theme */
+:host-context(.dark-mode) .social-row.primary-social a,
+:host-context(.dark-mode) .social-row.secondary-social a {
+  border-color: #60a5fa;
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
+}
+
+:host-context(.dark-mode) .social-row.primary-social a:hover,
+:host-context(.dark-mode) .social-row.secondary-social a:hover {
+  background: #60a5fa;
+  color: white;
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+} 

@@ -1,0 +1,31 @@
+<section id="publications">
+  <h2>Publications</h2>
+  
+  <div *ngIf="publications.length === 0" class="loading-message">
+    <p><i class="fas fa-file-alt loading-icon"></i>Cargando publicaciones...</p>
+  </div>
+  
+  <div *ngIf="publications.length > 0">
+    <app-carousel 
+      [items]="publications"
+      [config]="carouselConfig"
+      type="publications"
+      (itemClick)="onPublicationClick($event)"
+      (slideChange)="onSlideChange($event)">
+      
+      <ng-template #itemTemplate let-publication="item">
+        <div class="publication-card">
+          <img *ngIf="publication.imagen" [src]="publication.imagen" [alt]="publication.titulo">
+          <div class="card-content">
+            <h3>{{ publication.titulo }}</h3>
+            <p>{{ publication.descripcion }}</p>
+            <a [href]="publication.enlace" target="_blank" class="project-link" rel="noopener noreferrer">
+              <i class="fas fa-external-link-alt"></i>
+              Leer más
+            </a>
+          </div>
+        </div>
+      </ng-template>
+    </app-carousel>
+  </div>
+</section> 

@@ -1,0 +1,39 @@
+<section class="recommendations-section" id="recommendations">
+  <div class="recommendations-container">
+    <h2 class="section-title">Recommendations</h2>
+    
+    <app-carousel 
+      [items]="recommendations"
+      [config]="carouselConfig">
+      <ng-template #itemTemplate let-recommendation>
+        <div class="recommendation-card">
+          <div class="recommendation-header">
+            <div class="avatar">
+              {{ getInitials(recommendation) }}
+            </div>
+            <div class="author-info">
+              <h3 class="author-name">{{ recommendation.nombre }}</h3>
+              <p class="author-position">{{ recommendation.cargo }}</p>
+              <p class="author-company">{{ recommendation.empresa }}</p>
+            </div>
+          </div>
+          
+          <div class="recommendation-content">
+            <p class="recommendation-text">
+              {{ truncateText(recommendation.texto, 450) }}
+            </p>
+          </div>
+          
+          <div class="recommendation-footer">
+            <button 
+              class="read-more-btn"
+              (click)="onRecommendationClick(recommendation)">
+              <i class="fab fa-linkedin"></i>
+              Ver en LinkedIn
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </app-carousel>
+  </div>
+</section> 

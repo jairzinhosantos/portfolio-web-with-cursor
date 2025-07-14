@@ -1,0 +1,27 @@
+footer {
+  // TEMA CLARO (default) - FONDO BLANCO UNIFORME
+  background: #ffffff; // Fondo blanco uniforme (consistente con otras secciones)
+  color: #475569;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 4rem;
+  border-top: 1px solid #e5e7eb;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
+
+// TEMA OSCURO
+:host-context(.dark-mode) footer {
+  background: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  
+  p {
+    color: #e0e0e0 !important;
+    opacity: 0.8 !important;
+  }
+} 

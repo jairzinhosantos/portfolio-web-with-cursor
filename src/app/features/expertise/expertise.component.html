@@ -1,0 +1,12 @@
+<section id="expertise">
+  <h2>Expertise</h2>
+  <div class="expertise-grid">
+    <div class="expertise-block" *ngFor="let area of areas">
+      <div class="expertise-icon">
+        <i [class]="area.icono"></i>
+      </div>
+      <h3>{{ area.titulo }}</h3>
+      <p>{{ area.descripcion }}</p>
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,278 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+// Global CSS Variables for modular spacing - UNIFIED SYSTEM
+:root {
+  // Unified spacing scale - OPTIMIZED for better navigation and visual separation
+  --section-padding-y: 2.5rem;     // 40px - increased for better section separation
+  --section-padding-x: 2rem;       // 32px - consistent horizontal padding  
+  --section-gap: 1.5rem;           // 24px - gap between elements
+  --card-padding: 1.5rem;          // 24px - internal card padding
+  --content-max-width: 1200px;     // Max content width
+  --header-height: 72px;
+  
+  // Responsive breakpoints
+  --mobile-max: 768px;
+  --tablet-max: 1024px;
+  
+  // Color variables for consistent theming
+  --primary-color: #007acc;
+  --secondary-color: #60a5fa;
+  --text-color: #333;
+  --text-secondary: #666;
+  --text-tertiary: #888;
+  --bg-color: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+  
+  // Dark theme overrides
+  --dark-bg: #1a1a1a;
+  --dark-card-bg: #2a2a2a;
+  --dark-text: #e5e7eb;
+  --dark-text-secondary: #cbd5e1;
+  --dark-border: rgba(255, 255, 255, 0.1);
+}
+
+// Global reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+// Focus and selection improvements
+*:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+// MODULAR SECTION STYLES - Unified system
+.section {
+  padding: var(--section-padding-y) var(--section-padding-x);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: var(--section-gap);
+    color: var(--text-color);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+  }
+}
+
+// MODULAR CARD STYLES - Unified system
+.card {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  &__title {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    font-weight: 600;
+  }
+  
+  &__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+}
+
+// SOCIAL LINKS - Modular component
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+  &__row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 122, 204, 0.1);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+    }
+    
+    i, .x-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// PROJECT LINK STYLES - Global minimalist buttons
+.project-link {
+  color: #6b7280 !important;
+  border: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+  border-radius: 6px !important;
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  
+  &:hover {
+    background: #f8fafc !important;
+    color: #374151 !important;
+    border-color: #d1d5db !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+// DARK MODE STYLES - Enhanced and consistent
+body.dark-mode {
+  --text-color: var(--dark-text);
+  --text-secondary: var(--dark-text-secondary);
+  --bg-color: var(--dark-bg);
+  --border-color: var(--dark-border);
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+
+  .section__title {
+    color: var(--dark-text);
+    
+    &::after {
+      background: var(--secondary-color);
+    }
+  }
+
+  .card {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    
+    &__title {
+      color: var(--dark-text);
+    }
+    
+    &__text {
+      color: var(--dark-text-secondary);
+    }
+  }
+
+  .social-links__link {
+    background: rgba(96, 165, 250, 0.15);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+
+    &:hover {
+      background: var(--secondary-color);
+      color: white;
+      box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+    }
+  }
+
+  .project-link {
+    background: #374151 !important;
+    color: #d1d5db !important;
+    border-color: #4b5563 !important;
+
+    &:hover {
+      background: #4b5563 !important;
+      color: #f3f4f6 !important;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  :root {
+    --section-padding-y: 2rem;
+    --section-padding-x: 1rem;
+  }
+  
+  .section__title {
+    font-size: 2rem;
+  }
+  
+  .social-links__row {
+    gap: 0.5rem;
+  }
+  
+  .social-links__link {
+    width: 44px;
+    height: 44px;
+  }
+}

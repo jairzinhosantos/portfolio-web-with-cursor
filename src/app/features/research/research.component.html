@@ -1,0 +1,12 @@
+<section id="research">
+  <h2>Research Interests</h2>
+  <div class="research-grid">
+    <div class="research-block" *ngFor="let area of areas">
+      <div class="research-icon">
+        <i [class]="area.icono"></i>
+      </div>
+      <h3>{{ area.titulo }}</h3>
+      <p>{{ area.descripcion }}</p>
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,274 @@
+@use 'sass:map';
+@use './projects.theme.scss' as theme;
+
+// Constantes específicas de projects - Optimizadas para 3 cards sin imágenes
+$projects-card-width-desktop: 320px; // Mantengo el ancho optimizado
+$projects-card-width-mobile: 280px;
+$projects-card-height: 220px; // Reducido significativamente sin imagen
+
+#projects {
+  padding: 20px 2rem;
+  background: map.get(theme.$projects-light-theme, background);
+  color: map.get(theme.$projects-light-theme, text);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: map.get(theme.$projects-light-theme, title);
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: map.get(theme.$projects-light-theme, button-color);
+      border-radius: 2px;
+    }
+  }
+
+  .loading-message {
+    text-align: center;
+    padding: 3rem 0;
+
+    p {
+      font-size: 1.1rem;
+      color: map.get(theme.$projects-light-theme, meta-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .project-card {
+    background: map.get(theme.$projects-light-theme, card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.06); // Borde sutil consistente
+    border-radius: 12px;
+    overflow: hidden;
+    transition: map.get(theme.$projects-transitions, card-hover);
+    height: $projects-card-height;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-width: $projects-card-width-desktop;
+    min-width: $projects-card-width-desktop;
+    width: $projects-card-width-desktop;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 0 auto;
+    
+    // ELEVATED EFFECT - Sombras múltiples para efecto elevado
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),      // Sombra sutil cercana
+      0 4px 12px rgba(0, 0, 0, 0.12),     // Sombra media
+      0 8px 24px rgba(0, 0, 0, 0.06);     // Sombra ambiental lejana
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 0, 0, 0.08); // Cambio sutil del borde al hover
+      
+      // ELEVATED HOVER - Sombras mejoradas
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.12),     // Sombra cercana más fuerte
+        0 8px 20px rgba(0, 0, 0, 0.16),    // Sombra media más fuerte
+        0 16px 40px rgba(0, 0, 0, 0.12);   // Sombra lejana mucho más fuerte
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      h3 {
+        margin: 0 0 0.8rem 0;
+        font-size: 1.3rem;
+        color: map.get(theme.$projects-light-theme, title);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      p {
+        flex: 1;
+        line-height: 1.5;
+        color: map.get(theme.$projects-light-theme, text);
+        margin: 0 0 0.8rem 0;
+        font-size: 0.95rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; // Más líneas disponibles sin imagen
+        -webkit-box-orient: vertical;
+      }
+
+      .project-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+
+        .language, .stars {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          color: map.get(theme.$projects-light-theme, meta-text);
+
+          i {
+            color: map.get(theme.$projects-light-theme, icon-color);
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .project-links {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: auto; // Empuja los links al final
+
+        .project-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          padding: 0.5rem 0.9rem;
+          background: transparent;
+          color: map.get(theme.$projects-light-theme, button-color);
+          text-decoration: none;
+          border: 2px solid map.get(theme.$projects-light-theme, button-border);
+          border-radius: 6px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          transition: map.get(theme.$projects-transitions, button-hover);
+
+          &:hover {
+            background: map.get(theme.$projects-light-theme, button-hover-bg);
+            color: map.get(theme.$projects-light-theme, button-hover-color);
+            transform: translateY(-2px);
+          }
+
+          i {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Diseño Responsivo
+@media (max-width: 768px) {
+  #projects {
+    padding: 20px 1rem;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-card {
+      height: auto;
+      max-width: $projects-card-width-mobile;
+      min-width: $projects-card-width-mobile;
+      width: $projects-card-width-mobile;
+      flex-shrink: 0;
+      flex-grow: 0;
+      margin: 0 auto;
+
+      .card-content {
+        padding: 1.2rem;
+
+        h3 {
+          font-size: 1.1rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+        }
+
+        .project-meta {
+          font-size: 0.8rem;
+        }
+
+        .project-links .project-link {
+          font-size: 0.8rem;
+          padding: 0.4rem 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+// Dark theme
+:host-context(.dark-mode) #projects {
+  background: map.get(theme.$projects-dark-theme, background) !important;
+  color: map.get(theme.$projects-dark-theme, text) !important;
+
+  h2 {
+    color: map.get(theme.$projects-dark-theme, title) !important;
+
+    &::after {
+      background: map.get(theme.$projects-dark-theme, button-color) !important;
+    }
+  }
+
+  .loading-message p {
+    color: map.get(theme.$projects-dark-theme, meta-text) !important;
+  }
+
+  .project-card {
+    background: map.get(theme.$projects-dark-theme, card-bg) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    
+    // DARK THEME ELEVATED SHADOWS - Matching expertise
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.4),      // Close shadow stronger in dark
+      0 4px 12px rgba(0, 0, 0, 0.5),     // Medium shadow stronger
+      0 8px 24px rgba(0, 0, 0, 0.3) !important;     // Far shadow for depth
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      
+      // DARK THEME ELEVATED HOVER - Enhanced shadows
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.6),     // Close shadow much stronger
+        0 8px 20px rgba(0, 0, 0, 0.7),    // Medium shadow much stronger  
+        0 16px 40px rgba(0, 0, 0, 0.5) !important;   // Far shadow very strong
+    }
+
+    .card-content {
+      h3 {
+        color: map.get(theme.$projects-dark-theme, title) !important;
+      }
+
+      p {
+        color: map.get(theme.$projects-dark-theme, text) !important;
+      }
+
+      .project-meta {
+        .language, .stars {
+          color: map.get(theme.$projects-dark-theme, meta-text) !important;
+
+          i {
+            color: map.get(theme.$projects-dark-theme, icon-color) !important;
+          }
+        }
+      }
+
+      .project-links .project-link {
+        background: transparent !important;
+        color: map.get(theme.$projects-dark-theme, button-color) !important;
+        border-color: map.get(theme.$projects-dark-theme, button-border) !important;
+
+        &:hover {
+          background: map.get(theme.$projects-dark-theme, button-hover-bg) !important;
+          color: map.get(theme.$projects-dark-theme, button-hover-color) !important;
+        }
+      }
+    }
+  }
+} 

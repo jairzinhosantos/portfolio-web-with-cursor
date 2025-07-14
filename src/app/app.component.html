@@ -1,0 +1,64 @@
+<!-- Header Component -->
+<app-header
+  [activeSection]="activeSection"
+  [isMenuOpen]="isMenuOpen"
+  [themeMenuOpen]="themeMenuOpen"
+  [currentTheme]="currentTheme"
+  (sectionClick)="onSectionClick($event)"
+  (menuToggle)="onMenuToggle()"
+  (themeMenuToggle)="onThemeMenuToggle()"
+  (themeChange)="onThemeChange($event)">
+</app-header>
+
+<main>
+  <!-- About Component -->
+  <app-about
+    [nombre]="nombre"
+    [titulo1]="titulo1"
+    [titulo2]="titulo2"
+    [titulo3]="titulo3"
+    [tagline]="tagline"
+    [fotoPerfil]="fotoPerfil"
+    [resumenProfesional]="resumenProfesional"
+    [linkedin]="linkedin"
+    [twitter]="twitter"
+    [github]="github"
+    [youtube]="youtube"
+    [tiktok]="tiktok"
+    [instagram]="instagram"
+    [medium]="medium"
+    [email]="email">
+  </app-about>
+
+  <!-- Expertise Component -->
+  <app-expertise [areas]="areasEspecializacion"></app-expertise>
+
+  <!-- Research Component -->
+  <app-research [areas]="areasInvestigacion"></app-research>
+
+  <!-- Projects Component -->
+  <app-projects [projects]="proyectos"></app-projects>
+
+  <!-- Publications Component -->
+  <app-publications [publications]="publicaciones"></app-publications>
+
+  <!-- Videos Component -->
+  <app-videos></app-videos>
+
+  <!-- Recommendations Component -->
+  <app-recommendations [recommendations]="recomendaciones"></app-recommendations>
+
+</main>
+
+<!-- Footer Component -->
+<app-footer [currentYear]="currentYear" [nombre]="nombre"></app-footer>
+
+<!-- Video Modal now handled by VideosComponent -->
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
