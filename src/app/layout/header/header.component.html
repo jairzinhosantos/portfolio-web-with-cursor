@@ -2,25 +2,25 @@
   <nav class="nav">
     <ul class="nav-list" [class.mobile-open]="isMenuOpen">
       <li class="nav-item">
-        <a [class.active]="activeSection === 'about'" (click)="onSectionClick('about')">About</a>
+        <a href="#about" [class.active]="activeSection === 'about'" (click)="onSectionClick('about')">About</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'expertise'" (click)="onSectionClick('expertise')">Expertise</a>
+        <a href="#expertise" [class.active]="activeSection === 'expertise'" (click)="onSectionClick('expertise')">Expertise</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'research'" (click)="onSectionClick('research')">Research</a>
+        <a href="#research" [class.active]="activeSection === 'research'" (click)="onSectionClick('research')">Research</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'projects'" (click)="onSectionClick('projects')">Projects</a>
+        <a href="#projects" [class.active]="activeSection === 'projects'" (click)="onSectionClick('projects')">Projects</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'publications'" (click)="onSectionClick('publications')">Publications</a>
+        <a href="#publications" [class.active]="activeSection === 'publications'" (click)="onSectionClick('publications')">Publications</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'videos'" (click)="onSectionClick('videos')">Videos</a>
+        <a href="#videos" [class.active]="activeSection === 'videos'" (click)="onSectionClick('videos')">Videos</a>
       </li>
       <li class="nav-item">
-        <a [class.active]="activeSection === 'recommendations'" (click)="onSectionClick('recommendations')">Recommendations</a>
+        <a href="#recommendations" [class.active]="activeSection === 'recommendations'" (click)="onSectionClick('recommendations')">Recommendations</a>
       </li>
     </ul>
     

@@ -25,7 +25,7 @@ export const PUBLICATIONS_CAROUSEL_CONFIG: Partial<CarouselConfig> = {
 
 export const VIDEOS_CAROUSEL_CONFIG: Partial<CarouselConfig> = {
   itemsPerPage: 2,
-  gap: 20,
+  gap: 30,
   autoSlide: false,
   enableDrag: true
 };

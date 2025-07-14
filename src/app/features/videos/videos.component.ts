@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
-import { SanitizeUrlPipe } from '../../shared/pipes/sanitize-url.pipe';
 import { YoutubeService } from '../../services/youtube.service';
 import { StaticVideosService } from '../../services/static-videos.service';
-import { Video } from '../../core/interfaces';
-import { CAROUSEL_CONFIGS } from '../../core/constants';
-import { formatDuration, formatViewCount } from '../../core/utils';
-import { Subscription } from 'rxjs';
+import { SanitizeUrlPipe } from '../../shared/pipes/sanitize-url.pipe';
+import { CarouselConfig } from '../../core/interfaces/carousel.interface';
+import { VIDEOS_CAROUSEL_CONFIG } from '../../core/constants/carousel.constants';
+import { Video } from '../../core/interfaces/portfolio.interface';
 
 @Component({
   selector: 'app-videos',
@@ -18,60 +18,58 @@ import { Subscription } from 'rxjs';
 })
 export class VideosComponent implements OnInit, OnDestroy {
   videos: Video[] = [];
+  isLoading = true;
+  showNoVideosMessage = false;
+  isYouTubeAttempted = false;
+  
+  // Modal properties
   isVideoModalOpen = false;
   currentModalVideo: Video | null = null;
-  carouselConfig = CAROUSEL_CONFIGS['videos'];
+  
+  // Carousel config - usando la configuración específica de videos
+  carouselConfig: CarouselConfig = {
+    itemsPerPage: VIDEOS_CAROUSEL_CONFIG.itemsPerPage || 2,
+    gap: VIDEOS_CAROUSEL_CONFIG.gap || 30,
+    autoSlide: VIDEOS_CAROUSEL_CONFIG.autoSlide || false,
+    autoSlideInterval: 5000,
+    enableDrag: VIDEOS_CAROUSEL_CONFIG.enableDrag || true
+  };
   
   private subscriptions = new Subscription();
-  private isYouTubeAttempted = false;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private youtubeService: YoutubeService,
     private staticVideosService: StaticVideosService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    console.log('🎬 Videos component initialized');
+  }
 
   ngOnInit(): void {
-    console.log('🎬 Videos component initialized');
     this.loadVideos();
-    if (isPlatformBrowser(this.platformId)) {
-      this.setupModalEventListeners();
-    }
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    if (isPlatformBrowser(this.platformId)) {
-      this.removeModalEventListeners();
-    }
   }
 
   private loadVideos(): void {
-    console.log('📡 Attempting to load YouTube videos...');
+    console.log('📡 Loading videos...');
     this.isYouTubeAttempted = true;
     
     const youtubeSub = this.youtubeService.getVideos().subscribe({
       next: (videos: any[]) => {
-        console.log('✅ YouTube videos response received:', videos);
-        
         if (videos && videos.length > 0) {
-          console.log('🎯 Successfully loaded YouTube videos:', videos.length, 'videos');
+          console.log('🎯 YouTube videos loaded successfully');
           this.videos = this.transformVideosData(videos);
-          console.log('🔄 Transformed YouTube videos:', this.videos);
           this.cdr.detectChanges();
         } else {
-          console.log('📂 YouTube returned empty array, fallback to static videos...');
+          console.log('📂 YouTube unavailable, loading static videos...');
           this.loadStaticVideos();
         }
       },
       error: (error: any) => {
-        console.warn('⚠️ YouTube API failed, using static videos fallback:', error);
-        console.warn('📝 Error details:', {
-          status: error?.status,
-          message: error?.message,
-          error: error?.error
-        });
+        console.warn('⚠️ YouTube API failed, using static videos');
         this.loadStaticVideos();
       }
     });
@@ -80,15 +78,13 @@ export class VideosComponent implements OnInit, OnDestroy {
   }
 
   private loadStaticVideos(): void {
-    console.log('📂 Loading static videos as fallback...');
+    console.log('📂 Loading static videos...');
     
     const staticSub = this.staticVideosService.getStaticVideos().subscribe({
       next: (videos: any[]) => {
-        console.log('✅ Static videos loaded successfully:', videos);
         if (videos && videos.length > 0) {
+          console.log('✅ Static videos loaded successfully');
           this.videos = this.transformVideosData(videos);
-          console.log('🔄 Transformed static videos:', this.videos);
-          console.log('📊 Final videos count:', this.videos.length);
         } else {
           console.warn('⚠️ No static videos found');
           this.videos = [];
@@ -96,8 +92,7 @@ export class VideosComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       },
       error: (error: any) => {
-        console.error('❌ Critical error: Both YouTube and static videos failed');
-        console.error('📝 Static videos error:', error);
+        console.error('❌ Failed to load static videos');
         this.videos = [];
         this.cdr.detectChanges();
       }
@@ -108,7 +103,7 @@ export class VideosComponent implements OnInit, OnDestroy {
 
   private transformVideosData(videos: any[]): Video[] {
     if (!videos || !Array.isArray(videos)) {
-      console.warn('⚠️ Invalid videos data provided to transform');
+      console.warn('⚠️ Invalid videos data');
       return [];
     }
     
@@ -125,16 +120,9 @@ export class VideosComponent implements OnInit, OnDestroy {
           url: video.url || `https://www.youtube.com/watch?v=${video.id}`
         };
         
-        console.log(`🔄 Transformed video ${index + 1}:`, {
-          id: transformedVideo.id,
-          title: transformedVideo.title.substring(0, 50) + '...',
-          hasUrl: !!transformedVideo.url,
-          hasThumbnail: !!transformedVideo.thumbnail
-        });
-        
         return transformedVideo;
       } catch (error) {
-        console.error(`❌ Error transforming video ${index}:`, error);
+        console.error(`❌ Error transforming video ${index}`);
         return {
           id: `video-${index}`,
           title: 'Error loading video',
@@ -149,88 +137,63 @@ export class VideosComponent implements OnInit, OnDestroy {
     });
   }
 
-  formatDuration(seconds: number): string {
-    return formatDuration(seconds);
-  }
-
-  formatViewCount(views: string | number): string {
-    return formatViewCount(String(views));
-  }
-
   onVideoClick(video: Video): void {
     this.openVideoModal(video);
   }
 
+  // Modal methods
   openVideoModal(video: Video): void {
     this.currentModalVideo = video;
     this.isVideoModalOpen = true;
-    if (isPlatformBrowser(this.platformId)) {
-      document.body.style.overflow = 'hidden';
-    }
+    document.body.style.overflow = 'hidden';
     this.cdr.detectChanges();
   }
 
   closeVideoModal(): void {
     this.isVideoModalOpen = false;
     this.currentModalVideo = null;
-    if (isPlatformBrowser(this.platformId)) {
-      document.body.style.overflow = 'auto';
-    }
+    document.body.style.overflow = 'auto';
     this.cdr.detectChanges();
   }
 
-  private setupModalEventListeners(): void {
-    document.addEventListener('keydown', this.handleModalEscape.bind(this));
-    document.addEventListener('fullscreenchange', this.handleFullscreenChange.bind(this));
-    document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange.bind(this));
-    document.addEventListener('mozfullscreenchange', this.handleFullscreenChange.bind(this));
-    document.addEventListener('MSFullscreenChange', this.handleFullscreenChange.bind(this));
-  }
-
-  private removeModalEventListeners(): void {
-    document.removeEventListener('keydown', this.handleModalEscape.bind(this));
-    document.removeEventListener('fullscreenchange', this.handleFullscreenChange.bind(this));
-    document.removeEventListener('webkitfullscreenchange', this.handleFullscreenChange.bind(this));
-    document.removeEventListener('mozfullscreenchange', this.handleFullscreenChange.bind(this));
-    document.removeEventListener('MSFullscreenChange', this.handleFullscreenChange.bind(this));
-  }
-
-  private handleModalEscape(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.isVideoModalOpen) {
-      if (!isPlatformBrowser(this.platformId)) {
-        this.closeVideoModal();
-        return;
-      }
-      
-      const isFullscreen = !!(document.fullscreenElement || 
-                            (document as any).webkitFullscreenElement || 
-                            (document as any).mozFullScreenElement || 
-                            (document as any).msFullscreenElement);
-      
-      if (!isFullscreen) {
-        this.closeVideoModal();
-      }
-    }
-  }
-
-  private handleFullscreenChange(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    const isFullscreen = !!(document.fullscreenElement || 
-                          (document as any).webkitFullscreenElement || 
-                          (document as any).mozFullScreenElement || 
-                          (document as any).msFullscreenElement);
-    
-    if (isFullscreen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.body.style.position = '';
-    }
-  }
-
+  // Carousel methods
   onSlideChange(index: number): void {
-    // Slide change handler
+    // Handle slide change if needed
+  }
+
+  // Método para manejar errores de imágenes
+  onImageError(event: any): void {
+    const img = event.target;
+    img.src = 'assets/branding/profile.png'; // Imagen por defecto
+    img.alt = 'Video thumbnail not available';
+  }
+
+  // Método para formatear duración
+  formatDuration(seconds: number): string {
+    if (!seconds || seconds <= 0) return '';
+    
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    } else {
+      return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+  }
+
+  // Método para formatear número de visualizaciones
+  formatViewCount(viewCount: string): string {
+    if (!viewCount || viewCount === '0') return '';
+    
+    const count = parseInt(viewCount);
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M`;
+    } else if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}K`;
+    } else {
+      return count.toString();
+    }
   }
 } 

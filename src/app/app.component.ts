@@ -1,16 +1,13 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, PLATFORM_ID, Inject, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PersonalInfo, SocialMedia, AreaEspecializacion, AreaInvestigacion, Publicacion, Recomendacion } from './core/interfaces';
-import { StaticPortfolioService } from './services/static-portfolio.service';
-import { SocialUrlsService } from './services/social-urls.service';
-import { ThemeService, ThemeMode } from './services/theme.service';
-import { GithubService, GitHubProject } from './services/github.service';
-import { MediumService, MediumArticle } from './services/medium.service';
+import { Subscription } from 'rxjs';
 
-// Importar componentes
+// Layout Components
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+
+// Feature Components
 import { AboutComponent } from './features/about/about.component';
 import { ExpertiseComponent } from './features/expertise/expertise.component';
 import { ResearchComponent } from './features/research/research.component';
@@ -19,10 +16,15 @@ import { PublicationsComponent } from './features/publications/publications.comp
 import { RecommendationsComponent } from './features/recommendations/recommendations.component';
 import { VideosComponent } from './features/videos/videos.component';
 
-interface NavigationConfig {
-  readonly SECTIONS: readonly string[];
-  readonly HEADER_OFFSET: number;
-}
+// Services
+import { StaticPortfolioService } from './services/static-portfolio.service';
+import { ThemeService, ThemeMode } from './services/theme.service';
+import { SocialUrlsService } from './services/social-urls.service';
+import { GithubService } from './services/github.service';
+import { MediumService } from './services/medium.service';
+
+// Interfaces
+import { PersonalInfo, AreaEspecializacion, AreaInvestigacion, Recomendacion, Publicacion } from './core/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -44,256 +46,89 @@ interface NavigationConfig {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  // OPTIMIZED NAVIGATION CONFIGURATION - Improved precision
-  private readonly navigationConfig: NavigationConfig = {
-    SECTIONS: ['about', 'expertise', 'research', 'projects', 'publications', 'videos', 'recommendations'],
-    HEADER_OFFSET: 20  // Reduced offset for better title positioning
+  title = 'portfolio';
+  
+  // Estados de datos
+  personalInfo: PersonalInfo = {
+    nombre: 'Cargando...',
+    titulo1: 'Cargando...',
+    titulo2: 'Cargando...',
+    titulo3: 'Cargando...',
+    tagline: 'Cargando...',
+    fotoPerfil: 'assets/branding/profile.png',
+    ubicacion: 'Cargando...',
+    resumenProfesional: 'Cargando...'
   };
-
-  // Data Models
-  personalInfo: PersonalInfo = this.createEmptyPersonalInfo();
-  socialMedia: SocialMedia = this.createEmptySocialMedia();
+  
+  socialMedia: any = {};
   areasEspecializacion: AreaEspecializacion[] = [];
   areasInvestigacion: AreaInvestigacion[] = [];
   recomendaciones: Recomendacion[] = [];
-  proyectos: GitHubProject[] = [];
+  proyectos: any[] = [];
   publicaciones: Publicacion[] = [];
   
-  // UI State
-  readonly currentYear = new Date().getFullYear();
-  isMenuOpen = false;
-  activeSection = 'about';
+  // Estados de carga
+  isPersonalInfoLoaded = false;
+  isExpertiseLoaded = false;
+  isResearchLoaded = false;
+  isRecommendationsLoaded = false;
   
-  // Theme State
-  isDarkMode = false;
-  themeMenuOpen = false;
+  // Theme state
   currentTheme: ThemeMode = 'light';
+  isDarkModeActive = false;
+  
+  // UI state
+  activeSection = 'about';
+  isMenuOpen = false;
+  themeMenuOpen = false;
+  
+  private subscriptions = new Subscription();
 
   constructor(
     private staticPortfolioService: StaticPortfolioService,
-    private socialUrlsService: SocialUrlsService,
     private themeService: ThemeService,
+    private socialUrlsService: SocialUrlsService,
     private githubService: GithubService,
     private mediumService: MediumService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private cd: ChangeDetectorRef
-  ) {}
-
-  // Lifecycle Methods
-  ngOnInit(): void {
+    private cdr: ChangeDetectorRef
+  ) {
     console.log('🚀 AppComponent initializing...');
-    this.initializeApplication();
+  }
+
+  ngOnInit(): void {
+    this.initializeTheme();
+    this.loadAllData();
   }
 
   ngAfterViewInit(): void {
     console.log('🔍 AppComponent view initialized');
-    if (isPlatformBrowser(this.platformId)) {
-      this.setupBrowserFeatures();
-      // Force theme re-application
-      setTimeout(() => {
-        console.log('🎨 Forcing theme re-application...');
-        this.themeService.initializeTheme();
-      }, 100);
-    }
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {
-    this.cleanupResources();
+    this.subscriptions.unsubscribe();
+    this.themeService.cleanup();
   }
 
-  // Public Template Getters (simplified)
-  get nombre() { return this.personalInfo.nombre; }
-  get titulo1() { return this.personalInfo.titulo1; }
-  get titulo2() { return this.personalInfo.titulo2; }
-  get titulo3() { return this.personalInfo.titulo3; }
-  get tagline() { return this.personalInfo.tagline; }
-  get fotoPerfil() { return this.personalInfo.fotoPerfil; }
-  get resumenProfesional() { return this.personalInfo.resumenProfesional; }
-  get ubicacion() { return this.personalInfo.ubicacion; }
-  
-  // Social Media Getters
-  get linkedin() { return this.socialMedia.linkedin; }
-  get github() { return this.socialMedia.github; }
-  get twitter() { return this.socialMedia.twitter; }
-  get youtube() { return this.socialMedia.youtube; }
-  get tiktok() { return this.socialMedia.tiktok; }
-  get instagram() { return this.socialMedia.instagram; }
-  get medium() { return this.socialMedia.medium || ''; }
-  get email() { return this.socialMedia.email; }
-
-  // ** REFACTORED THEME MANAGEMENT **
-  
-  /**
-   * Inicializa la aplicación completa
-   */
-  private initializeApplication(): void {
-    this.initializeTheme();
-    this.loadAllData();
-    
-    if (isPlatformBrowser(this.platformId)) {
-      this.setupScrollListener();
-    }
-  }
-
-  /**
-   * Inicializa el sistema de temas
-   */
   private initializeTheme(): void {
     console.log('🎨 Initializing theme system...');
     this.currentTheme = this.themeService.initializeTheme();
-    this.isDarkMode = this.themeService.applyTheme(this.currentTheme);
-    console.log('✅ Theme system initialized:', { theme: this.currentTheme, isDark: this.isDarkMode });
-    this.cd.detectChanges();
+    this.isDarkModeActive = this.themeService.applyTheme(this.currentTheme);
+    console.log('✅ Theme system initialized:', { theme: this.currentTheme, isDark: this.isDarkModeActive });
+    this.cdr.detectChanges();
   }
 
-  /**
-   * Maneja el cambio de tema desde el header
-   */
-  onThemeChange(theme: ThemeMode): void {
-    console.log('🎨 Theme change requested:', theme);
-    this.currentTheme = theme;
-    this.isDarkMode = this.themeService.applyTheme(theme);
-    this.themeMenuOpen = false;
-    this.cd.detectChanges();
-    console.log('✅ Theme changed to:', { theme, isDark: this.isDarkMode });
-  }
-
-  /**
-   * Obtiene el ícono apropiado para el tema actual
-   */
-  getThemeIcon(): string {
-    const iconMap: Record<ThemeMode, string> = {
-      light: 'fa-sun',
-      dark: 'fa-moon',
-      auto: 'fa-desktop'
-    };
-    return iconMap[this.currentTheme] || 'fa-sun';
-  }
-
-  // ** OPTIMIZED NAVIGATION MANAGEMENT **
-
-  /**
-   * Configura el scroll listener para navegación optimizada
-   */
-  private setupScrollListener(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // Throttled scroll listener for better performance
-      let ticking = false;
-      const scrollHandler = () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            this.handleScroll();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      };
-      
-      window.addEventListener('scroll', scrollHandler, { passive: true });
-    }
-  }
-
-  /**
-   * Maneja el scroll para detectar sección activa - OPTIMIZED
-   */
-  private handleScroll(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    const header = document.querySelector('.header') as HTMLElement;
-    const headerHeight = header?.offsetHeight || 72;
-    const scrollPosition = window.scrollY + headerHeight + 50; // Better detection threshold
-    
-    let currentSection = 'about';
-    
-    // Improved section detection logic
-    for (const sectionId of this.navigationConfig.SECTIONS) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        
-        // Check if current scroll position is within this section
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          currentSection = sectionId;
-          break;
-        }
-      }
-    }
-    
-    // Only update if section actually changed
-    if (this.activeSection !== currentSection) {
-      this.activeSection = currentSection;
-      this.cd.detectChanges();
-    }
-  }
-
-  /**
-   * Navega a una sección específica - OPTIMIZED FOR PRECISE POSITIONING
-   */
-  private scrollToSection(sectionId: string): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const header = document.querySelector('.header') as HTMLElement;
-      const headerHeight = header?.offsetHeight || 72;
-      
-      // PRECISE POSITIONING: Title should be near the top after header
-      const targetPosition = element.offsetTop - headerHeight - this.navigationConfig.HEADER_OFFSET;
-      
-      // Ensure we don't scroll past the top
-      const finalPosition = Math.max(0, targetPosition);
-      
-      // Smooth scroll with precise positioning
-      window.scrollTo({
-        top: finalPosition,
-        behavior: 'smooth'
-      });
-      
-      // Update active section immediately for better UX
-      this.activeSection = sectionId;
-      this.cd.detectChanges();
-    }
-  }
-
-  /**
-   * Maneja el click en una sección del menú - IMPROVED UX
-   */
-  onSectionClick(sectionId: string): void {
-    // Close mobile menu immediately
-    this.isMenuOpen = false;
-    
-    // Scroll to section with precise positioning
-    this.scrollToSection(sectionId);
-  }
-
-  /**
-   * Toggle del menú móvil
-   */
-  onMenuToggle(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  /**
-   * Toggle del menú de temas
-   */
-  onThemeMenuToggle(): void {
-    this.themeMenuOpen = !this.themeMenuOpen;
-  }
-
-  // ** DATA LOADING METHODS **
-
-  /**
-   * Carga todos los datos necesarios
-   */
   private loadAllData(): void {
+    // Cargar datos estáticos
     this.loadPersonalInfo();
     this.loadSocialUrls();
     this.loadExpertise();
     this.loadResearchInterests();
     this.loadRecommendations();
-    this.loadMediumArticles();
+    
+    // Cargar datos dinámicos
     this.loadGitHubProjects();
+    this.loadMediumPublications();
   }
 
   private loadPersonalInfo(): void {
@@ -301,9 +136,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (data) => {
         // Extraer personalInfo del objeto wrapper
         this.personalInfo = data.personalInfo || data;
-        console.log('✅ Personal info loaded:', this.personalInfo.nombre);
+        this.isPersonalInfoLoaded = true;
+        console.log('✅ Personal info loaded');
       },
-      error: (error) => console.warn('⚠️ Failed to load personal info:', error)
+      error: (error) => console.warn('⚠️ Failed to load personal info')
     });
   }
 
@@ -322,7 +158,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         };
         console.log('✅ Social URLs loaded');
       },
-      error: (error) => console.warn('⚠️ Failed to load social URLs:', error)
+      error: (error) => console.warn('⚠️ Failed to load social URLs')
     });
   }
 
@@ -331,9 +167,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (data) => {
         // Extraer areasEspecializacion del objeto wrapper
         this.areasEspecializacion = data.areasEspecializacion || data;
-        console.log('✅ Expertise loaded:', this.areasEspecializacion.length, 'areas');
+        this.isExpertiseLoaded = true;
+        console.log('✅ Expertise loaded');
       },
-      error: (error) => console.warn('⚠️ Failed to load expertise:', error)
+      error: (error) => console.warn('⚠️ Failed to load expertise')
     });
   }
 
@@ -342,9 +179,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (data) => {
         // Extraer areasInvestigacion del objeto wrapper
         this.areasInvestigacion = data.areasInvestigacion || data;
-        console.log('✅ Research interests loaded:', this.areasInvestigacion.length, 'areas');
+        console.log('✅ Research interests loaded');
       },
-      error: (error) => console.warn('⚠️ Failed to load research interests:', error)
+      error: (error) => console.warn('⚠️ Failed to load research interests')
     });
   }
 
@@ -353,96 +190,190 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (data) => {
         // Extraer recomendaciones del objeto wrapper
         this.recomendaciones = data.recomendaciones || data;
-        console.log('✅ Recommendations loaded:', this.recomendaciones.length, 'items');
+        this.isRecommendationsLoaded = true;
+        console.log('✅ Recommendations loaded');
       },
-      error: (error) => console.warn('⚠️ Failed to load recommendations:', error)
-    });
-  }
-
-  private loadMediumArticles(): void {
-    this.mediumService.getLatestArticles().subscribe({
-      next: (articles: MediumArticle[]) => {
-        const validArticles = articles.filter(article => article.titulo && article.enlace);
-        this.publicaciones = validArticles.map(article => ({
-          titulo: article.titulo,
-          enlace: article.enlace,
-          descripcion: article.descripcion || '',
-          imagen: article.imagen || 'https://via.placeholder.com/400x250/007acc/ffffff?text=Article'
-        }));
-      },
-      error: (error) => console.warn('⚠️ Failed to load Medium articles:', error)
+      error: (error) => console.warn('⚠️ Failed to load recommendations')
     });
   }
 
   private loadGitHubProjects(): void {
-    this.githubService.getRepositories().subscribe({
-      next: (repos: GitHubProject[]) => this.proyectos = repos.slice(0, 6),
-      error: (error) => console.warn('⚠️ Failed to load GitHub projects:', error)
+    const projectsSub = this.githubService.getRepositories().subscribe({
+      next: (projects) => {
+        this.proyectos = projects;
+        console.log('✅ GitHub projects loaded');
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.warn('⚠️ Failed to load GitHub projects');
+        this.proyectos = [];
+      }
     });
+    this.subscriptions.add(projectsSub);
   }
 
-  // ** BROWSER FEATURES SETUP **
-
-  /**
-   * Configura características específicas del navegador
-   */
-  private setupBrowserFeatures(): void {
-    this.setupEventListeners();
+  private loadMediumPublications(): void {
+    const publicationsSub = this.mediumService.getLatestArticles().subscribe({
+      next: (articles) => {
+        this.publicaciones = articles;
+        console.log('✅ Medium publications loaded');
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.warn('⚠️ Failed to load Medium publications');
+        this.publicaciones = [];
+      }
+    });
+    this.subscriptions.add(publicationsSub);
   }
 
-  /**
-   * Configura event listeners globales
-   */
-  private setupEventListeners(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // Cierra menús al hacer click fuera
-      document.addEventListener('click', (event) => {
-        if (this.isMenuOpen || this.themeMenuOpen) {
-          const target = event.target as HTMLElement;
-          if (!target.closest('.header')) {
-            this.isMenuOpen = false;
-            this.themeMenuOpen = false;
-            this.cd.detectChanges();
-          }
-        }
-      });
+  // Theme methods
+  onThemeChange(theme: ThemeMode): void {
+    this.currentTheme = theme;
+    this.isDarkModeActive = this.themeService.applyTheme(theme);
+    this.themeMenuOpen = false;
+    this.cdr.detectChanges();
+  }
+
+  onThemeMenuToggle(): void {
+    this.themeMenuOpen = !this.themeMenuOpen;
+  }
+
+  // Navigation methods
+  onSectionClick(sectionId: string): void {
+    this.activeSection = sectionId;
+    this.isMenuOpen = false;
+    // El navegador se encarga del scroll automáticamente usando scroll-padding-top
+  }
+
+  onMenuToggle(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  // Métodos para acceder a las propiedades del tema
+  get currentThemeMode(): ThemeMode {
+    return this.currentTheme;
+  }
+
+  get isDarkMode(): boolean {
+    return this.isDarkModeActive;
+  }
+
+  get isAutoMode(): boolean {
+    return this.currentTheme === 'auto';
+  }
+
+  get isLightMode(): boolean {
+    return this.currentTheme === 'light';
+  }
+
+  // Personal info getters
+  get nombre(): string {
+    return this.personalInfo.nombre;
+  }
+
+  get titulo1(): string {
+    return this.personalInfo.titulo1;
+  }
+
+  get titulo2(): string {
+    return this.personalInfo.titulo2;
+  }
+
+  get titulo3(): string {
+    return this.personalInfo.titulo3;
+  }
+
+  get tagline(): string {
+    return this.personalInfo.tagline;
+  }
+
+  get fotoPerfil(): string {
+    return this.personalInfo.fotoPerfil;
+  }
+
+  get resumenProfesional(): string {
+    return this.personalInfo.resumenProfesional;
+  }
+
+  // Social media getters
+  get linkedin(): string {
+    return this.socialMedia.linkedin || '';
+  }
+
+  get github(): string {
+    return this.socialMedia.github || '';
+  }
+
+  get twitter(): string {
+    return this.socialMedia.twitter || '';
+  }
+
+  get youtube(): string {
+    return this.socialMedia.youtube || '';
+  }
+
+  get tiktok(): string {
+    return this.socialMedia.tiktok || '';
+  }
+
+  get instagram(): string {
+    return this.socialMedia.instagram || '';
+  }
+
+  get medium(): string {
+    return this.socialMedia.medium || '';
+  }
+
+  get email(): string {
+    return this.socialMedia.email || '';
+  }
+
+  // Utility getters
+  get currentYear(): number {
+    return new Date().getFullYear();
+  }
+
+  // Método para obtener el estado de carga general
+  get isDataLoaded(): boolean {
+    return this.isPersonalInfoLoaded && this.isExpertiseLoaded && this.isRecommendationsLoaded;
+  }
+
+  // Método para scroll suave a sección con offset para header
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Usar el scroll-padding-top definido en CSS para el comportamiento nativo
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  // ** CLEANUP **
-
-  /**
-   * Limpia recursos al destruir el componente
-   */
-  private cleanupResources(): void {
-    this.themeService.cleanup();
+  // Método para manejar errores de imagen
+  onImageError(event: any): void {
+    event.target.src = 'assets/branding/profile.png';
+    event.target.alt = 'Profile image not available';
   }
 
-  // ** HELPER METHODS **
-
-  private createEmptyPersonalInfo(): PersonalInfo {
-    return {
-      nombre: '',
-      titulo1: '',
-      titulo2: '',
-      titulo3: '',
-      tagline: '',
-      fotoPerfil: '',
-      ubicacion: '',
-      resumenProfesional: ''
-    };
+  // Método para formatear texto con saltos de línea
+  formatTextWithLineBreaks(text: string): string {
+    if (!text) return '';
+    return text.replace(/\n/g, '<br>');
   }
 
-  private createEmptySocialMedia(): SocialMedia {
-    return {
-      linkedin: '',
-      github: '',
-      twitter: '',
-      youtube: '',
-      tiktok: '',
-      instagram: '',
-      medium: '',
-      email: ''
-    };
+  // Método para verificar si una URL es válida
+  isValidUrl(url: string): boolean {
+    if (!url) return false;
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // Método para obtener iniciales de un nombre
+  getInitials(name: string): string {
+    if (!name) return '';
+    return name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
   }
 } 

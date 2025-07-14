@@ -43,29 +43,26 @@ export class YoutubeService {
         );
       }),
       catchError(error => {
-        console.warn('📺 YouTube Shorts API error:', error);
-        if (error.status === 403 && error.error?.error?.reason === 'quotaExceeded') {
-          console.warn('⚠️ YouTube API quota exceeded for today');
-        } else if (error.status === 403) {
-          console.warn('🔒 YouTube API access forbidden (check API key)');
-        } else if (error.name === 'TimeoutError') {
-          console.warn('⏰ YouTube API timeout (>10s)');
-        } else {
-          console.warn('❌ YouTube API general error:', error.message);
-        }
-        return of([]); // Retorna array vacío en caso de error
+        console.warn('⚠️ YouTube Shorts API error');
+        return of([]);
       })
     );
   }
 
+  private parseDuration(duration: string): number {
+    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+    if (!match) return 0;
+    
+    const hours = parseInt(match[1]) || 0;
+    const minutes = parseInt(match[2]) || 0;
+    const seconds = parseInt(match[3]) || 0;
+    
+    return hours * 3600 + minutes * 60 + seconds;
+  }
+
   // Método para obtener todos los videos del canal
   getVideos(maxResults = 20) {
-    console.log('🔌 Connecting to YouTube API...');
-    console.log('📊 API Config:', {
-      channelId: this.channelId,
-      hasApiKey: !!this.apiKey,
-      maxResults
-    });
+    console.log('📺 Loading YouTube videos...');
     
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${this.apiKey}&channelId=${this.channelId}&part=snippet,id&order=date&maxResults=${maxResults}&type=video`;
     
@@ -73,27 +70,25 @@ export class YoutubeService {
       timeout(8000), // 8 segundos de timeout
       retry(1),
       map(res => {
-        console.log('📡 YouTube search response:', res);
         if (!res || !res.items) {
           throw new Error('Invalid YouTube API response');
         }
+        console.log(`📺 Found ${res.items.length} videos`);
         return res.items.filter((item: any) => item.id.kind === 'youtube#video');
       }),
       switchMap((videos: any[]) => {
         if (videos.length === 0) {
-          console.log('📭 No videos found in search');
+          console.log('📭 No videos found');
           return of([]);
         }
         
-        console.log(`🎯 Found ${videos.length} videos, getting details...`);
+        console.log(`🎯 Processing ${videos.length} videos...`);
         const ids = videos.map(v => v.id.videoId).join(',');
         const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${this.apiKey}&id=${ids}&part=contentDetails,snippet,statistics`;
         
         return this.http.get<any>(detailsUrl).pipe(
           timeout(8000), // 8 segundos de timeout
           map(res2 => {
-            console.log('📊 YouTube details response:', res2);
-            
             if (!res2.items || res2.items.length === 0) {
               console.log('📭 No video details received');
               return [];
@@ -117,33 +112,24 @@ export class YoutubeService {
               };
             });
             
-            console.log(`✅ Successfully processed ${processedVideos.length} YouTube videos`);
+            console.log(`✅ Successfully processed ${processedVideos.length} videos`);
             return processedVideos;
           })
         );
       }),
       catchError(error => {
-        console.warn('📺 YouTube Videos API error:', error);
+        console.warn('📺 YouTube API error');
         if (error.status === 403 && error.error?.error?.reason === 'quotaExceeded') {
-          console.warn('⚠️ YouTube API quota exceeded for today');
+          console.warn('⚠️ YouTube API quota exceeded');
         } else if (error.status === 403) {
-          console.warn('🔒 YouTube API access forbidden (check API key)');
+          console.warn('🔒 YouTube API access forbidden');
         } else if (error.name === 'TimeoutError') {
-          console.warn('⏰ YouTube API timeout (>8s)');
+          console.warn('⏰ YouTube API timeout');
         } else {
-          console.warn('❌ YouTube API general error:', error.message);
+          console.warn('❌ YouTube API error');
         }
         return of([]); // Retorna array vacío en caso de error
       })
     );
-  }
-
-  // Convierte la duración ISO 8601 a segundos
-  private parseDuration(duration: string): number {
-    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-    const hours = match && match[1] ? parseInt(match[1]) : 0;
-    const minutes = match && match[2] ? parseInt(match[2]) : 0;
-    const seconds = match && match[3] ? parseInt(match[3]) : 0;
-    return hours * 3600 + minutes * 60 + seconds;
   }
 } 

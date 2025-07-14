@@ -33,7 +33,7 @@ $dark-theme-colors: (
 );
 
 #videos {
-  padding: 20px 2rem;
+  padding: var(--section-padding-y) 0;
   background: map.get($light-theme-colors, background);
 
   h2 {
@@ -63,7 +63,7 @@ $dark-theme-colors: (
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: $transition-smooth;
     cursor: pointer;
-    max-width: 520px; // Agrandado de 420px a 520px para 2 cards por ventana
+    max-width: 480px; // Ajustado para evitar solapamiento con botones de navegación
     width: 100%;
     margin: 0 auto;
 

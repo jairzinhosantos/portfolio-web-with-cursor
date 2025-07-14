@@ -9,9 +9,9 @@ export interface StaticVideo {
   description: string;
   url: string;
   thumbnail: string;
-  duration: number;
-  viewCount: string;
-  publishedAt: string;
+  duration?: number;
+  viewCount?: string;
+  publishedAt?: string;
 }
 
 export interface StaticVideosData {
@@ -29,12 +29,10 @@ export class StaticVideosService {
     const cacheBuster = `?v=${Date.now()}`;
     const url = `assets/data/static-videos.json${cacheBuster}`;
     
-    console.log('📂 Loading static videos from:', url);
+    console.log('📂 Loading static videos...');
     
     return this.http.get<StaticVideosData>(url).pipe(
       map((data: any) => {
-        console.log('📊 Raw static videos data:', data);
-        
         if (!data) {
           throw new Error('No data received from static-videos.json');
         }
@@ -47,16 +45,11 @@ export class StaticVideosService {
           throw new Error('Videos property is not an array in static-videos.json');
         }
         
-        console.log('✅ Static videos data validated:', data.videos);
+        console.log('✅ Static videos loaded successfully');
         return data.videos;
       }),
       catchError(error => {
-        console.error('❌ Error loading static videos:', error);
-        console.error('📄 Error details:', {
-          message: error.message,
-          status: error.status,
-          url: error.url
-        });
+        console.error('❌ Error loading static videos');
         return of([]);
       })
     );

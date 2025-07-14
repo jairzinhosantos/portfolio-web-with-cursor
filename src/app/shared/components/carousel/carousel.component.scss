@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 0 var(--section-padding-x);
+  padding: 0 80px; // Espacio para los botones de navegación
   max-width: var(--content-max-width);
   margin: 0 auto;
 
@@ -68,8 +68,8 @@
 
       .slide-content {
         display: flex;
-        gap: 20px;
-        padding: 0 20px;
+        gap: 30px;
+        padding: 0;
         justify-content: center;
         align-items: flex-start;
       }
@@ -107,7 +107,7 @@
 // Responsive Design
 @media (max-width: 768px) {
   .carousel-container {
-    padding: 0 var(--section-padding-x);
+    padding: 0 60px; // Menos espacio en móviles
 
     .carousel-btn {
       width: 36px;
@@ -115,17 +115,17 @@
       font-size: 14px;
 
       &.prev {
-        left: 10px;
+        left: 15px;
       }
 
       &.next {
-        right: 10px;
+        right: 15px;
       }
     }
 
     .carousel-track .carousel-slide .slide-content {
       gap: 15px;
-      padding: 0 10px;
+      padding: 0;
       justify-content: center;
       align-items: flex-start;
     }

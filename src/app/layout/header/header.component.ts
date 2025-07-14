@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSectionClick(section: string) {
     this.sectionClick.emit(section);
+    // Cerrar menú móvil al hacer click en navegación
+    this.menuToggle.emit();
   }
 
   onMenuToggle() {
