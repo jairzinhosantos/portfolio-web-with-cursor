@@ -1,9 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && mkdir -p dist/functions && cp dist/portfolio/server/server.mjs dist/functions/server.mjs"
   publish = "dist/portfolio/browser"
 
 [functions]
-  directory = "dist/portfolio/server"
+  directory = "dist/functions"
   node_bundler = "esbuild"
 
 [[redirects]]
