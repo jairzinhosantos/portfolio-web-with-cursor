@@ -20,7 +20,7 @@
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -43,3 +43,10 @@ Thumbs.db
 .env
 .env.local
 .env.production
+
+# Ignore Angular cache
+.angular/cache/
+
+# Ignore temporary files
+*.log
+*.tmp
