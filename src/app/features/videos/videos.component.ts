@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
 import { YoutubeService } from '../../services/youtube.service';
@@ -26,31 +26,78 @@ export class VideosComponent implements OnInit, OnDestroy {
   isVideoModalOpen = false;
   currentModalVideo: Video | null = null;
   
-  // Carousel config - usando la configuración específica de videos
+  // Carousel config responsive
   carouselConfig: CarouselConfig = {
-    itemsPerPage: VIDEOS_CAROUSEL_CONFIG.itemsPerPage || 2,
-    gap: VIDEOS_CAROUSEL_CONFIG.gap || 30,
-    autoSlide: VIDEOS_CAROUSEL_CONFIG.autoSlide || false,
+    itemsPerPage: 1, // Mobile first approach
+    gap: 15,
+    autoSlide: false,
     autoSlideInterval: 5000,
-    enableDrag: VIDEOS_CAROUSEL_CONFIG.enableDrag || true
+    enableDrag: true
   };
   
   private subscriptions = new Subscription();
+  private resizeTimeout?: NodeJS.Timeout;
 
   constructor(
     private youtubeService: YoutubeService,
     private staticVideosService: StaticVideosService,
-    private cdr: ChangeDetectorRef
-  ) {
-    console.log('🎬 Videos component initialized');
-  }
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     this.loadVideos();
+    this.updateCarouselConfig();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    // Debounce para optimizar performance
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      this.updateCarouselConfig();
+    }, 250);
+  }
+
+  private updateCarouselConfig(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const screenWidth = window.innerWidth;
+      
+      // Configuración responsive modular
+      let itemsPerPage = 1; // Mobile first
+      let gap = 15;
+      
+      if (screenWidth >= 1366) {
+        // Desktop/Laptop grande
+        itemsPerPage = 2;
+        gap = 25;
+      } else if (screenWidth >= 1024) {
+        // Tablet horizontal/Laptop pequeño
+        itemsPerPage = 2;
+        gap = 20;
+      } else if (screenWidth >= 768) {
+        // Tablet vertical
+        itemsPerPage = 1;
+        gap = 15;
+      }
+      
+      this.carouselConfig = {
+        ...this.carouselConfig,
+        itemsPerPage,
+        gap
+      };
+      
+      this.cdr.detectChanges();
+    }
   }
 
   private loadVideos(): void {

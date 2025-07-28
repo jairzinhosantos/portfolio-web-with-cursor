@@ -153,6 +153,40 @@
   }
 }
 
+// Responsive Design - Matching Research Interests
+@media (max-width: 768px) {
+  #expertise {
+    padding: 20px 1rem;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .expertise-grid {
+      padding: 0;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+
+      .expertise-block {
+        padding: 1.5rem; // Adjusted for mobile
+
+        .expertise-icon i {
+          font-size: 2.5rem; // Smaller for mobile but still impactful
+        }
+
+        h3 {
+          font-size: 1.2rem; // Matching Research Interests mobile size
+        }
+
+        p {
+          font-size: 0.9rem; // Matching Research Interests mobile size
+        }
+      }
+    }
+  }
+}
+
 // DARK THEME SUPPORT - Enhanced for elevated card design
 :host-context(.dark-mode) #expertise {
   background: #1a1a1a;

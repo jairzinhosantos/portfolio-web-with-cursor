@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener, PLATFORM_ID, Inject, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -22,7 +22,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isScrolled = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit() {
     this.checkScroll();
@@ -37,11 +40,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    // Cerrar menú móvil al hacer click fuera del header
+    if (isPlatformBrowser(this.platformId) && this.isMenuOpen) {
+      const target = event.target as HTMLElement;
+      if (!this.elementRef.nativeElement.contains(target)) {
+        this.menuToggle.emit();
+      }
+    }
+  }
+
   onSectionClick(section: string, event: Event) {
     event.preventDefault(); // Prevenir el comportamiento por defecto del link
     this.sectionClick.emit(section);
-    // Cerrar menú móvil al hacer click en navegación
-    this.menuToggle.emit();
+    // Cerrar menú móvil al hacer click en navegación (solo en mobile)
+    if (isPlatformBrowser(this.platformId) && window.innerWidth <= 768) {
+      this.menuToggle.emit();
+    }
   }
 
   onMenuToggle() {

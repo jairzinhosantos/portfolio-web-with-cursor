@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy, SimpleChanges, ChangeDetectorRef, PLATFORM_ID, Inject, HostListener } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
 import { Recomendacion } from '../../core/interfaces';
@@ -15,13 +15,13 @@ import { CarouselConfig } from '../../core/interfaces/carousel.interface';
   templateUrl: './recommendations.component.html',
   styleUrls: ['./recommendations.component.scss']
 })
-export class RecommendationsComponent implements OnInit, OnChanges {
+export class RecommendationsComponent implements OnInit, OnChanges, OnDestroy {
   @Input() recommendations: Recomendacion[] = [];
   
-  // Configuración específica de recommendations - aislada de otras secciones
+  // Configuración responsive del carousel - Mobile first estricto
   carouselConfig: CarouselConfig = {
-    itemsPerPage: RECOMMENDATIONS_CARD_CONFIG.layout.itemsPerPage,
-    gap: RECOMMENDATIONS_CARD_CONFIG.layout.gap,
+    itemsPerPage: 1, // Siempre 1 card por vez
+    gap: 15,
     autoSlide: false,
     autoSlideInterval: 5000,
     enableDrag: true
@@ -29,6 +29,7 @@ export class RecommendationsComponent implements OnInit, OnChanges {
   
   truncateText = truncateText;
   currentYear = new Date().getFullYear();
+  private resizeTimeout?: NodeJS.Timeout;
 
   constructor(
     private portfolioService: StaticPortfolioService,
@@ -47,17 +48,52 @@ export class RecommendationsComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    // Debounce para optimizar performance
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      this.updateCarouselConfig();
+    }, 250);
+  }
+
   private updateCarouselConfig(): void {
-    // Solo ejecutar en el browser, no durante SSR
     if (isPlatformBrowser(this.platformId)) {
-      const isMobile = window.innerWidth <= RECOMMENDATIONS_CARD_CONFIG.mobile.width * 2;
+      const screenWidth = window.innerWidth;
+      
+      // Configuración responsive modular - EXACTA como Videos
+      let itemsPerPage = 1; // Mobile first
+      let gap = 15;
+      
+      if (screenWidth >= 1366) {
+        // Desktop/Laptop grande
+        itemsPerPage = 2;
+        gap = 25;
+      } else if (screenWidth >= 1024) {
+        // Tablet horizontal/Laptop pequeño
+        itemsPerPage = 2;
+        gap = 20;
+      } else if (screenWidth >= 768) {
+        // Tablet vertical
+        itemsPerPage = 1;
+        gap = 15;
+      }
+      
       this.carouselConfig = {
-        itemsPerPage: isMobile ? 1 : RECOMMENDATIONS_CARD_CONFIG.layout.itemsPerPage,
-        gap: isMobile ? 20 : RECOMMENDATIONS_CARD_CONFIG.layout.gap,
-        autoSlide: false,
-        autoSlideInterval: 5000,
-        enableDrag: true
+        ...this.carouselConfig,
+        itemsPerPage,
+        gap
       };
+      
+      this.cd.detectChanges();
     }
   }
 

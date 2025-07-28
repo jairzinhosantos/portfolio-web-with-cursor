@@ -4,7 +4,10 @@
     
     <app-carousel 
       [items]="recommendations"
-      [config]="carouselConfig">
+      [config]="carouselConfig"
+      type="recommendations"
+      (itemClick)="onRecommendationClick($event)"
+      (slideChange)="onSlideChange($event)">
       <ng-template #itemTemplate let-recommendation>
         <div class="recommendation-card">
           <div class="recommendation-header">

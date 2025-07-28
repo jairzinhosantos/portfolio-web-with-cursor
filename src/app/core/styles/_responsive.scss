@@ -1,0 +1,127 @@
+// ============================================
+// Responsive Utilities - Patrón Modular
+// ============================================
+// Utilidades CSS centralizadas para responsive design
+
+// ============================================
+// Breakpoints Unificados
+// ============================================
+$breakpoints: (
+  mobile: 768px,
+  tablet: 1024px, 
+  laptop: 1366px,
+  desktop: 1920px
+);
+
+// ============================================
+// Mixins para Media Queries
+// ============================================
+@mixin mobile-only {
+  @media (max-width: #{map-get($breakpoints, mobile) - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{map-get($breakpoints, mobile)}) {
+    @content;
+  }
+}
+
+@mixin laptop-up {
+  @media (min-width: #{map-get($breakpoints, tablet)}) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: #{map-get($breakpoints, laptop)}) {
+    @content;
+  }
+}
+
+// ============================================
+// Card Dimensions Responsive
+// ============================================
+$card-dimensions: (
+  mobile: (
+    projects: (width: 280px, height: 200px),
+    publications: (width: 300px, height: 350px),
+    videos: (width: 280px, height: 300px),
+    recommendations: (width: 300px, height: 380px)
+  ),
+  tablet: (
+    projects: (width: 320px, height: 240px),
+    publications: (width: 380px, height: 400px),
+    videos: (width: 350px, height: 380px),
+    recommendations: (width: 380px, height: 420px)
+  ),
+  laptop: (
+    projects: (width: 360px, height: 280px),
+    publications: (width: 450px, height: 450px),
+    videos: (width: 420px, height: 420px),
+    recommendations: (width: 450px, height: 480px)
+  )
+);
+
+// ============================================
+// Función para obtener dimensiones de card
+// ============================================
+@function get-card-dimension($type, $breakpoint, $dimension) {
+  @return map-get(map-get(map-get($card-dimensions, $breakpoint), $type), $dimension);
+}
+
+// ============================================
+// Mixin para Card Responsive
+// ============================================
+@mixin card-responsive($card-type) {
+  // Mobile first
+  width: get-card-dimension($card-type, mobile, width);
+  height: get-card-dimension($card-type, mobile, height);
+  min-width: get-card-dimension($card-type, mobile, width);
+  max-width: get-card-dimension($card-type, mobile, width);
+
+  @include tablet-up {
+    width: get-card-dimension($card-type, tablet, width);
+    height: get-card-dimension($card-type, tablet, height);
+    min-width: get-card-dimension($card-type, tablet, width);
+    max-width: get-card-dimension($card-type, tablet, width);
+  }
+
+  @include laptop-up {
+    width: get-card-dimension($card-type, laptop, width);
+    height: get-card-dimension($card-type, laptop, height);
+    min-width: get-card-dimension($card-type, laptop, width);
+    max-width: get-card-dimension($card-type, laptop, width);
+  }
+}
+
+// ============================================
+// Container Responsive
+// ============================================
+@mixin container-responsive {
+  padding: 0 1rem;
+  
+  @include tablet-up {
+    padding: 0 2rem;
+  }
+  
+  @include laptop-up {
+    padding: 0 3rem;
+  }
+}
+
+// ============================================
+// Gap Responsive para Carousels
+// ============================================
+@mixin carousel-gap-responsive {
+  gap: 15px;
+  
+  @include tablet-up {
+    gap: 20px;
+  }
+  
+  @include laptop-up {
+    gap: 25px;
+  }
+} 

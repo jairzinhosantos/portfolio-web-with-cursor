@@ -42,10 +42,20 @@ $dark-theme-colors: (
 );
 
 #publications {
-  padding: var(--section-padding-y) var(--section-padding-x);
   max-width: 1200px;
   margin: 0 auto;
   background: map.get($light-theme-colors, background);
+  
+  // Responsive padding - Mobile first
+  padding: var(--section-padding-y, 2rem) var(--section-padding-x, 1rem);
+  
+  @media (min-width: 768px) {
+    padding: var(--section-padding-y, 3rem) var(--section-padding-x, 2rem);
+  }
+  
+  @media (min-width: 1024px) {
+    padding: var(--section-padding-y, 4rem) var(--section-padding-x, 3rem);
+  }
 
   h2 {
     text-align: center;
@@ -87,15 +97,46 @@ $dark-theme-colors: (
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    height: $publications-card-height-desktop;
     display: flex;
     flex-direction: column;
-    max-width: $publications-card-width-desktop;
-    min-width: $publications-card-width-desktop;
-    width: $publications-card-width-desktop;
     flex-shrink: 0;
     flex-grow: 0;
     margin: 0 auto;
+    
+    // Mobile First Responsive Design - Optimizado para carousel padding
+    width: 260px;
+    height: 340px;
+    max-width: 260px;
+    min-width: 260px;
+    
+    // iPhone SE y pantallas pequeñas
+    @media (max-width: 375px) {
+      width: 240px;
+      height: 320px;
+      max-width: 240px;
+      min-width: 240px;
+    }
+    
+    @media (min-width: 768px) {
+      width: 380px;
+      height: 400px;
+      max-width: 380px;
+      min-width: 380px;
+    }
+    
+    @media (min-width: 1024px) {
+      width: 420px;
+      height: 430px;
+      max-width: 420px;
+      min-width: 420px;
+    }
+    
+    @media (min-width: 1366px) {
+      width: 450px;
+      height: 450px;
+      max-width: 450px;
+      min-width: 450px;
+    }
 
     &:hover {
       transform: translateY(-5px);
@@ -104,8 +145,26 @@ $dark-theme-colors: (
 
     img, .image-placeholder {
       width: 100%;
-      height: $publications-image-height-desktop;
       object-fit: cover;
+      
+      // Responsive image height - Ajustado para cards más pequeñas
+      height: 120px;
+      
+      @media (max-width: 375px) {
+        height: 110px;
+      }
+      
+      @media (min-width: 768px) {
+        height: 160px;
+      }
+      
+      @media (min-width: 1024px) {
+        height: 170px;
+      }
+      
+      @media (min-width: 1366px) {
+        height: 180px;
+      }
     }
 
     .image-placeholder {
@@ -118,6 +177,10 @@ $dark-theme-colors: (
 
       i {
         font-size: 2rem;
+        
+        @media (min-width: 768px) {
+          font-size: 2.5rem;
+        }
       }
     }
 

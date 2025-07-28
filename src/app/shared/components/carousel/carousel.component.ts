@@ -49,6 +49,15 @@ export class CarouselComponent<T> implements OnInit, OnDestroy, OnChanges {
       this.updateSlides();
       this.cd.detectChanges();
     }
+    
+    if (changes['config']) {
+      this.fullConfig = { ...DEFAULT_CAROUSEL_CONFIG, ...this.config };
+      this.state.itemsPerPage = this.fullConfig.itemsPerPage;
+      this.updateSlides();
+      this.cd.detectChanges();
+    }
+    
+
   }
 
   ngOnDestroy(): void {

@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 0 80px; // Espacio para los botones de navegación
+  padding: 0 80px; // Padding estándar para todos los carousels
   max-width: var(--content-max-width);
   margin: 0 auto;
 
@@ -104,30 +104,55 @@
   }
 }
 
-// Responsive Design
+// Responsive Design - Mobile First Approach
 @media (max-width: 768px) {
   .carousel-container {
-    padding: 0 60px; // Menos espacio en móviles
+    padding: 0 45px; // Padding estándar para mobile
 
     .carousel-btn {
-      width: 36px;
-      height: 36px;
-      font-size: 14px;
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
 
       &.prev {
-        left: 15px;
+        left: 8px;
       }
 
       &.next {
-        right: 15px;
+        right: 8px;
       }
     }
 
     .carousel-track .carousel-slide .slide-content {
-      gap: 15px;
+      gap: 10px; // Menor gap para optimizar espacio
       padding: 0;
       justify-content: center;
       align-items: flex-start;
+    }
+  }
+}
+
+// Extra small devices (iPhone SE, etc.)
+@media (max-width: 375px) {
+  .carousel-container {
+    padding: 0 35px; // Padding estándar para pantallas pequeñas
+
+    .carousel-btn {
+      width: 28px;
+      height: 28px;
+      font-size: 10px;
+
+      &.prev {
+        left: 5px;
+      }
+
+      &.next {
+        right: 5px;
+      }
+    }
+
+    .carousel-track .carousel-slide .slide-content {
+      gap: 8px;
     }
   }
 } 

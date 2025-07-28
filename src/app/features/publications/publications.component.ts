@@ -16,14 +16,16 @@ import { PUBLICATIONS_CARD_CONFIG } from './publications.constants';
 export class PublicationsComponent implements OnInit {
   @Input() publications: Publicacion[] = [];
 
-  // Configuración específica de publications - aislada de otras secciones
+  // Configuración responsive del carousel
   carouselConfig: CarouselConfig = {
-    itemsPerPage: PUBLICATIONS_CARD_CONFIG.layout.itemsPerPage,
-    gap: PUBLICATIONS_CARD_CONFIG.layout.gap,
+    itemsPerPage: 1, // Mobile first approach
+    gap: 15,
     autoSlide: false,
     autoSlideInterval: 5000,
     enableDrag: true
   };
+
+  private resizeTimeout?: NodeJS.Timeout;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -34,22 +36,52 @@ export class PublicationsComponent implements OnInit {
     this.updateCarouselConfig();
   }
 
+  ngOnDestroy(): void {
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(): void {
-    this.updateCarouselConfig();
+    // Debounce para optimizar performance
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      this.updateCarouselConfig();
+    }, 250);
   }
 
   private updateCarouselConfig(): void {
-    // Solo ejecutar en el browser, no durante SSR
     if (isPlatformBrowser(this.platformId)) {
-      const isMobile = window.innerWidth <= PUBLICATIONS_CARD_CONFIG.mobile.width * 2;
+      const screenWidth = window.innerWidth;
+      
+      // Configuración responsive modular
+      let itemsPerPage = 1; // Mobile first
+      let gap = 15;
+      
+      if (screenWidth >= 1366) {
+        // Desktop/Laptop grande
+        itemsPerPage = 2;
+        gap = 25;
+      } else if (screenWidth >= 1024) {
+        // Tablet horizontal/Laptop pequeño
+        itemsPerPage = 2;
+        gap = 20;
+      } else if (screenWidth >= 768) {
+        // Tablet vertical
+        itemsPerPage = 1;
+        gap = 15;
+      }
+      
       this.carouselConfig = {
-        itemsPerPage: isMobile ? 1 : PUBLICATIONS_CARD_CONFIG.layout.itemsPerPage,
-        gap: isMobile ? 15 : PUBLICATIONS_CARD_CONFIG.layout.gap,
-        autoSlide: false,
-        autoSlideInterval: 5000,
-        enableDrag: true
+        ...this.carouselConfig,
+        itemsPerPage,
+        gap
       };
+      
+      this.changeDetectorRef.detectChanges();
     }
   }
 
