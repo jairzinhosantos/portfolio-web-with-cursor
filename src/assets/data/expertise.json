@@ -7,7 +7,7 @@
     },
     {
       "titulo": "Solution Architecture",
-      "descripcion": "Designing end-to-end Generative AI architectures for cloud, on-premise, and hybrid environments—ensuring scalability, security, and performance.",
+      "descripcion": "Designing end-to-end Generative AI architectures for cloud, on-premise, and hybrid environments ensuring scalability, security, and performance.",
       "icono": "fas fa-sitemap"
     },
     {
@@ -17,17 +17,17 @@
     },
     {
       "titulo": "User-Centric Design (UX)",
-      "descripcion": "Crafting AI systems that prioritize usability and human interaction—balancing functionality with a deep focus on user experience.",
+      "descripcion": "Crafting AI systems that prioritize usability and human interaction balancing functionality with a deep focus on user experience.",
       "icono": "fas fa-users"
     },
     {
       "titulo": "Leadership",
-      "descripcion": "Driving cross-functional teams with a 360° vision—bridging strategy, design, and execution to deliver impactful outcomes.",
+      "descripcion": "Driving cross-functional teams with a 360° vision bridging strategy, design, and execution to deliver impactful outcomes.",
       "icono": "fas fa-rocket"
     },
     {
       "titulo": "Strategic Design",
-      "descripcion": "Evaluating, planning, and aligning Generative AI initiatives with business goals—maximizing value and adoption.",
+      "descripcion": "Evaluating, planning, and aligning Generative AI initiatives with business goals maximizing value and adoption.",
       "icono": "fas fa-chess"
     }
   ]

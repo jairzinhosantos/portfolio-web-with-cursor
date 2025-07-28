@@ -1,14 +1,24 @@
 {
   "areasInvestigacion": [
     {
+      "titulo": "Artificial General Intelligence",
+      "descripcion": "Research on building general-purpose AI systems that exhibit human-level reasoning, adaptability, and problem-solving across diverse domains.",
+      "icono": "fas fa-network-wired"
+    },
+    {
+      "titulo": "Machine Consciousness",
+      "descripcion": "Exploration of theoretical and computational models of consciousness, aiming to understand if and how machines can develop self-awareness and subjective experience.",
+      "icono": "fas fa-lightbulb"
+    },
+    {
       "titulo": "Interpretability",
       "descripcion": "Deep learning interpretability and explainability to uncover how models reason and make decisions.",
       "icono": "fas fa-search"
     },
     {
-      "titulo": "Computational Neuroscience",
-      "descripcion": "Exploring brain-inspired architectures to bridge artificial intelligence and cognitive science.",
-      "icono": "fas fa-brain"
+      "titulo": "AI Ethics",
+      "descripcion": "Research on responsible AI development, focusing on fairness, transparency, accountability, and alignment with human values in machine learning systems.",
+      "icono": "fas fa-balance-scale"
     },
     {
       "titulo": "Reinforcement Learning",
@@ -16,9 +26,9 @@
       "icono": "fas fa-robot"
     },
     {
-      "titulo": "Quantum Computing",
-      "descripcion": "Investigation of quantum algorithms and their potential to accelerate AI problem-solving capabilities.",
-      "icono": "fas fa-atom"
+      "titulo": "Computational Neuroscience",
+      "descripcion": "Exploring brain-inspired architectures to bridge artificial intelligence and cognitive science.",
+      "icono": "fas fa-brain"
     }
   ]
 } 
