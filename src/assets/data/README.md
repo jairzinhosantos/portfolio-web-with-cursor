@@ -1,36 +1,36 @@
-# Sistema de Datos Estáticos del Portafolio
+# Portfolio Static Data System
 
-Este directorio contiene los archivos JSON que alimentan el contenido estático del portafolio personal.
+This directory contains the JSON files that feed the static content of the personal portfolio.
 
-## Archivos de Datos
+## Data Files
 
 ### personal-info.json
-Contiene información personal básica.
+Contains basic personal information.
 
-Estructura:
+Structure:
 ```json
 {
   "personalInfo": {
-    "nombre": "Nombre completo",
-    "titulo1": "Título principal",
-    "titulo2": "Título secundario", 
-    "titulo3": "Título terciario",
-    "tagline": "Frase de presentación (acepta HTML)",
-    "fotoPerfil": "Ruta a la imagen",
-    "ubicacion": "Ciudad, País",
-    "resumenProfesional": "Descripción profesional (múltiples líneas)"
+    "nombre": "Full name",
+    "titulo1": "Main title",
+    "titulo2": "Secondary title", 
+    "titulo3": "Tertiary title",
+    "tagline": "Presentation phrase (accepts HTML)",
+    "fotoPerfil": "Image path",
+    "ubicacion": "City, Country",
+    "resumenProfesional": "Professional description (multiple lines)"
   }
 }
 ```
 
 ### social-urls.json
-URLs sociales, configuración de iconos y mensajes de interacción.
+Social URLs, icon configuration and interaction messages.
 
-Estructura:
+Structure:
 ```json
 {
-  "socialMedia": { "plataforma": "url" },
-  "iconMapping": { "plataforma": { "icon": "", "title": "", "customContent": "" } },
+  "socialMedia": { "platform": "url" },
+  "iconMapping": { "platform": { "icon": "", "title": "", "customContent": "" } },
   "socialGroups": { "primary": [], "secondary": [] },
   "messages": {
     "contact": { "emailSubject": "", "emailBody": "", "contactLinkText": "" },
@@ -40,70 +40,70 @@ Estructura:
 ```
 
 ### expertise.json
-Define las áreas de especialización profesional.
+Defines areas of professional expertise.
 
-Estructura:
+Structure:
 ```json
 {
   "areasEspecializacion": [
     {
-      "titulo": "Nombre del área",
-      "descripcion": "Descripción detallada",
-      "icono": "Clase CSS de Font Awesome (ej: 'fas fa-brain')"
+      "titulo": "Area name",
+      "descripcion": "Detailed description",
+      "icono": "Font Awesome CSS class (e.g: 'fas fa-brain')"
     }
   ]
 }
 ```
 
 ### research-interests.json
-Define las áreas de investigación y intereses académicos.
+Defines research areas and academic interests.
 
-Estructura:
+Structure:
 ```json
 {
   "areasInvestigacion": [
     {
-      "titulo": "Área de investigación",
-      "descripcion": "Descripción del interés",
-      "icono": "Clase CSS de Font Awesome"
+      "titulo": "Research area",
+      "descripcion": "Interest description",
+      "icono": "Font Awesome CSS class"
     }
   ]
 }
 ```
 
 ### recommendations.json
-Contiene las recomendaciones de LinkedIn y testimonios.
+Contains LinkedIn recommendations and testimonials.
 
-Estructura:
+Structure:
 ```json
 {
   "recomendaciones": [
     {
-      "nombre": "Nombre completo",
-      "cargo": "Título profesional",
-      "empresa": "Nombre de la empresa",
-      "fecha": "Fecha de la recomendación",
-      "texto": "Texto completo de la recomendación",
-      "foto": "URL de la imagen de perfil o placeholder",
-      "linkedinUrl": "URL del perfil de LinkedIn"
+      "nombre": "Full name",
+      "cargo": "Professional title",
+      "empresa": "Company name",
+      "fecha": "Recommendation date",
+      "texto": "Full recommendation text",
+      "foto": "Profile image URL or placeholder",
+      "linkedinUrl": "LinkedIn profile URL"
     }
   ]
 }
 ```
 
 ### static-videos.json
-Videos estáticos de respaldo cuando la API de YouTube no está disponible.
+Static backup videos when YouTube API is not available.
 
-Estructura:
+Structure:
 ```json
 {
   "videos": [
     {
-      "id": "VIDEO_ID_DE_YOUTUBE",
-      "title": "Título del video",
-      "description": "Descripción del video",
-      "url": "https://www.youtube.com/watch?v=VIDEO_ID_DE_YOUTUBE",
-      "thumbnail": "https://img.youtube.com/vi/VIDEO_ID_DE_YOUTUBE/maxresdefault.jpg",
+      "id": "YOUTUBE_VIDEO_ID",
+      "title": "Video title",
+      "description": "Video description",
+      "url": "https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID",
+      "thumbnail": "https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/maxresdefault.jpg",
       "duration": 300,
       "viewCount": "1,234",
       "publishedAt": "2024-01-15T00:00:00Z"
@@ -112,68 +112,68 @@ Estructura:
 }
 ```
 
-## Cómo Actualizar
+## How to Update
 
-### Para modificar información personal:
-1. Edita `personal-info.json`
-2. La aplicación detectará los cambios automáticamente
+### To modify personal information:
+1. Edit `personal-info.json`
+2. The application will detect changes automatically
 
-### Para agregar/modificar áreas de especialización:
-1. Edita `expertise.json`
-2. Usa iconos de Font Awesome disponibles
+### To add/modify areas of expertise:
+1. Edit `expertise.json`
+2. Use available Font Awesome icons
 
-### Para actualizar investigación:
-1. Edita `research-interests.json`
-2. Mantén las descripciones concisas
+### To update research:
+1. Edit `research-interests.json`
+2. Keep descriptions concise
 
-### Para agregar recomendaciones:
-1. Edita `recommendations.json`
-2. Usa placeholders para fotos: `https://via.placeholder.com/150x150/COLOR/ffffff?text=INICIALES`
+### To add recommendations:
+1. Edit `recommendations.json`
+2. Use placeholders for photos: `https://via.placeholder.com/150x150/COLOR/ffffff?text=INITIALS`
 
-### Para configurar videos estáticos:
-1. Edita `static-videos.json`
-2. Extrae el ID del video de YouTube de la URL
-3. La thumbnail se genera automáticamente
+### To configure static videos:
+1. Edit `static-videos.json`
+2. Extract YouTube video ID from URL
+3. Thumbnail is generated automatically
 
-## Sistema de Fallback
+## Fallback System
 
-Si algún archivo JSON no se puede cargar, el sistema usa datos de fallback mínimos definidos en `StaticPortfolioService`.
+If any JSON file cannot be loaded, the system uses minimal fallback data defined in `StaticPortfolioService`.
 
-## Notas Importantes
+## Important Notes
 
-- Formato JSON: Mantén la estructura exacta para evitar errores
-- URLs: Todas las URLs deben ser absolutas (incluir http/https)
-- Iconos: Usa clases de Font Awesome disponibles en el proyecto
-- Imágenes: Las rutas de imágenes locales deben apuntar a `assets/`
-- HTML: Solo `tagline` acepta HTML básico (como `<strong>`)
+- JSON Format: Maintain exact structure to avoid errors
+- URLs: All URLs must be absolute (include http/https)
+- Icons: Use Font Awesome classes available in the project
+- Images: Local image paths must point to `assets/`
+- HTML: Only `tagline` accepts basic HTML (like `<strong>`)
 
-## Servicios Relacionados
+## Related Services
 
-- StaticPortfolioService: Carga y maneja los datos JSON
-- SocialUrlsService: Servicio centralizado para URLs sociales y mensajes
-- Componentes: AboutComponent, ExpertiseComponent, ResearchComponent, RecommendationsComponent consumen estos datos
+- StaticPortfolioService: Loads and manages JSON data
+- SocialUrlsService: Centralized service for social URLs and messages
+- Components: AboutComponent, ExpertiseComponent, ResearchComponent, RecommendationsComponent consume this data
 
-## Ejemplo de Uso en Código
+## Code Usage Example
 
 ```typescript
-// En AppComponent
+// In AppComponent
 this.staticPortfolioService.getPersonalInfo().subscribe(data => {
   this.personalInfo = data.personalInfo;
 });
 ```
 
-## Principios de Clean Code Aplicados
+## Applied Clean Code Principles
 
-### Eliminación de Redundancias
-- Antes: `socialMedia` duplicado en archivos separados
-- Ahora: Un solo archivo centralizado `social-urls.json`
+### Redundancy Elimination
+- Before: `socialMedia` duplicated in separate files
+- Now: Single centralized `social-urls.json` file
 
-### Responsabilidad Única
-- Cada archivo tiene un propósito específico y bien definido
-- Servicios especializados para cada tipo de dato
-- Fallbacks robustos en caso de errores de carga
+### Single Responsibility
+- Each file has a specific and well-defined purpose
+- Specialized services for each data type
+- Robust fallbacks in case of loading errors
 
-### Modularidad
-- Estructura JSON clara y consistente
-- Documentación integrada con ejemplos
-- Cache-buster automático para prevenir problemas de caché
+### Modularity
+- Clear and consistent JSON structure
+- Integrated documentation with examples
+- Automatic cache-buster to prevent cache issues

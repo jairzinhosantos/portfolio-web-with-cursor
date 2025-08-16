@@ -1,167 +1,167 @@
 # Personal Portfolio
 
-Portafolio personal construido con Angular 19 que muestra información profesional, proyectos, publicaciones y contenido multimedia.
+Personal portfolio built with Angular 19 that showcases professional information, projects, publications, and multimedia content.
 
-## Características
+## Features
 
-- Angular 19 con Server-Side Rendering
-- Diseño responsive
-- Integración con APIs externas (GitHub, YouTube, Medium)
-- Carruseles interactivos
-- Gestión de temas
-- Variables de entorno
-- Sistema de fallbacks
-- SEO optimizado
+- Angular 19 with Server-Side Rendering
+- Responsive design
+- External API integration (GitHub, YouTube, Medium)
+- Interactive carousels
+- Theme management
+- Environment variables
+- Fallback system
+- SEO optimized
 
-## Requisitos Previos
+## Prerequisites
 
 - Node.js 20.x LTS
 - npm
-- Claves de API para servicios externos (opcional)
+- API keys for external services (optional)
 
-## Instalación
+## Installation
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 ```bash
 git clone https://github.com/jairzinhosantos/portfolio.git
 cd portfolio
 ```
 
-### 2. Instalar dependencias
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 3. Configurar archivos de entorno y datos personales
+### 3. Configure environment files and personal data
 
-#### Configurar variables de entorno:
+#### Configure environment variables:
 ```bash
 cp src/environments/environment.example.ts src/environments/environment.ts
 cp src/environments/environment.prod.example.ts src/environments/environment.prod.ts
 ```
 
-Edita los archivos con tus credenciales:
+Edit the files with your credentials:
 - `src/environments/environment.ts`
 - `src/environments/environment.prod.ts`
 
-#### Configurar datos personales:
+#### Configure personal data:
 ```bash
 cp src/assets/data/personal-info.example.json src/assets/data/personal-info.json
 cp src/assets/data/social-urls.example.json src/assets/data/social-urls.json
 ```
 
-Edita los archivos JSON con tu información:
+Edit the JSON files with your information:
 - `src/assets/data/personal-info.json`
 - `src/assets/data/social-urls.json`
 
-### 4. Agregar archivos personales
-- Foto de perfil: `src/assets/branding/profile.png`
-- CV en PDF: `src/assets/resume/resume_tu_nombre-es.pdf`
+### 4. Add personal files
+- Profile photo: `src/assets/branding/profile.png`
+- CV in PDF: `src/assets/resume/resume_yourname-en.pdf`
 
-### 5. Ejecutar en desarrollo
+### 5. Run in development
 ```bash
 npm start
 ```
 
-Disponible en `http://localhost:4200`
+Available at `http://localhost:4200`
 
-## Scripts Disponibles
+## Available Scripts
 
 ```bash
-npm start          # Servidor de desarrollo
-npm run build      # Build para producción
-npm run build:ssr  # Build con SSR
-npm test           # Pruebas unitarias
-npm run e2e        # Pruebas end-to-end
-npm run analyze    # Análisis del bundle
+npm start          # Development server
+npm run build      # Production build
+npm run build:ssr  # Build with SSR
+npm test           # Unit tests
+npm run e2e        # End-to-end tests
+npm run analyze    # Bundle analysis
 ```
 
-## Variables de Entorno
+## Environment Variables
 
 ### YouTube API
-- API Key: Obtén una en Google Cloud Console
-- Channel ID: ID del canal de YouTube
-- Channel Handle: Handle del canal
+- API Key: Get one from Google Cloud Console
+- Channel ID: Your YouTube channel ID
+- Channel Handle: Your channel handle
 
 ### GitHub API
-- Username: Tu usuario de GitHub
-- Token (opcional): Token personal
+- Username: Your GitHub username
+- Token (optional): Personal access token
 
 ### Medium RSS
-- Username: Tu usuario de Medium
-- RSS API URL: Servicio para convertir RSS a JSON
+- Username: Your Medium username
+- RSS API URL: Service to convert RSS to JSON
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── services/          # Servicios para APIs externas
-│   │   ├── github.service.ts    # Servicio de GitHub
-│   │   ├── medium.service.ts    # Servicio de Medium
-│   │   └── youtube.service.ts   # Servicio de YouTube
-│   ├── app.component.ts   # Componente principal
-│   ├── app.component.html # Template principal
-│   └── app.component.scss # Estilos principales
-├── assets/               # Recursos estáticos
-│   ├── branding/        # Logos y marca personal
-│   ├── icons/           # Iconos de tecnologías
-│   ├── projects/        # Imágenes de proyectos
-│   └── publications/    # Imágenes de publicaciones
-├── environments/        # Configuración de entornos
-└── styles.scss         # Estilos globales
+│   ├── services/          # Services for external APIs
+│   │   ├── github.service.ts    # GitHub service
+│   │   ├── medium.service.ts    # Medium service
+│   │   └── youtube.service.ts   # YouTube service
+│   ├── app.component.ts   # Main component
+│   ├── app.component.html # Main template
+│   └── app.component.scss # Main styles
+├── assets/               # Static resources
+│   ├── branding/        # Logos and personal branding
+│   ├── icons/           # Technology icons
+│   ├── projects/        # Project images
+│   └── publications/    # Publication images
+├── environments/        # Environment configuration
+└── styles.scss         # Global styles
 ```
 
-## Características Técnicas
+## Technical Features
 
-### Carruseles Interactivos
-- Soporte táctil y mouse
+### Interactive Carousels
+- Touch and mouse support
 - Responsive
-- Animaciones CSS
+- CSS animations
 
-### Gestión de Temas
-- Tema claro, oscuro y automático
-- Persistencia en localStorage
-- Transiciones suaves
+### Theme Management
+- Light, dark and automatic themes
+- localStorage persistence
+- Smooth transitions
 
 ### Performance
 - Lazy loading
 - Server-Side Rendering
-- Optimización de bundles
+- Bundle optimization
 
-### Gestión de Errores
-- Sistema de fallbacks
-- Manejo robusto de errores
-- Estados de carga
+### Error Handling
+- Fallback system
+- Robust error handling
+- Loading states
 
-## APIs Integradas
+## Integrated APIs
 
 ### GitHub API
 - Endpoint: `https://api.github.com/users/{username}/repos`
-- Obtiene repositorios públicos
-- Fallback: Array vacío
+- Gets public repositories
+- Fallback: Empty array
 
 ### YouTube Data API v3
 - Endpoint: `https://www.googleapis.com/youtube/v3/`
-- Obtiene videos del canal
-- Fallback: Estado no disponible
+- Gets channel videos
+- Fallback: Not available state
 
 ### Medium RSS
-- Endpoint: RSS convertido a JSON
-- Obtiene últimos artículos
-- Fallback: Artículos estáticos
+- Endpoint: RSS converted to JSON
+- Gets latest articles
+- Fallback: Static articles
 
-## Despliegue
+## Deployment
 
-### Construcción para producción
+### Production build
 ```bash
 npm run build
 ```
 
-Los archivos se generan en `dist/portfolio/`
+Files are generated in `dist/portfolio/`
 
-### Variables de entorno en producción
-Configura las variables en tu plataforma de hosting:
+### Production environment variables
+Configure variables in your hosting platform:
 - Vercel: Environment Variables
 - Netlify: Site settings > Environment variables
 
@@ -171,19 +171,19 @@ npm run build:ssr
 npm run serve:ssr
 ```
 
-## Seguridad
+## Security
 
-### Protección de Credenciales
-- Variables de entorno separadas del código
-- Archivos reales excluidos del repositorio
-- Archivos ejemplo como plantillas
-- Tokens con permisos mínimos
+### Credential Protection
+- Environment variables separated from code
+- Real files excluded from repository
+- Example files as templates
+- Tokens with minimal permissions
 
-### Protección de Datos Personales
-- Información personal en archivos separados
-- CV y fotos excluidos del control de versiones
+### Personal Data Protection
+- Personal information in separate files
+- CV and photos excluded from version control
 
-### Archivos Protegidos
+### Protected Files
 ```
 src/environments/environment.ts
 src/environments/environment.prod.ts
@@ -193,60 +193,13 @@ src/assets/resume/*.pdf
 src/assets/branding/profile.png
 ```
 
-### Configuración Inicial
-1. Copia archivos `.example` y remueve el sufijo
-2. Edita con tu información real
-3. Agrega foto de perfil y CV
-4. No subas estos archivos al repositorio
+### Initial Configuration
+1. Copy `.example` files and remove suffix
+2. Edit with your real information
+3. Add profile photo and CV
+4. Never upload these files to repository
 
-### Validación de Datos
-- Sanitización automática de APIs
-- Validación de URLs y HTML
-- Manejo seguro de errores
-
-## Actualizaciones Recientes
-
-### v1.3.0 - Seguridad y Privacidad
-- Protección de información personal y credenciales
-- Archivos sensibles excluidos del repositorio
-- Archivos de ejemplo para configuración
-- Documentación de seguridad
-- README minimalista
-
-### v1.2.0 - Variables de Entorno
-- Migración a variables de entorno
-- Archivos `.env` y `.env.example`
-- Mejora en gestión de errores
-- Documentación de configuración
-
-### v1.1.0 - Performance
-- Optimización con Node.js 20 LTS
-- Resolución de errores TypeScript
-- Mejora en cargas de dependencias
-
-## Compatibilidad
-
-- Navegadores: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-- Dispositivos: Desktop, Tablet, Mobile
-- Node.js: 20.x LTS
-- Angular: 19.x
-
-## Contribuciones
-
-1. Fork el proyecto
-2. Crea una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
-
-## Licencia
-
-MIT License. Ver `LICENSE` para más detalles.
-
-## Nota de Seguridad
-
-Este repositorio utiliza archivos de ejemplo para proteger información sensible:
-
-1. Copia archivos `.example` y configúralos
-2. No subas archivos con credenciales reales
-3. Revisa el `.gitignore` para confirmar protección
+### Data Validation
+- Automatic API sanitization
+- URL and HTML validation
+- Secure error handling

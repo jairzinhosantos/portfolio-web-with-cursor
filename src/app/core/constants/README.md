@@ -1,56 +1,56 @@
 # Constants Module
 
-Este módulo contiene las constantes de la aplicación organizadas por dominio.
+This module contains application constants organized by domain.
 
-## Arquitectura
+## Architecture
 
 ### portfolio.constants.ts
-Contiene únicamente valores de fallback para mostrar durante la carga inicial de datos.
+Contains only fallback values to display during initial data loading.
 
-IMPORTANTE: Estos valores son placeholders temporales que se reemplazan automáticamente cuando se cargan los datos reales desde archivos JSON.
+IMPORTANT: These values are temporary placeholders that are automatically replaced when real data is loaded from JSON files.
 
-#### Principios:
-- No hardcodear datos reales - Los datos vienen de archivos JSON
-- Solo valores de fallback - Para mejorar UX durante la carga
-- Claramente documentado - Cada constante explica su propósito
+#### Principles:
+- Don't hardcode real data - Data comes from JSON files
+- Only fallback values - To improve UX during loading
+- Clearly documented - Each constant explains its purpose
 
 ### carousel.constants.ts
-Configuración específica para componentes de carrusel.
+Specific configuration for carousel components.
 
-## Uso Recomendado
+## Recommended Usage
 
-### Correcto
+### Correct
 ```typescript
-// En componentes - inicializar con fallback
+// In components - initialize with fallback
 personalInfo: PersonalInfo = FALLBACK_PERSONAL_INFO;
 
-// Luego cargar datos reales
+// Then load real data
 this.staticPortfolioService.getPersonalInfo().subscribe(data => {
   this.personalInfo = data.personalInfo;
 });
 ```
 
-### Incorrecto
+### Incorrect
 ```typescript
-// No hardcodear datos reales en constantes
+// Don't hardcode real data in constants
 export const PERSONAL_INFO = {
-  nombre: 'Tu Nombre Real', // Hardcoded
-  titulo1: 'Tu Título Real' // Hardcoded
+  nombre: 'Your Real Name', // Hardcoded
+  titulo1: 'Your Real Title' // Hardcoded
 };
 ```
 
-## Flujo de Datos
+## Data Flow
 
 ```
 JSON Files → StaticPortfolioService → Components
     ↑              ↑                     ↑
 Assets/data    HTTP Client        Fallback Constants
-                                 (solo durante carga)
+                                 (only during loading)
 ```
 
-### Beneficios
-1. **Modularidad**: Datos separados del código
-2. **Mantenimiento**: Cambios sin recompilación
-3. **Performance**: SSR + datos estáticos
-4. **UX**: Fallbacks suaves durante carga
-5. **Clean Code**: Separación de responsabilidades 
+### Benefits
+1. **Modularity**: Data separated from code
+2. **Maintenance**: Changes without recompilation
+3. **Performance**: SSR + static data
+4. **UX**: Smooth fallbacks during loading
+5. **Clean Code**: Separation of concerns 
