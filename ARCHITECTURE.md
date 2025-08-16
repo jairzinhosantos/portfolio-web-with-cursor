@@ -1,63 +1,63 @@
-# Arquitectura del Portafolio
+# Portfolio Architecture
 
-## Estructura Modular
+## Modular Structure
 
-### Principios de Diseño
-- Separación de responsabilidades
+### Design Principles
+- Separation of concerns
 - Clean Code
-- Modularidad
-- Datos dinámicos mediante JSON
+- Modularity
+- Dynamic data through JSON
 
-## Organización del Código
+## Code Organization
 
-### Componentes Modulares
+### Modular Components
 ```
 src/app/
-├── layout/                    # Componentes de estructura
-│   ├── header/               # Navegación y temas
-│   └── footer/               # Pie de página
-├── features/                 # Funcionalidades principales
-│   ├── about/               # Información personal
-│   ├── expertise/           # Áreas de especialización
-│   ├── research/           # Intereses de investigación
-│   ├── projects/           # Proyectos de GitHub
-│   ├── publications/       # Artículos de Medium
-│   ├── recommendations/    # Recomendaciones de LinkedIn
-│   └── videos/             # Videos de YouTube
-├── shared/                  # Componentes compartidos
+├── layout/                    # Structural components
+│   ├── header/               # Navigation and themes
+│   └── footer/               # Footer
+├── features/                 # Main functionalities
+│   ├── about/               # Personal information
+│   ├── expertise/           # Areas of expertise
+│   ├── research/           # Research interests
+│   ├── projects/           # GitHub projects
+│   ├── publications/       # Medium articles
+│   ├── recommendations/    # LinkedIn recommendations
+│   └── videos/             # YouTube videos
+├── shared/                  # Shared components
 │   └── components/
-│       └── carousel/        # Carrusel reutilizable
-├── services/               # Servicios de datos
-│   ├── github.service.ts   # API de GitHub
-│   ├── medium.service.ts   # API de Medium
-│   ├── youtube.service.ts  # API de YouTube
-│   ├── static-videos.service.ts     # Videos estáticos
-│   └── static-portfolio.service.ts  # Datos JSON estáticos
-└── core/                   # Configuración central
-    ├── constants/          # Constantes y configuración
-    ├── interfaces/         # Tipos de datos TypeScript
-    └── utils/              # Utilidades comunes
+│       └── carousel/        # Reusable carousel
+├── services/               # Data services
+│   ├── github.service.ts   # GitHub API
+│   ├── medium.service.ts   # Medium API
+│   ├── youtube.service.ts  # YouTube API
+│   ├── static-videos.service.ts     # Static videos
+│   └── static-portfolio.service.ts  # Static JSON data
+└── core/                   # Core configuration
+    ├── constants/          # Constants and configuration
+    ├── interfaces/         # TypeScript data types
+    └── utils/              # Common utilities
 ```
 
-### Gestión de Datos
+### Data Management
 
-#### Sistema de Datos Estáticos
+#### Static Data System
 ```
 src/assets/data/
-├── personal-info.json      # Información personal y redes sociales
-├── expertise.json          # Áreas de especialización
-├── research-interests.json # Intereses de investigación
-├── recommendations.json    # Recomendaciones de LinkedIn
-├── static-videos.json      # Videos cuando API falla
-└── README.md              # Documentación del sistema
+├── personal-info.json      # Personal information and social media
+├── expertise.json          # Areas of expertise
+├── research-interests.json # Research interests
+├── recommendations.json    # LinkedIn recommendations
+├── static-videos.json      # Videos when API fails
+└── README.md              # System documentation
 ```
 
-#### APIs Dinámicas
-- GitHub API: Proyectos en tiempo real
-- Medium API: Publicaciones actuales
-- YouTube API: Videos del canal con fallback estático
+#### Dynamic APIs
+- GitHub API: Real-time projects
+- Medium API: Current publications
+- YouTube API: Channel videos with static fallback
 
-### Flujo de Datos
+### Data Flow
 
 ```mermaid
 graph TD
@@ -82,131 +82,131 @@ graph TD
     K --> R[Videos]
 ```
 
-## Patrones Implementados
+## Implemented Patterns
 
 ### 1. Component Pattern
-- Cada sección es un componente independiente
-- Inputs para recibir datos
-- Outputs para comunicación con el padre
-- Estilos encapsulados por componente
+- Each section is an independent component
+- Inputs to receive data
+- Outputs for parent communication
+- Component-encapsulated styles
 
 ### 2. Service Pattern
-- Servicios inyectables para manejo de datos
-- Separación de lógica de negocio
-- Observables para programación reactiva
-- Manejo de errores centralizado
+- Injectable services for data handling
+- Business logic separation
+- Observables for reactive programming
+- Centralized error handling
 
 ### 3. Strategy Pattern
-- Múltiples fuentes de datos (API + JSON)
-- Fallbacks automáticos cuando APIs fallan
-- Configuración dinámica por ambiente
+- Multiple data sources (API + JSON)
+- Automatic fallbacks when APIs fail
+- Dynamic configuration per environment
 
 ### 4. Observer Pattern
-- Uso de RxJS Observables
-- Detección automática de cambios
-- Programación reactiva
+- RxJS Observables usage
+- Automatic change detection
+- Reactive programming
 
-## Sistema de Estilos
+## Style System
 
-### Metodología BEM + Scoped Styles
-- Estilos encapsulados por componente
-- Nomenclatura consistente
-- Tema claro/oscuro unificado
+### BEM + Scoped Styles Methodology
+- Component-encapsulated styles
+- Consistent nomenclature
+- Unified light/dark theme
 
-### Variables de Color Unificadas
+### Unified Color Variables
 ```scss
-// Colores minimalistas
-$primary-gray: #6b7280;      // Iconos base
-$dark-gray: #374151;         // Hover claro
-$light-gray: #9ca3af;        // Hover oscuro
-$accent-blue: #60a5fa;       // Acentos tema oscuro
+// Minimalist colors
+$primary-gray: #6b7280;      // Base icons
+$dark-gray: #374151;         // Light hover
+$light-gray: #9ca3af;        // Dark hover
+$accent-blue: #60a5fa;       // Dark theme accents
 ```
 
-## Configuración Dinámica
+## Dynamic Configuration
 
-### Archivos de Configuración
-- `environment.ts` - Variables de entorno
-- `portfolio.constants.ts` - Constantes de fallback
-- `carousel.constants.ts` - Configuración de carruseles
+### Configuration Files
+- `environment.ts` - Environment variables
+- `portfolio.constants.ts` - Fallback constants
+- `carousel.constants.ts` - Carousel configuration
 
-### Sistema de Temas
-- Detección automática del sistema
-- Configuración manual (claro/oscuro/auto)
-- Persistencia en localStorage
+### Theme System
+- Automatic system detection
+- Manual configuration (light/dark/auto)
+- localStorage persistence
 
-## Build y Deployment
+## Build and Deployment
 
-### Scripts NPM
+### NPM Scripts
 ```json
 {
-  "start": "ng serve --hmr",                    // Desarrollo
-  "build": "ng build",                          // Compilación
-  "serve:ssr:portfolio": "node dist/.../server.mjs"  // Producción SSR
+  "start": "ng serve --hmr",                    // Development
+  "build": "ng build",                          // Build
+  "serve:ssr:portfolio": "node dist/.../server.mjs"  // SSR Production
 }
 ```
 
 ### Server-Side Rendering
-- Pre-renderizado para SEO
-- Hidratación en el cliente
-- Puerto 4000 para producción
+- Pre-rendering for SEO
+- Client-side hydration
+- Port 4000 for production
 
-## Principios de Clean Code
+## Clean Code Principles
 
 ### Naming Conventions
 - Variables: `camelCase`
-- Componentes: `PascalCase`
-- Archivos: `kebab-case`
-- Métodos: `verboSustantivo()`
+- Components: `PascalCase`
+- Files: `kebab-case`
+- Methods: `verbNoun()`
 
-### Organización del Código
-- Imports ordenados por tipo
-- Métodos públicos antes que privados
-- Lógica de negocio en servicios
-- Presentación en componentes
+### Code Organization
+- Imports ordered by type
+- Public methods before private
+- Business logic in services
+- Presentation in components
 
-### Documentación
-- JSDoc para métodos complejos
-- README para cada sistema
-- Comentarios explicativos (no obvios)
-- Arquitectura documentada
+### Documentation
+- JSDoc for complex methods
+- README for each system
+- Explanatory comments (not obvious ones)
+- Documented architecture
 
-## Escalabilidad
+## Scalability
 
-### Agregar Nueva Sección
-1. Crear componente en `features/`
-2. Definir interfaz en `core/interfaces/`
-3. Crear servicio si necesita datos externos
-4. Agregar al routing en `app.component.html`
-5. Configurar estilos con tema claro/oscuro
+### Adding New Section
+1. Create component in `features/`
+2. Define interface in `core/interfaces/`
+3. Create service if external data needed
+4. Add to routing in `app.component.html`
+5. Configure styles with light/dark theme
 
-### Modificar Datos
-1. Estáticos: Editar archivos JSON en `assets/data/`
-2. Dinámicos: Modificar servicios correspondientes
-3. Configuración: Actualizar constantes en `core/`
+### Modifying Data
+1. Static: Edit JSON files in `assets/data/`
+2. Dynamic: Modify corresponding services
+3. Configuration: Update constants in `core/`
 
 ## Performance
 
 ### Lazy Loading
-- Componentes cargados bajo demanda
-- Imágenes con lazy loading nativo
-- Tree shaking automático
+- Components loaded on demand
+- Native image lazy loading
+- Automatic tree shaking
 
-### Optimizaciones
-- OnPush change detection donde posible
-- Observables con unsubscribe automático
-- Imágenes optimizadas
-- CSS minificado en producción
+### Optimizations
+- OnPush change detection where possible
+- Observables with automatic unsubscribe
+- Optimized images
+- Minified CSS in production
 
-## Manejo de Errores
+## Error Handling
 
-### Estrategia de Fallbacks
-- APIs externas con datos de respaldo
-- Mensajes de error amigables
-- Degradación gradual de funcionalidades
-- Logs informativos para debugging
+### Fallback Strategy
+- External APIs with backup data
+- User-friendly error messages
+- Graceful feature degradation
+- Informative logs for debugging
 
-Este diseño garantiza:
-- Mantenibilidad: Código organizado y documentado
-- Escalabilidad: Fácil agregar nuevas funcionalidades
-- Performance: Optimizado para producción
-- UX: Experiencia consistente y responsive 
+This design ensures:
+- Maintainability: Organized and documented code
+- Scalability: Easy to add new features
+- Performance: Optimized for production
+- UX: Consistent and responsive experience 
