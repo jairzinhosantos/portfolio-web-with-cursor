@@ -2,28 +2,28 @@
 
 Un portafolio personal moderno construido con Angular 19 que muestra información profesional, proyectos, publicaciones y contenido multimedia.
 
-## 🚀 Características
+## Características
 
-- ✅ **Angular 19** con Server-Side Rendering (SSR)
-- ✅ **Diseño Responsive** optimizado para todos los dispositivos
-- ✅ **Integración con APIs externas**:
+- Angular 19 con Server-Side Rendering (SSR)
+- Diseño Responsive optimizado para todos los dispositivos
+- Integración con APIs externas:
   - GitHub (proyectos)
   - YouTube (videos)
   - Medium (artículos)
-- ✅ **Carruseles interactivos** con soporte táctil
-- ✅ **Gestión de temas** (claro/oscuro/automático)
-- ✅ **Variables de entorno** para configuración segura
-- ✅ **Fallbacks robustos** cuando las APIs fallan
-- ✅ **Animaciones suaves** y transiciones
-- ✅ **SEO optimizado**
+- Carruseles interactivos con soporte táctil
+- Gestión de temas (claro/oscuro/automático)
+- Variables de entorno para configuración segura
+- Fallbacks robustos cuando las APIs fallan
+- Animaciones suaves y transiciones
+- SEO optimizado
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
-- **Node.js 20.x LTS** (recomendado v20.19.3)
-- **npm** (incluido con Node.js)
+- Node.js 20.x LTS (recomendado v20.19.3)
+- npm (incluido con Node.js)
 - Claves de API para servicios externos (opcional)
 
-## 🛠️ Instalación
+## Instalación
 
 ### 1. Clonar el repositorio
 ```bash
@@ -36,37 +36,47 @@ cd portfolio
 npm install
 ```
 
-### 3. Configurar variables de entorno
-Copia el archivo de ejemplo y configura tus variables:
+### 3. Configurar archivos de entorno y datos personales
+
+#### Configurar variables de entorno:
 ```bash
-cp .env.example .env
+# Copia y configura los archivos de entorno
+cp src/environments/environment.example.ts src/environments/environment.ts
+cp src/environments/environment.prod.example.ts src/environments/environment.prod.ts
 ```
 
-Edita `.env` con tus credenciales:
-```env
-# YouTube API Configuration
-YOUTUBE_API_KEY=tu_api_key_de_youtube
-YOUTUBE_CHANNEL_ID=tu_channel_id
-YOUTUBE_CHANNEL_HANDLE=@tu_handle
+Edita los archivos con tus credenciales reales:
+- `src/environments/environment.ts` (desarrollo)
+- `src/environments/environment.prod.ts` (producción)
 
-# GitHub API Configuration
-GITHUB_USERNAME=tu_usuario_github
-GITHUB_API_URL=https://api.github.com
-GITHUB_TOKEN=tu_token_opcional
-
-# Medium RSS Configuration  
-MEDIUM_USERNAME=tu.usuario.medium
-MEDIUM_RSS_API_URL=https://api.rss2json.com/v1/api.json
+#### Configurar datos personales:
+```bash
+# Copia y configura los archivos de datos personales
+cp src/assets/data/personal-info.example.json src/assets/data/personal-info.json
+cp src/assets/data/social-urls.example.json src/assets/data/social-urls.json
 ```
 
-### 4. Ejecutar en desarrollo
+Edita los archivos JSON con tu información personal:
+- `src/assets/data/personal-info.json` (información básica)
+- `src/assets/data/social-urls.json` (redes sociales y contacto)
+
+### 4. Agregar tu foto de perfil y CV
+```bash
+# Agrega tu foto de perfil (reemplaza el archivo existente)
+# Archivo: src/assets/branding/profile.png
+
+# Agrega tu CV en PDF (reemplaza el archivo existente)  
+# Archivo: src/assets/resume/resume_tu_nombre-es.pdf
+```
+
+### 5. Ejecutar en desarrollo
 ```bash
 npm start
 ```
 
 El sitio estará disponible en `http://localhost:4200`
 
-## 🔧 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
 # Desarrollo
@@ -85,7 +95,7 @@ npm run e2e            # Pruebas end-to-end
 npm run analyze        # Analiza el bundle
 ```
 
-## 🌐 Variables de Entorno
+## Variables de Entorno
 
 ### YouTube API
 Para mostrar videos de YouTube, necesitas:
@@ -103,7 +113,7 @@ Para mostrar artículos:
 1. **Username**: Tu usuario de Medium
 2. **RSS API URL**: Servicio para convertir RSS a JSON
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
@@ -124,7 +134,7 @@ src/
 └── styles.scss         # Estilos globales
 ```
 
-## 🎨 Características Técnicas
+## Características Técnicas
 
 ### Carruseles Interactivos
 - Soporte para navegación táctil y mouse
@@ -146,7 +156,7 @@ src/
 - Manejo robusto de errores de red
 - Estados de carga informativos
 
-## 🔌 APIs Integradas
+## APIs Integradas
 
 ### GitHub API
 - **Endpoint**: `https://api.github.com/users/{username}/repos`
@@ -163,7 +173,7 @@ src/
 - **Funcionalidad**: Obtiene últimos artículos publicados
 - **Fallback**: Artículos estáticos si falla la API
 
-## 🚀 Despliegue
+## Despliegue
 
 ### Construcción para producción
 ```bash
@@ -184,34 +194,72 @@ npm run build:ssr
 npm run serve:ssr
 ```
 
-## 🛡️ Seguridad
+## Seguridad
 
-- Las variables de entorno mantienen las credenciales seguras
-- El archivo `.env` está en `.gitignore`
+Este proyecto implementa múltiples capas de seguridad para proteger información sensible:
+
+### Protección de Credenciales
+- Variables de entorno en archivos separados del código fuente
+- Archivos de configuración real excluidos del repositorio via `.gitignore`
+- Archivos de ejemplo (`.example`) disponibles como plantillas
 - Tokens de API con permisos mínimos necesarios
-- Validación y sanitización de datos de APIs externas
 
-## 🔄 Actualizaciones Recientes
+### Protección de Datos Personales
+- Información personal en archivos JSON separados y excluidos del repositorio
+- Archivos de ejemplo disponibles para configuración inicial
+- CV y fotos de perfil excluidos del control de versiones
+
+### Archivos Protegidos
+Los siguientes archivos están excluidos del repositorio:
+```
+src/environments/environment.ts
+src/environments/environment.prod.ts
+src/assets/data/personal-info.json
+src/assets/data/social-urls.json
+src/assets/resume/*.pdf
+src/assets/branding/profile.png
+```
+
+### Configuración Inicial
+Para configurar el proyecto con tu información:
+1. Copia los archivos `.example` y remueve el sufijo
+2. Edita los archivos con tu información real
+3. Agrega tu foto de perfil y CV
+4. Nunca subas estos archivos al repositorio
+
+### Validación de Datos
+- Sanitización automática de datos de APIs externas
+- Validación de URLs y contenido HTML
+- Manejo seguro de errores sin exponer información sensible
+
+## Actualizaciones Recientes
+
+### v1.3.0 - Seguridad y Privacidad (Actual)
+- Protección completa de información personal y credenciales
+- Archivos sensibles excluidos del repositorio via `.gitignore`
+- Archivos de ejemplo para configuración inicial
+- Documentación de seguridad actualizada
+- README minimalista sin emojis
 
 ### v1.2.0 - Variables de Entorno
-- ✅ Migración a variables de entorno para todas las APIs
-- ✅ Creación de archivos `.env` y `.env.example`
-- ✅ Mejora en gestión de errores de servicios
-- ✅ Documentación completa de configuración
+- Migración a variables de entorno para todas las APIs
+- Creación de archivos `.env` y `.env.example`
+- Mejora en gestión de errores de servicios
+- Documentación completa de configuración
 
 ### v1.1.0 - Mejoras de Performance
-- ✅ Optimización con Node.js 20 LTS
-- ✅ Resolución de errores de TypeScript
-- ✅ Mejora en cargas de dependencias
+- Optimización con Node.js 20 LTS
+- Resolución de errores de TypeScript
+- Mejora en cargas de dependencias
 
-## 📱 Compatibilidad
+## Compatibilidad
 
 - **Navegadores**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
 - **Dispositivos**: Desktop, Tablet, Mobile
 - **Node.js**: 20.x LTS (recomendado)
 - **Angular**: 19.x
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Para cambios importantes:
 
@@ -221,18 +269,22 @@ Las contribuciones son bienvenidas. Para cambios importantes:
 4. Push a la rama (`git push origin feature/amazing-feature`)
 5. Abre un Pull Request
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
-## 📧 Contacto
+## Contacto
 
-**Jairzinho Santos**
+Jairzinho Santos
 - LinkedIn: [jairzinhosantos](https://www.linkedin.com/in/jairzinhosantos/)
 - GitHub: [jairzinhosantos](https://github.com/jairzinhosantos)
 - Email: jairzinho.santos@hotmail.com
 - Portfolio: [jairzinhosantos.com](https://jairzinhosantos.com)
 
----
+## Nota de Seguridad
 
-⭐ Si este proyecto te ayudó, ¡considera darle una estrella!
+Este repositorio utiliza archivos de ejemplo (`.example`) para proteger información sensible. Antes de usar el proyecto, asegúrate de:
+
+1. Copiar los archivos `.example` y configurarlos con tu información real
+2. Nunca subir archivos con credenciales o datos personales reales
+3. Revisar el `.gitignore` para confirmar que tus archivos sensibles están protegidos

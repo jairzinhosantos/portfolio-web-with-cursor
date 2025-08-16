@@ -1,6 +1,6 @@
-# 🏗️ Arquitectura del Portafolio - Jairzinho Santos
+# Arquitectura del Portafolio - Jairzinho Santos
 
-## 📋 Estructura Modular
+## Estructura Modular
 
 ### **Principios de Diseño**
 - **Separación de responsabilidades:** Cada componente tiene una función específica
@@ -8,7 +8,7 @@
 - **Modularidad:** Componentes independientes y reutilizables
 - **Datos dinámicos:** Configuración mediante archivos JSON externos
 
-## 🗂️ Organización del Código
+## Organización del Código
 
 ### **Componentes Modulares**
 ```
@@ -82,7 +82,7 @@ graph TD
     K --> R[Videos]
 ```
 
-## 🎯 Patrones Implementados
+## Patrones Implementados
 
 ### **1. Component Pattern**
 - Cada sección es un componente independiente
@@ -106,7 +106,7 @@ graph TD
 - Detección automática de cambios
 - Programación reactiva
 
-## 🎨 Sistema de Estilos
+## Sistema de Estilos
 
 ### **Metodología BEM + Scoped Styles**
 - Estilos encapsulados por componente
@@ -122,7 +122,7 @@ $light-gray: #9ca3af;        // Hover oscuro
 $accent-blue: #60a5fa;       // Acentos tema oscuro
 ```
 
-## 🔧 Configuración Dinámica
+## Configuración Dinámica
 
 ### **Archivos de Configuración**
 - `environment.ts` - Variables de entorno
@@ -134,7 +134,7 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 - Configuración manual (claro/oscuro/auto)
 - Persistencia en localStorage
 
-## 📦 Build y Deployment
+## Build y Deployment
 
 ### **Scripts NPM**
 ```json
@@ -150,7 +150,7 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 - Hidratación en el cliente
 - Puerto 4000 para producción
 
-## 🧪 Principios de Clean Code
+## Principios de Clean Code
 
 ### **Naming Conventions**
 - Variables: `camelCase`
@@ -170,7 +170,7 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 - Comentarios explicativos (no obvios)
 - Arquitectura documentada
 
-## 🚀 Escalabilidad
+## Escalabilidad
 
 ### **Agregar Nueva Sección**
 1. Crear componente en `features/`
@@ -184,7 +184,7 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 2. **Dinámicos:** Modificar servicios correspondientes
 3. **Configuración:** Actualizar constantes en `core/`
 
-## ⚡ Performance
+## Performance
 
 ### **Lazy Loading**
 - Componentes cargados bajo demanda
@@ -197,7 +197,7 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 - Imágenes optimizadas
 - CSS minificado en producción
 
-## 🛡️ Manejo de Errores
+## Manejo de Errores
 
 ### **Estrategia de Fallbacks**
 - APIs externas con datos de respaldo

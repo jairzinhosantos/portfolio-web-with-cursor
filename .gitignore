@@ -43,6 +43,30 @@ Thumbs.db
 .env
 .env.local
 .env.production
+.env.development
+.env.*
+
+# Archivos con información personal/sensible
+src/environments/environment.ts
+src/environments/environment.prod.ts
+src/environments/environment.*.ts
+
+# Datos personales sensibles
+src/assets/data/personal-info.json
+src/assets/data/social-urls.json
+src/assets/resume/*.pdf
+src/assets/branding/profile.png
+
+# Credenciales y tokens
+**/api-keys.json
+**/credentials.json
+**/*-secret.*
+**/*-private.*
+
+# Backups de archivos sensibles
+*.backup
+*.bak
+*-backup.*
 
 # Ignore Angular cache
 .angular/cache/
@@ -50,3 +74,19 @@ Thumbs.db
 # Ignore temporary files
 *.log
 *.tmp
+
+# Archivos de configuración local
+.vscode/settings.json
+.idea/
+
+# Archivos de OS específicos
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Certificados y llaves
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx

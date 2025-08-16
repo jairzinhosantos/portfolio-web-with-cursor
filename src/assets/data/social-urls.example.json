@@ -1,0 +1,76 @@
+{
+  "socialMedia": {
+    "linkedin": "https://www.linkedin.com/in/tu-usuario/",
+    "github": "https://github.com/tu-usuario",
+    "twitter": "https://x.com/tu_usuario",
+    "youtube": "https://www.youtube.com/@tu.canal",
+    "tiktok": "https://www.tiktok.com/@tu.usuario",
+    "instagram": "https://www.instagram.com/tu.usuario/",
+    "medium": "https://medium.com/@tu.usuario",
+    "email": "tu.email@ejemplo.com",
+    "discord": "javascript:void(0)",
+    "resume": "assets/resume/tu_cv.pdf"
+  },
+  "iconMapping": {
+    "linkedin": {
+      "icon": "fab fa-linkedin",
+      "title": "LinkedIn"
+    },
+    "github": {
+      "icon": "fab fa-github", 
+      "title": "GitHub"
+    },
+    "twitter": {
+      "icon": "x-icon",
+      "title": "X (formerly Twitter)",
+      "customContent": "𝕏"
+    },
+    "youtube": {
+      "icon": "fab fa-youtube",
+      "title": "YouTube"
+    },
+    "tiktok": {
+      "icon": "fab fa-tiktok",
+      "title": "TikTok"
+    },
+    "instagram": {
+      "icon": "fab fa-instagram",
+      "title": "Instagram"
+    },
+    "medium": {
+      "icon": "fab fa-medium",
+      "title": "Medium"
+    },
+    "email": {
+      "icon": "fas fa-envelope",
+      "title": "Email"
+    },
+    "discord": {
+      "icon": "fab fa-discord",
+      "title": "Discord"
+    },
+    "resume": {
+      "icon": "fas fa-download",
+      "title": "Ver CV"
+    }
+  },
+  "socialGroups": {
+    "primary": ["linkedin", "twitter", "github", "discord", "email", "resume"],
+    "secondary": ["youtube", "tiktok", "instagram"]
+  },
+  "messages": {
+    "contact": {
+      "emailSubject": "Conectemos - Consulta Profesional",
+      "emailBody": "Hola [Tu Nombre],\n\nMe pongo en contacto contigo respecto a tu experiencia en [Tu Especialidad]. Me gustaría discutir posibles oportunidades de colaboración.\n\nSaludos cordiales",
+      "contactLinkText": "escribirme"
+    },
+    "discord": {
+      "popupTitle": "Servidor Discord",
+      "popupMessage": "¡El servidor de Discord estará disponible pronto! Estamos trabajando en crear un espacio comunitario increíble donde podamos discutir sobre tecnología e innovación juntos.\n\n¡Mantente atento a las actualizaciones!",
+      "popupButtonText": "¡Entendido!"
+    }
+  }
+}
+
+
+
