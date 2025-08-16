@@ -108,10 +108,10 @@ export class SocialUrlsService {
   private getFallbackConfig(): SocialUrlConfig {
     return {
       socialMedia: {
-        linkedin: 'https://www.linkedin.com/in/jairzinhosantos/',
-        github: 'https://github.com/jairzinhosantos',
-        twitter: 'https://x.com/_jairzinho_',
-        email: 'jairzinho.santos@hotmail.com'
+        linkedin: 'https://www.linkedin.com/in/tu-usuario/',
+        github: 'https://github.com/tu-usuario',
+        twitter: 'https://x.com/tu_usuario',
+        email: 'tu.email@ejemplo.com'
       },
       iconMapping: {
         linkedin: { icon: 'fab fa-linkedin', title: 'LinkedIn' },
@@ -125,14 +125,14 @@ export class SocialUrlsService {
       },
       messages: {
         contact: {
-          emailSubject: "Let's Connect - Professional Inquiry",
-          emailBody: "Hello Jairzinho,\n\nI'm reaching out regarding your expertise in AI Solutions Architecture.\n\nBest regards",
-          contactLinkText: "you can write me"
+          emailSubject: "Conectemos - Consulta Profesional",
+          emailBody: "Hola [Tu Nombre],\n\nMe pongo en contacto contigo respecto a tu experiencia profesional.\n\nSaludos cordiales",
+          contactLinkText: "puedes escribirme"
         },
         discord: {
-          popupTitle: "Discord Server",
-          popupMessage: "The Discord server will be available soon! We're currently working on setting up an amazing community space.",
-          popupButtonText: "Got it!"
+          popupTitle: "Servidor Discord",
+          popupMessage: "El servidor de Discord estará disponible pronto. Estamos trabajando en crear un espacio comunitario increíble.",
+          popupButtonText: "¡Entendido!"
         }
       }
     };

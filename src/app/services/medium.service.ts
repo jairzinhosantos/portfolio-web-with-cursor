@@ -110,16 +110,16 @@ export class MediumService {
   private getFallbackArticles(): MediumArticle[] {
     return [
       {
-        titulo: 'DeepSeek: A Game-Changer in AI, but Proceed with Caution',
-        descripcion: 'As the AI race intensifies globally, DeepSeek emerges as a formidable contender, challenging the dominance of established players like OpenAI and Anthropic.',
-        enlace: 'https://medium.com/@jairzinho.santos',
-        imagen: 'https://via.placeholder.com/400x250/007acc/ffffff?text=DeepSeek+AI'
+        titulo: 'Tu Primer Artículo de Ejemplo',
+        descripcion: 'Esta es la descripción de tu primer artículo. Habla sobre tecnología, desarrollo o tu área de especialización.',
+        enlace: 'https://medium.com/@tu.usuario',
+        imagen: 'https://via.placeholder.com/400x250/007acc/ffffff?text=Articulo+1'
       },
       {
-        titulo: 'OpenAI o1: The Next Evolution in AI Reasoning',
-        descripcion: 'OpenAI has unveiled its latest breakthrough: the o1 model series, designed to excel at complex reasoning tasks.',
-        enlace: 'https://medium.com/@jairzinho.santos',
-        imagen: 'https://via.placeholder.com/400x250/00a8ff/ffffff?text=OpenAI+o1'
+        titulo: 'Tu Segundo Artículo de Ejemplo',
+        descripcion: 'Descripción de tu segundo artículo. Puedes escribir sobre tendencias, experiencias o tutoriales.',
+        enlace: 'https://medium.com/@tu.usuario',
+        imagen: 'https://via.placeholder.com/400x250/00a8ff/ffffff?text=Articulo+2'
       }
     ];
   }
