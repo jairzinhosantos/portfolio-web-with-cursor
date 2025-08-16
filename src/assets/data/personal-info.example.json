@@ -2,14 +2,11 @@
   "personalInfo": {
     "nombre": "Tu Nombre Completo",
     "titulo1": "Tu Título Principal",
-    "titulo2": "Tu Título Secundario • Descripción • Especialidad",
-    "titulo3": "Tu Título Terciario",
-    "tagline": "Una <strong>descripción</strong> atractiva sobre ti y tu pasión.",
+    "titulo2": "Tu Título Secundario • Especialidad • Otros",
+    "titulo3": "Tu Título Académico",
+    "tagline": "Una <strong>descripción</strong> breve que te defina profesionalmente.",
     "fotoPerfil": "assets/branding/profile.png",
     "ubicacion": "Tu Ciudad, Tu País",
-    "resumenProfesional": "Descripción profesional detallada.\n\nPuedes incluir múltiples párrafos aquí.\n\nDescribe tu experiencia, especialidades y objetivos.\n\n📩 Si tienes preguntas o quieres contactarme, puedes <span class=\"contact-link\">escribirme</span>."
+    "resumenProfesional": "Tu resumen profesional aquí.\n\nDescribe tu experiencia, especialización y objetivos.\n\nPuedes usar múltiples párrafos para organizar la información.\n\nIncluye un llamado a la acción al final con <span class=\"contact-link\">enlace de contacto</span>."
   }
 }
-
-
-

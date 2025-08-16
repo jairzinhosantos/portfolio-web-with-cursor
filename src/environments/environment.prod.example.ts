@@ -1,17 +1,17 @@
 export const environment = {
   production: true,
   youtube: {
-    apiKey: 'AIzaSyDsupAWMpsXCmeRs_aU_BdaG25zYaLqE8o',
-    channelId: 'UCugONNgbbLWSwLeD9g02KLg',
-    channelHandle: '@jairzinho.santos'
+    apiKey: 'YOUR_YOUTUBE_API_KEY_HERE',
+    channelId: 'YOUR_CHANNEL_ID_HERE',
+    channelHandle: '@your.channel.handle'
   },
   github: {
-    username: 'jairzinhosantos',
+    username: 'your-github-username',
     apiUrl: 'https://api.github.com',
     token: '' // Opcional para repos públicos
   },
   medium: {
-    username: 'jairzinho.santos',
+    username: 'your.medium.username',
     rssApiUrl: 'https://api.rss2json.com/v1/api.json'
   }
-}; 
+};

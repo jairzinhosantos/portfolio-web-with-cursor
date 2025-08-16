@@ -1,26 +1,22 @@
-# Jairzinho Santos - Personal Portfolio
+# Personal Portfolio
 
-Un portafolio personal moderno construido con Angular 19 que muestra información profesional, proyectos, publicaciones y contenido multimedia.
+Portafolio personal construido con Angular 19 que muestra información profesional, proyectos, publicaciones y contenido multimedia.
 
 ## Características
 
-- Angular 19 con Server-Side Rendering (SSR)
-- Diseño Responsive optimizado para todos los dispositivos
-- Integración con APIs externas:
-  - GitHub (proyectos)
-  - YouTube (videos)
-  - Medium (artículos)
-- Carruseles interactivos con soporte táctil
-- Gestión de temas (claro/oscuro/automático)
-- Variables de entorno para configuración segura
-- Fallbacks robustos cuando las APIs fallan
-- Animaciones suaves y transiciones
+- Angular 19 con Server-Side Rendering
+- Diseño responsive
+- Integración con APIs externas (GitHub, YouTube, Medium)
+- Carruseles interactivos
+- Gestión de temas
+- Variables de entorno
+- Sistema de fallbacks
 - SEO optimizado
 
 ## Requisitos Previos
 
-- Node.js 20.x LTS (recomendado v20.19.3)
-- npm (incluido con Node.js)
+- Node.js 20.x LTS
+- npm
 - Claves de API para servicios externos (opcional)
 
 ## Instalación
@@ -40,78 +36,60 @@ npm install
 
 #### Configurar variables de entorno:
 ```bash
-# Copia y configura los archivos de entorno
 cp src/environments/environment.example.ts src/environments/environment.ts
 cp src/environments/environment.prod.example.ts src/environments/environment.prod.ts
 ```
 
-Edita los archivos con tus credenciales reales:
-- `src/environments/environment.ts` (desarrollo)
-- `src/environments/environment.prod.ts` (producción)
+Edita los archivos con tus credenciales:
+- `src/environments/environment.ts`
+- `src/environments/environment.prod.ts`
 
 #### Configurar datos personales:
 ```bash
-# Copia y configura los archivos de datos personales
 cp src/assets/data/personal-info.example.json src/assets/data/personal-info.json
 cp src/assets/data/social-urls.example.json src/assets/data/social-urls.json
 ```
 
-Edita los archivos JSON con tu información personal:
-- `src/assets/data/personal-info.json` (información básica)
-- `src/assets/data/social-urls.json` (redes sociales y contacto)
+Edita los archivos JSON con tu información:
+- `src/assets/data/personal-info.json`
+- `src/assets/data/social-urls.json`
 
-### 4. Agregar tu foto de perfil y CV
-```bash
-# Agrega tu foto de perfil (reemplaza el archivo existente)
-# Archivo: src/assets/branding/profile.png
-
-# Agrega tu CV en PDF (reemplaza el archivo existente)  
-# Archivo: src/assets/resume/resume_tu_nombre-es.pdf
-```
+### 4. Agregar archivos personales
+- Foto de perfil: `src/assets/branding/profile.png`
+- CV en PDF: `src/assets/resume/resume_tu_nombre-es.pdf`
 
 ### 5. Ejecutar en desarrollo
 ```bash
 npm start
 ```
 
-El sitio estará disponible en `http://localhost:4200`
+Disponible en `http://localhost:4200`
 
 ## Scripts Disponibles
 
 ```bash
-# Desarrollo
-npm start                # Inicia servidor de desarrollo
-npm run dev             # Alias para npm start
-
-# Construcción
-npm run build           # Build para producción
-npm run build:ssr       # Build con SSR
-
-# Pruebas
-npm test               # Ejecuta pruebas unitarias
-npm run e2e            # Pruebas end-to-end
-
-# Análisis
-npm run analyze        # Analiza el bundle
+npm start          # Servidor de desarrollo
+npm run build      # Build para producción
+npm run build:ssr  # Build con SSR
+npm test           # Pruebas unitarias
+npm run e2e        # Pruebas end-to-end
+npm run analyze    # Análisis del bundle
 ```
 
 ## Variables de Entorno
 
 ### YouTube API
-Para mostrar videos de YouTube, necesitas:
-1. **API Key**: Obtén una en [Google Cloud Console](https://console.cloud.google.com/)
-2. **Channel ID**: ID del canal de YouTube
-3. **Channel Handle**: Handle del canal (ej: @jairzinho.santos)
+- API Key: Obtén una en Google Cloud Console
+- Channel ID: ID del canal de YouTube
+- Channel Handle: Handle del canal
 
 ### GitHub API
-Para mostrar repositorios:
-1. **Username**: Tu usuario de GitHub
-2. **Token** (opcional): Token personal para evitar límites de rate
+- Username: Tu usuario de GitHub
+- Token (opcional): Token personal
 
 ### Medium RSS
-Para mostrar artículos:
-1. **Username**: Tu usuario de Medium
-2. **RSS API URL**: Servicio para convertir RSS a JSON
+- Username: Tu usuario de Medium
+- RSS API URL: Servicio para convertir RSS a JSON
 
 ## Estructura del Proyecto
 
@@ -137,41 +115,41 @@ src/
 ## Características Técnicas
 
 ### Carruseles Interactivos
-- Soporte para navegación táctil y mouse
-- Carruseles responsivos que se adaptan al tamaño de pantalla
-- Animaciones suaves con CSS transitions
+- Soporte táctil y mouse
+- Responsive
+- Animaciones CSS
 
 ### Gestión de Temas
-- Tema claro, oscuro y automático (basado en preferencias del sistema)
+- Tema claro, oscuro y automático
 - Persistencia en localStorage
-- Transiciones suaves entre temas
+- Transiciones suaves
 
-### Optimización de Performance
-- Lazy loading de imágenes
-- Server-Side Rendering (SSR)
-- Optimización de bundles con Angular
+### Performance
+- Lazy loading
+- Server-Side Rendering
+- Optimización de bundles
 
 ### Gestión de Errores
-- Fallbacks cuando las APIs fallan
-- Manejo robusto de errores de red
-- Estados de carga informativos
+- Sistema de fallbacks
+- Manejo robusto de errores
+- Estados de carga
 
 ## APIs Integradas
 
 ### GitHub API
-- **Endpoint**: `https://api.github.com/users/{username}/repos`
-- **Funcionalidad**: Obtiene repositorios públicos ordenados por última actualización
-- **Fallback**: Array vacío si falla la API
+- Endpoint: `https://api.github.com/users/{username}/repos`
+- Obtiene repositorios públicos
+- Fallback: Array vacío
 
 ### YouTube Data API v3
-- **Endpoint**: `https://www.googleapis.com/youtube/v3/`
-- **Funcionalidad**: Obtiene videos del canal
-- **Fallback**: Estado "no disponible" si falla la API
+- Endpoint: `https://www.googleapis.com/youtube/v3/`
+- Obtiene videos del canal
+- Fallback: Estado no disponible
 
 ### Medium RSS
-- **Endpoint**: RSS convertido a JSON via `rss2json.com`
-- **Funcionalidad**: Obtiene últimos artículos publicados
-- **Fallback**: Artículos estáticos si falla la API
+- Endpoint: RSS convertido a JSON
+- Obtiene últimos artículos
+- Fallback: Artículos estáticos
 
 ## Despliegue
 
@@ -180,15 +158,14 @@ src/
 npm run build
 ```
 
-Los archivos se generarán en `dist/portfolio/`
+Los archivos se generan en `dist/portfolio/`
 
 ### Variables de entorno en producción
 Configura las variables en tu plataforma de hosting:
-- Vercel: En la sección "Environment Variables"
-- Netlify: En "Site settings > Environment variables"
-- Otros: Según documentación del proveedor
+- Vercel: Environment Variables
+- Netlify: Site settings > Environment variables
 
-### SSR (Server-Side Rendering)
+### SSR
 ```bash
 npm run build:ssr
 npm run serve:ssr
@@ -196,21 +173,17 @@ npm run serve:ssr
 
 ## Seguridad
 
-Este proyecto implementa múltiples capas de seguridad para proteger información sensible:
-
 ### Protección de Credenciales
-- Variables de entorno en archivos separados del código fuente
-- Archivos de configuración real excluidos del repositorio via `.gitignore`
-- Archivos de ejemplo (`.example`) disponibles como plantillas
-- Tokens de API con permisos mínimos necesarios
+- Variables de entorno separadas del código
+- Archivos reales excluidos del repositorio
+- Archivos ejemplo como plantillas
+- Tokens con permisos mínimos
 
 ### Protección de Datos Personales
-- Información personal en archivos JSON separados y excluidos del repositorio
-- Archivos de ejemplo disponibles para configuración inicial
-- CV y fotos de perfil excluidos del control de versiones
+- Información personal en archivos separados
+- CV y fotos excluidos del control de versiones
 
 ### Archivos Protegidos
-Los siguientes archivos están excluidos del repositorio:
 ```
 src/environments/environment.ts
 src/environments/environment.prod.ts
@@ -221,70 +194,59 @@ src/assets/branding/profile.png
 ```
 
 ### Configuración Inicial
-Para configurar el proyecto con tu información:
-1. Copia los archivos `.example` y remueve el sufijo
-2. Edita los archivos con tu información real
-3. Agrega tu foto de perfil y CV
-4. Nunca subas estos archivos al repositorio
+1. Copia archivos `.example` y remueve el sufijo
+2. Edita con tu información real
+3. Agrega foto de perfil y CV
+4. No subas estos archivos al repositorio
 
 ### Validación de Datos
-- Sanitización automática de datos de APIs externas
-- Validación de URLs y contenido HTML
-- Manejo seguro de errores sin exponer información sensible
+- Sanitización automática de APIs
+- Validación de URLs y HTML
+- Manejo seguro de errores
 
 ## Actualizaciones Recientes
 
-### v1.3.0 - Seguridad y Privacidad (Actual)
-- Protección completa de información personal y credenciales
-- Archivos sensibles excluidos del repositorio via `.gitignore`
-- Archivos de ejemplo para configuración inicial
-- Documentación de seguridad actualizada
-- README minimalista sin emojis
+### v1.3.0 - Seguridad y Privacidad
+- Protección de información personal y credenciales
+- Archivos sensibles excluidos del repositorio
+- Archivos de ejemplo para configuración
+- Documentación de seguridad
+- README minimalista
 
 ### v1.2.0 - Variables de Entorno
-- Migración a variables de entorno para todas las APIs
-- Creación de archivos `.env` y `.env.example`
-- Mejora en gestión de errores de servicios
-- Documentación completa de configuración
+- Migración a variables de entorno
+- Archivos `.env` y `.env.example`
+- Mejora en gestión de errores
+- Documentación de configuración
 
-### v1.1.0 - Mejoras de Performance
+### v1.1.0 - Performance
 - Optimización con Node.js 20 LTS
-- Resolución de errores de TypeScript
+- Resolución de errores TypeScript
 - Mejora en cargas de dependencias
 
 ## Compatibilidad
 
-- **Navegadores**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-- **Dispositivos**: Desktop, Tablet, Mobile
-- **Node.js**: 20.x LTS (recomendado)
-- **Angular**: 19.x
+- Navegadores: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- Dispositivos: Desktop, Tablet, Mobile
+- Node.js: 20.x LTS
+- Angular: 19.x
 
 ## Contribuciones
 
-Las contribuciones son bienvenidas. Para cambios importantes:
-
 1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
-3. Commit tus cambios (`git commit -m 'Add amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
+2. Crea una rama para tu feature
+3. Commit tus cambios
+4. Push a la rama
 5. Abre un Pull Request
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
-## Contacto
-
-Jairzinho Santos
-- LinkedIn: [jairzinhosantos](https://www.linkedin.com/in/jairzinhosantos/)
-- GitHub: [jairzinhosantos](https://github.com/jairzinhosantos)
-- Email: jairzinho.santos@hotmail.com
-- Portfolio: [jairzinhosantos.com](https://jairzinhosantos.com)
+MIT License. Ver `LICENSE` para más detalles.
 
 ## Nota de Seguridad
 
-Este repositorio utiliza archivos de ejemplo (`.example`) para proteger información sensible. Antes de usar el proyecto, asegúrate de:
+Este repositorio utiliza archivos de ejemplo para proteger información sensible:
 
-1. Copiar los archivos `.example` y configurarlos con tu información real
-2. Nunca subir archivos con credenciales o datos personales reales
-3. Revisar el `.gitignore` para confirmar que tus archivos sensibles están protegidos
+1. Copia archivos `.example` y configúralos
+2. No subas archivos con credenciales reales
+3. Revisa el `.gitignore` para confirmar protección

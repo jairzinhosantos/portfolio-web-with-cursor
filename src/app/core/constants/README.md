@@ -4,22 +4,22 @@ Este módulo contiene las constantes de la aplicación organizadas por dominio.
 
 ## Arquitectura
 
-### 📄 `portfolio.constants.ts`
-Contiene **únicamente valores de fallback** para mostrar durante la carga inicial de datos.
+### portfolio.constants.ts
+Contiene únicamente valores de fallback para mostrar durante la carga inicial de datos.
 
-**⚠️ IMPORTANTE:** Estos valores son placeholders temporales que se reemplazan automáticamente cuando se cargan los datos reales desde archivos JSON.
+IMPORTANTE: Estos valores son placeholders temporales que se reemplazan automáticamente cuando se cargan los datos reales desde archivos JSON.
 
 #### Principios:
-- **No hardcodear datos reales** - Los datos vienen de archivos JSON
-- **Solo valores de fallback** - Para mejorar UX durante la carga
-- **Claramente documentado** - Cada constante explica su propósito
+- No hardcodear datos reales - Los datos vienen de archivos JSON
+- Solo valores de fallback - Para mejorar UX durante la carga
+- Claramente documentado - Cada constante explica su propósito
 
-### 🎠 `carousel.constants.ts`
+### carousel.constants.ts
 Configuración específica para componentes de carrusel.
 
 ## Uso Recomendado
 
-### ✅ Correcto
+### Correcto
 ```typescript
 // En componentes - inicializar con fallback
 personalInfo: PersonalInfo = FALLBACK_PERSONAL_INFO;
@@ -30,12 +30,12 @@ this.staticPortfolioService.getPersonalInfo().subscribe(data => {
 });
 ```
 
-### ❌ Incorrecto
+### Incorrecto
 ```typescript
 // No hardcodear datos reales en constantes
 export const PERSONAL_INFO = {
-  nombre: 'Jairzinho Santos', // ❌ Hardcoded
-  titulo1: 'AI Solutions Architect' // ❌ Hardcoded
+  nombre: 'Jairzinho Santos', // Hardcoded
+  titulo1: 'AI Solutions Architect' // Hardcoded
 };
 ```
 

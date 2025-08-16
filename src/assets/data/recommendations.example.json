@@ -1,0 +1,25 @@
+{
+  "linkedinRecommendationsUrl": "https://www.linkedin.com/in/tu-usuario/details/recommendations/",
+  "recomendaciones": [
+    {
+      "nombre": "Nombre del Recomendante 1",
+      "acronimo": "NR",
+      "cargo": "Cargo del Recomendante",
+      "empresa": "Empresa del Recomendante",
+      "fecha": "Fecha de la Recomendación",
+      "texto": "Texto de la recomendación. Aquí va el testimonio completo de la persona que te recomienda, describiendo tu trabajo, habilidades y logros.",
+      "foto": "https://via.placeholder.com/150x150/007acc/ffffff?text=NR",
+      "linkedinUrl": "https://www.linkedin.com/in/tu-usuario/details/recommendations/"
+    },
+    {
+      "nombre": "Nombre del Recomendante 2",
+      "acronimo": "NR2",
+      "cargo": "Otro Cargo",
+      "empresa": "Otra Empresa",
+      "fecha": "Otra Fecha",
+      "texto": "Otra recomendación. Incluye más testimonios de colegas, clientes o supervisores que destaquen tu experiencia profesional.",
+      "foto": "https://via.placeholder.com/150x150/28a745/ffffff?text=NR2",
+      "linkedinUrl": "https://www.linkedin.com/in/tu-usuario/details/recommendations/"
+    }
+  ]
+}

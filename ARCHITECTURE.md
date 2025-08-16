@@ -1,16 +1,16 @@
-# Arquitectura del Portafolio - Jairzinho Santos
+# Arquitectura del Portafolio
 
 ## Estructura Modular
 
-### **Principios de Diseño**
-- **Separación de responsabilidades:** Cada componente tiene una función específica
-- **Clean Code:** Código legible, mantenible y bien documentado
-- **Modularidad:** Componentes independientes y reutilizables
-- **Datos dinámicos:** Configuración mediante archivos JSON externos
+### Principios de Diseño
+- Separación de responsabilidades
+- Clean Code
+- Modularidad
+- Datos dinámicos mediante JSON
 
 ## Organización del Código
 
-### **Componentes Modulares**
+### Componentes Modulares
 ```
 src/app/
 ├── layout/                    # Componentes de estructura
@@ -39,9 +39,9 @@ src/app/
     └── utils/              # Utilidades comunes
 ```
 
-### **Gestión de Datos**
+### Gestión de Datos
 
-#### **Sistema de Datos Estáticos (JSON)**
+#### Sistema de Datos Estáticos
 ```
 src/assets/data/
 ├── personal-info.json      # Información personal y redes sociales
@@ -52,12 +52,12 @@ src/assets/data/
 └── README.md              # Documentación del sistema
 ```
 
-#### **APIs Dinámicas**
-- **GitHub API:** Proyectos en tiempo real
-- **Medium API:** Publicaciones actuales
-- **YouTube API:** Videos del canal (con fallback estático)
+#### APIs Dinámicas
+- GitHub API: Proyectos en tiempo real
+- Medium API: Publicaciones actuales
+- YouTube API: Videos del canal con fallback estático
 
-### **Flujo de Datos**
+### Flujo de Datos
 
 ```mermaid
 graph TD
@@ -84,36 +84,36 @@ graph TD
 
 ## Patrones Implementados
 
-### **1. Component Pattern**
+### 1. Component Pattern
 - Cada sección es un componente independiente
 - Inputs para recibir datos
 - Outputs para comunicación con el padre
 - Estilos encapsulados por componente
 
-### **2. Service Pattern**
+### 2. Service Pattern
 - Servicios inyectables para manejo de datos
 - Separación de lógica de negocio
 - Observables para programación reactiva
 - Manejo de errores centralizado
 
-### **3. Strategy Pattern**
+### 3. Strategy Pattern
 - Múltiples fuentes de datos (API + JSON)
 - Fallbacks automáticos cuando APIs fallan
 - Configuración dinámica por ambiente
 
-### **4. Observer Pattern**
+### 4. Observer Pattern
 - Uso de RxJS Observables
 - Detección automática de cambios
 - Programación reactiva
 
 ## Sistema de Estilos
 
-### **Metodología BEM + Scoped Styles**
+### Metodología BEM + Scoped Styles
 - Estilos encapsulados por componente
 - Nomenclatura consistente
 - Tema claro/oscuro unificado
 
-### **Variables de Color Unificadas**
+### Variables de Color Unificadas
 ```scss
 // Colores minimalistas
 $primary-gray: #6b7280;      // Iconos base
@@ -124,19 +124,19 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 
 ## Configuración Dinámica
 
-### **Archivos de Configuración**
+### Archivos de Configuración
 - `environment.ts` - Variables de entorno
 - `portfolio.constants.ts` - Constantes de fallback
 - `carousel.constants.ts` - Configuración de carruseles
 
-### **Sistema de Temas**
+### Sistema de Temas
 - Detección automática del sistema
 - Configuración manual (claro/oscuro/auto)
 - Persistencia en localStorage
 
 ## Build y Deployment
 
-### **Scripts NPM**
+### Scripts NPM
 ```json
 {
   "start": "ng serve --hmr",                    // Desarrollo
@@ -145,26 +145,26 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 }
 ```
 
-### **Server-Side Rendering**
+### Server-Side Rendering
 - Pre-renderizado para SEO
 - Hidratación en el cliente
 - Puerto 4000 para producción
 
 ## Principios de Clean Code
 
-### **Naming Conventions**
+### Naming Conventions
 - Variables: `camelCase`
 - Componentes: `PascalCase`
 - Archivos: `kebab-case`
 - Métodos: `verboSustantivo()`
 
-### **Organización del Código**
+### Organización del Código
 - Imports ordenados por tipo
 - Métodos públicos antes que privados
 - Lógica de negocio en servicios
 - Presentación en componentes
 
-### **Documentación**
+### Documentación
 - JSDoc para métodos complejos
 - README para cada sistema
 - Comentarios explicativos (no obvios)
@@ -172,26 +172,26 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 
 ## Escalabilidad
 
-### **Agregar Nueva Sección**
+### Agregar Nueva Sección
 1. Crear componente en `features/`
 2. Definir interfaz en `core/interfaces/`
 3. Crear servicio si necesita datos externos
 4. Agregar al routing en `app.component.html`
 5. Configurar estilos con tema claro/oscuro
 
-### **Modificar Datos**
-1. **Estáticos:** Editar archivos JSON en `assets/data/`
-2. **Dinámicos:** Modificar servicios correspondientes
-3. **Configuración:** Actualizar constantes en `core/`
+### Modificar Datos
+1. Estáticos: Editar archivos JSON en `assets/data/`
+2. Dinámicos: Modificar servicios correspondientes
+3. Configuración: Actualizar constantes en `core/`
 
 ## Performance
 
-### **Lazy Loading**
+### Lazy Loading
 - Componentes cargados bajo demanda
 - Imágenes con lazy loading nativo
 - Tree shaking automático
 
-### **Optimizaciones**
+### Optimizaciones
 - OnPush change detection donde posible
 - Observables con unsubscribe automático
 - Imágenes optimizadas
@@ -199,14 +199,14 @@ $accent-blue: #60a5fa;       // Acentos tema oscuro
 
 ## Manejo de Errores
 
-### **Estrategia de Fallbacks**
+### Estrategia de Fallbacks
 - APIs externas con datos de respaldo
 - Mensajes de error amigables
 - Degradación gradual de funcionalidades
 - Logs informativos para debugging
 
 Este diseño garantiza:
-- ✅ **Mantenibilidad:** Código organizado y documentado
-- ✅ **Escalabilidad:** Fácil agregar nuevas funcionalidades
-- ✅ **Performance:** Optimizado para producción
-- ✅ **UX:** Experiencia consistente y responsive 
+- Mantenibilidad: Código organizado y documentado
+- Escalabilidad: Fácil agregar nuevas funcionalidades
+- Performance: Optimizado para producción
+- UX: Experiencia consistente y responsive 

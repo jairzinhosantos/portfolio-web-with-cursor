@@ -1,0 +1,24 @@
+{
+  "areasInvestigacion": [
+    {
+      "titulo": "Tu Área de Investigación 1",
+      "descripcion": "Descripción de tu primera área de investigación. Explica tus intereses y objetivos de investigación.",
+      "icono": "fas fa-network-wired"
+    },
+    {
+      "titulo": "Tu Área de Investigación 2",
+      "descripcion": "Descripción de tu segunda área de investigación. Detalla tu enfoque y metodología.",
+      "icono": "fas fa-lightbulb"
+    },
+    {
+      "titulo": "Tu Área de Investigación 3",
+      "descripcion": "Descripción de tu tercera área de investigación. Incluye proyectos actuales y futuros.",
+      "icono": "fas fa-search"
+    },
+    {
+      "titulo": "Tu Área de Investigación 4",
+      "descripcion": "Descripción de tu cuarta área de investigación. Menciona publicaciones y colaboraciones.",
+      "icono": "fas fa-balance-scale"
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 # Sistema de Datos Estáticos del Portafolio
 
-Este directorio contiene los archivos JSON que alimentan el contenido estático del portafolio personal de Jairzinho Santos.
+Este directorio contiene los archivos JSON que alimentan el contenido estático del portafolio personal.
 
 ## Archivos de Datos
 
 ### personal-info.json
 Contiene información personal básica.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "personalInfo": {
@@ -26,7 +26,7 @@ Contiene información personal básica.
 ### social-urls.json
 URLs sociales, configuración de iconos y mensajes de interacción.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "socialMedia": { "plataforma": "url" },
@@ -42,7 +42,7 @@ URLs sociales, configuración de iconos y mensajes de interacción.
 ### expertise.json
 Define las áreas de especialización profesional.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "areasEspecializacion": [
@@ -58,7 +58,7 @@ Define las áreas de especialización profesional.
 ### research-interests.json
 Define las áreas de investigación y intereses académicos.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "areasInvestigacion": [
@@ -74,7 +74,7 @@ Define las áreas de investigación y intereses académicos.
 ### recommendations.json
 Contiene las recomendaciones de LinkedIn y testimonios.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "recomendaciones": [
@@ -94,7 +94,7 @@ Contiene las recomendaciones de LinkedIn y testimonios.
 ### static-videos.json
 Videos estáticos de respaldo cuando la API de YouTube no está disponible.
 
-**Estructura:**
+Estructura:
 ```json
 {
   "videos": [

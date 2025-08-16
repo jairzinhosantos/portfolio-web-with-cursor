@@ -50,12 +50,21 @@ Thumbs.db
 src/environments/environment.ts
 src/environments/environment.prod.ts
 src/environments/environment.*.ts
+!src/environments/*.example.ts
 
 # Datos personales sensibles
 src/assets/data/personal-info.json
 src/assets/data/social-urls.json
+src/assets/data/expertise.json
+src/assets/data/research-interests.json
+src/assets/data/recommendations.json
+src/assets/data/static-videos.json
+!src/assets/data/*.example.json
 src/assets/resume/*.pdf
 src/assets/branding/profile.png
+src/assets/branding/profile.jpg
+src/assets/branding/profile.jpeg
+src/assets/branding/profile.webp
 
 # Credenciales y tokens
 **/api-keys.json
@@ -90,3 +99,17 @@ desktop.ini
 *.crt
 *.p12
 *.pfx
+
+# Archivos de configuración local personal
+.vscode/settings.json
+.idea/workspace.xml
+.idea/vcs.xml
+
+# Archivos temporales de desarrollo
+*.swp
+*.swo
+*~
+
+# Archivos de respaldo
+*.orig
+*.rej

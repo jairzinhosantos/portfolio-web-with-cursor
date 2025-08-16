@@ -1,0 +1,24 @@
+{
+  "areasEspecializacion": [
+    {
+      "titulo": "Tu Área de Especialización 1",
+      "descripcion": "Descripción de tu primera área de especialización. Explica tus habilidades y experiencia en esta área.",
+      "icono": "fas fa-brain"
+    },
+    {
+      "titulo": "Tu Área de Especialización 2",
+      "descripcion": "Descripción de tu segunda área de especialización. Detalla tu conocimiento y experiencia.",
+      "icono": "fas fa-sitemap"
+    },
+    {
+      "titulo": "Tu Área de Especialización 3",
+      "descripcion": "Descripción de tu tercera área de especialización. Incluye proyectos relevantes y habilidades.",
+      "icono": "fas fa-code"
+    },
+    {
+      "titulo": "Tu Área de Especialización 4",
+      "descripcion": "Descripción de tu cuarta área de especialización. Menciona logros y competencias.",
+      "icono": "fas fa-users"
+    }
+  ]
+}

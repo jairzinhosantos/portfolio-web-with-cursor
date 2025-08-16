@@ -1,0 +1,24 @@
+{
+  "videos": [
+    {
+      "id": "VIDEO_ID_DE_YOUTUBE",
+      "title": "Título de tu Video 1",
+      "description": "Descripción de tu video. Explica el contenido y los temas que cubres.",
+      "url": "https://www.youtube.com/watch?v=VIDEO_ID_DE_YOUTUBE",
+      "thumbnail": "https://img.youtube.com/vi/VIDEO_ID_DE_YOUTUBE/maxresdefault.jpg",
+      "duration": 300,
+      "viewCount": "1,234",
+      "publishedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "OTRO_VIDEO_ID",
+      "title": "Título de tu Video 2",
+      "description": "Descripción de otro video tuyo. Incluye información relevante sobre el tema.",
+      "url": "https://www.youtube.com/watch?v=OTRO_VIDEO_ID",
+      "thumbnail": "https://img.youtube.com/vi/OTRO_VIDEO_ID/maxresdefault.jpg",
+      "duration": 450,
+      "viewCount": "2,567",
+      "publishedAt": "2024-02-20T00:00:00Z"
+    }
+  ]
+}
