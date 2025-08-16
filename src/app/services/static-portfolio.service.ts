@@ -65,14 +65,14 @@ export class StaticPortfolioService {
   private getFallbackPersonalInfo() {
     return {
       personalInfo: {
-        nombre: 'Jairzinho Santos',
-        titulo1: 'AI Solutions Architect',
-        titulo2: 'AI Engineer • Researcher • Speaker',
-        titulo3: 'AI Master\'s Candidate',
-        tagline: 'A <strong>human</strong> passionate about technology, business, science, and the future.',
+        nombre: 'Tu Nombre Completo',
+        titulo1: 'Tu Título Principal',
+        titulo2: 'Tu Especialidad • Tus Roles • Tu Enfoque',
+        titulo3: 'Tu Título Académico',
+        tagline: 'Una <strong>descripción</strong> breve que te defina profesionalmente.',
         fotoPerfil: 'assets/branding/profile.png',
-        ubicacion: 'Santo Domingo, Dominican Republic',
-        resumenProfesional: 'Loading professional information...'
+        ubicacion: 'Tu Ciudad, Tu País',
+        resumenProfesional: 'Cargando información profesional...'
       }
     };
   }
@@ -81,8 +81,8 @@ export class StaticPortfolioService {
     return {
       areasEspecializacion: [
         {
-          titulo: 'Artificial Intelligence',
-          descripcion: 'AI solutions and implementations',
+          titulo: 'Tu Área de Especialización',
+          descripcion: 'Descripción de tus habilidades y experiencia profesional',
           icono: 'fas fa-brain'
         }
       ]
@@ -93,8 +93,8 @@ export class StaticPortfolioService {
     return {
       areasInvestigacion: [
         {
-          titulo: 'AI Research',
-          descripcion: 'Research in artificial intelligence',
+          titulo: 'Tu Área de Investigación',
+          descripcion: 'Descripción de tus intereses de investigación y objetivos',
           icono: 'fas fa-search'
         }
       ]

@@ -34,8 +34,8 @@ this.staticPortfolioService.getPersonalInfo().subscribe(data => {
 ```typescript
 // No hardcodear datos reales en constantes
 export const PERSONAL_INFO = {
-  nombre: 'Jairzinho Santos', // Hardcoded
-  titulo1: 'AI Solutions Architect' // Hardcoded
+  nombre: 'Tu Nombre Real', // Hardcoded
+  titulo1: 'Tu Título Real' // Hardcoded
 };
 ```
 
